@@ -21,3 +21,12 @@ When you download the selfbot, the first thing you need to do before launching t
 
    - (You can modify embed color in the selfbot without restarting !)
 
+# FOR THE DEVLOPPERS
+
+  - If you want to reuse the code, keep my name in it
+  - Keep my name in the README.md
+  - Make an credits command with my name in it 
+  
+
+  - OR ITS SKID.
+
