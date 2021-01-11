@@ -54,13 +54,26 @@ namespace RamokSelfbot.Commands.Moderation
                     embed.Footer = new EmbedFooter() { Text = "Selfbot rewritten by Ramok with <3", IconUrl = Message.Author.User.Avatar.Url };
                 }
 
-                if (Message.Author.Member.GetPermissions().Has(DiscordPermission.AttachFiles) || Message.Author.Member.GetPermissions().Has(DiscordPermission.Administrator) || Client.GetCachedGuild(Message.Guild.Id).OwnerId == Program.id) //CHECK DE PERMISSIONS
+                if (Message.Guild == null)
                 {
                     Message.Edit(new Discord.MessageEditProperties()
                     {
                         Content = "",
                         Embed = embed
                     });
+                    return;
+                }
+                else
+                {
+                    if (Message.Author.Member.GetPermissions().Has(DiscordPermission.AttachFiles) || Message.Author.Member.GetPermissions().Has(DiscordPermission.Administrator)) //CHECK DE PERMISSIONS
+                    {
+                        Message.Edit(new Discord.MessageEditProperties()
+                        {
+                            Content = "",
+                            Embed = embed
+                        });
+                        return;
+                    }
                 }
             }
         }

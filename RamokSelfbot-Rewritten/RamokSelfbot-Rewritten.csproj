@@ -85,6 +85,7 @@
     <Compile Include="Commands\Moderation\Moderation.cs" />
     <Compile Include="Commands\Others\Others.cs" />
     <Compile Include="Commands\Others\Ping.cs" />
+    <Compile Include="Commands\Others\Start.cs" />
     <Compile Include="Commands\Utils\ColorEmbed.cs" />
     <Compile Include="Commands\Utils\Tinyurl.cs" />
     <Compile Include="Commands\Utils\Utils.cs" />

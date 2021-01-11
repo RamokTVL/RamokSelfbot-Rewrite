@@ -12,7 +12,7 @@ namespace RamokSelfbot.Commands.Others
     [Command("ping", "Ping the website specified, if there is no site specified, cdn.discordapp.com will be pinged - OTHERS")]
     class Ping : CommandBase
     {
-        [Parameter("website")]
+        [Parameter("website", true)]
         public string website { get; set; }
         public override void Execute()
         {
@@ -37,6 +37,15 @@ namespace RamokSelfbot.Commands.Others
                     {
                         Content = ":ping_pong: Ping to " + s + " : " + r.RoundtripTime.ToString() + " ms"
                     });
+                } else
+                {
+                    Message.Edit(new Discord.MessageEditProperties()
+                    {
+                        Content = ":ping_pong: Cannot ping : " + s
+                    });
+                }
+            
+                    
                 }
             }
         }
@@ -45,4 +54,4 @@ namespace RamokSelfbot.Commands.Others
 
 
     }
-}
+

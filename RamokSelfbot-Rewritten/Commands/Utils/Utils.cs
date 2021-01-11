@@ -17,7 +17,7 @@ namespace RamokSelfbot.Commands.Utils
             {
                 EmbedMaker embed = new EmbedMaker()
                 {
-                    Title = "Fun help menu",
+                    Title = "Utils help menu",
                     Description = "A list of informatives commands",
                     Color = System.Drawing.Color.FromArgb(JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorr, JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorg, JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorb)
                 };
@@ -52,13 +52,26 @@ namespace RamokSelfbot.Commands.Utils
                     embed.Footer = new EmbedFooter() { Text = "Selfbot rewritten by Ramok with <3", IconUrl = Message.Author.User.Avatar.Url };
                 }
 
-                if (Message.Author.Member.GetPermissions().Has(DiscordPermission.AttachFiles) || Message.Author.Member.GetPermissions().Has(DiscordPermission.Administrator) || Client.GetCachedGuild(Message.Guild.Id).OwnerId == Program.id) //CHECK DE PERMISSIONS
+                if (Message.Guild == null)
                 {
                     Message.Edit(new Discord.MessageEditProperties()
                     {
                         Content = "",
                         Embed = embed
                     });
+                    return;
+                }
+                else
+                {
+                    if (Message.Author.Member.GetPermissions().Has(DiscordPermission.AttachFiles) || Message.Author.Member.GetPermissions().Has(DiscordPermission.Administrator)) //CHECK DE PERMISSIONS
+                    {
+                        Message.Edit(new Discord.MessageEditProperties()
+                        {
+                            Content = "",
+                            Embed = embed
+                        });
+                        return;
+                    }
                 }
             }
         }

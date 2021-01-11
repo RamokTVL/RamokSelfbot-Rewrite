@@ -51,13 +51,26 @@ namespace RamokSelfbot.Commands.Utils
             embed.AddField("G", JsonConvert.DeserializeObject<RamokSelfbot.JSON>(File.ReadAllText("config.json")).embedcolorg.ToString(), true);
             embed.AddField("B", JsonConvert.DeserializeObject<RamokSelfbot.JSON>(File.ReadAllText("config.json")).embedcolorb.ToString(), true);
 
-            if (Message.Author.Member.GetPermissions().Has(DiscordPermission.AttachFiles) || Message.Author.Member.GetPermissions().Has(DiscordPermission.Administrator) || Client.GetCachedGuild(Message.Guild.Id).OwnerId == Program.id) //CHECK DE PERMISSIONS
+            if (Message.Guild == null)
             {
-                Message.Edit(new MessageEditProperties()
+                Message.Edit(new Discord.MessageEditProperties()
                 {
                     Content = "",
                     Embed = embed
                 });
+                return;
+            }
+            else
+            {
+                if (Message.Author.Member.GetPermissions().Has(DiscordPermission.AttachFiles) || Message.Author.Member.GetPermissions().Has(DiscordPermission.Administrator)) //CHECK DE PERMISSIONS
+                {
+                    Message.Edit(new Discord.MessageEditProperties()
+                    {
+                        Content = "",
+                        Embed = embed
+                    });
+                    return;
+                }
             }
         }
 

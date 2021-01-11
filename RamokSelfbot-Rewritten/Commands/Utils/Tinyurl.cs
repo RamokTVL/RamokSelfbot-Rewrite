@@ -49,13 +49,26 @@ namespace RamokSelfbot.Commands.Utils
                 embed.AddField("Original Link", link, true);
                 embed.AddField("Shorten Link", new WebClient().DownloadString("https://tinyurl.com/api-create.php?url=" + link), true);
                 embed.AddField("Time elapsed", sw.ElapsedMilliseconds.ToString(), true);
-                if(Message.Author.Member.GetPermissions().Has(DiscordPermission.AttachFiles) || Message.Author.Member.GetPermissions().Has(DiscordPermission.Administrator) || Client.GetCachedGuild(Message.Guild.Id).OwnerId == Program.id) //CHECK DE PERMISSIONS
+                if (Message.Guild == null)
                 {
                     Message.Edit(new Discord.MessageEditProperties()
                     {
                         Content = "",
                         Embed = embed
                     });
+                    return;
+                }
+                else
+                {
+                    if (Message.Author.Member.GetPermissions().Has(DiscordPermission.AttachFiles) || Message.Author.Member.GetPermissions().Has(DiscordPermission.Administrator)) //CHECK DE PERMISSIONS
+                    {
+                        Message.Edit(new Discord.MessageEditProperties()
+                        {
+                            Content = "",
+                            Embed = embed
+                        });
+                        return;
+                    }
                 }
                 sw.Reset();
             }

@@ -1,5 +1,6 @@
 ﻿using Discord;
 using Discord.Commands;
+using Discord.Gateway;
 using Newtonsoft.Json;
 using System;
 using System.IO;
@@ -30,16 +31,41 @@ namespace RamokSelfbot.Commands.Fun
                 }
 
                 footer.Text = "Selfbot rewritten by Ramok with <3";
-                Message.Edit(new MessageEditProperties()
+
+                if (Message.Guild == null)
                 {
-                    Content = "",
-                    Embed = new EmbedMaker()
+                    Message.Edit(new Discord.MessageEditProperties()
                     {
-                        ImageUrl = url,
-                        Color = System.Drawing.Color.FromArgb(JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorr, JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorg, JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorb),
-                        Footer = footer
-                    },
-                });
+                        Content = "",
+                        Embed = new EmbedMaker()
+                        {
+                            ImageUrl = url,
+                            Color = System.Drawing.Color.FromArgb(JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorr, JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorg, JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorb),
+                            Footer = footer
+                        },
+                    });
+                    return;
+                }
+                else
+                {
+                    if (Message.Author.Member.GetPermissions().Has(DiscordPermission.AttachFiles) || Message.Author.Member.GetPermissions().Has(DiscordPermission.Administrator)) //CHECK DE PERMISSIONS
+                    {
+                        Message.Edit(new Discord.MessageEditProperties()
+                        {
+                            Content = "",
+                            Embed = new EmbedMaker()
+                            {
+                                ImageUrl = url,
+                                Color = System.Drawing.Color.FromArgb(JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorr, JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorg, JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorb),
+                                Footer = footer
+                            },
+                        });
+                        return;
+                    }
+                }
+
+
+
             }
         }
 

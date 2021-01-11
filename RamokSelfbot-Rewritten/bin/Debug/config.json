@@ -1,7 +1,7 @@
 {
   "prefix": "!!",
-  "tenorkey": "",
-  "giphykey": "",
+  "tenorkey": "tenorkeyhere",
+  "giphykey": "giphykeyhere",
   "embedcolorr": 0,
   "embedcolorb": 216,
   "embedcolorg": 180

@@ -89,19 +89,26 @@ namespace RamokSelfbot.Commands.Info
 
                 embed.AddField("Username", $"```{user.Username}#{user.Discriminator}```", true);
                 embed.AddField("ID", "```" + user.Id.ToString() + "```", true);
-                if (user.Avatar.Url == null)
+
+
+                try
+                {
+                    if (user.Avatar == null)
+                    {
+                        embed.AddField("Avatar URL", "```No Avatar```", true);
+                    }
+                    else
+                    {
+                        embed.ThumbnailUrl = user.Avatar.Url;
+                        avatarurl = new System.Net.WebClient().DownloadString("https://tinyurl.com/api-create.php?url=" + user.Avatar.Url);
+                        embed.AddField("Avatar URL", "```" + avatarurl + "```", true);
+                    }
+                } catch
                 {
                     embed.AddField("Avatar URL", "```No Avatar```", true);
                 }
-                else
-                {
-                    
-                    embed.ThumbnailUrl = user.Avatar.Url;
-                    avatarurl = new System.Net.WebClient().DownloadString("https://tinyurl.com/api-create.php?url=" + user.Avatar.Url);
-                    embed.AddField("Avatar URL", "```" + avatarurl + "```", true);
-                }
 
-                if (Message.Author.User.Avatar.Url != null)
+                if (Message.Author.User.Avatar.Url.Length != 0)
                 {
                     if(embed.ThumbnailUrl == null)
                     {
@@ -231,19 +238,33 @@ namespace RamokSelfbot.Commands.Info
                 servers += "```";
 
                 embed.AddField("Mutual Guilds [" + serversn.ToString() + "] (shows up to 15 guilds)", servers, false);
+                embed.AddField("Created at", user.CreatedAt.ToString(), false);
 
 
 
 
 
 
-                if (Message.Author.Member.GetPermissions().Has(DiscordPermission.AttachFiles) || Message.Author.Member.GetPermissions().Has(DiscordPermission.Administrator) || Client.GetCachedGuild(Message.Guild.Id).OwnerId == Program.id) //CHECK DE PERMISSIONS
+               if (Message.Guild == null)
                 {
                     Message.Edit(new Discord.MessageEditProperties()
                     {
                         Content = "",
                         Embed = embed
                     });
+                    return;
+                }
+                else
+                {
+                    if (Message.Author.Member.GetPermissions().Has(DiscordPermission.AttachFiles) || Message.Author.Member.GetPermissions().Has(DiscordPermission.Administrator)) //CHECK DE PERMISSIONS
+                    {
+                        Message.Edit(new Discord.MessageEditProperties()
+                        {
+                            Content = "",
+                            Embed = embed
+                        });
+                        return;
+                    }
                 }
 
             }
@@ -280,13 +301,26 @@ namespace RamokSelfbot.Commands.Info
                 embed.Footer = new EmbedFooter() { Text = "Selfbot rewritten by Ramok with <3", IconUrl = Message.Author.User.Avatar.Url };
             }
 
-            if(Message.Author.Member.GetPermissions().Has(DiscordPermission.AttachFiles) || Message.Author.Member.GetPermissions().Has(DiscordPermission.Administrator) || Client.GetCachedGuild(Message.Guild.Id).OwnerId == Program.id) //CHECK DE PERMISSIONS
+            if (Message.Guild == null)
             {
-                Message.Edit(new MessageEditProperties()
+                Message.Edit(new Discord.MessageEditProperties()
                 {
                     Content = "",
                     Embed = embed
                 });
+                return;
+            }
+            else
+            {
+                if (Message.Author.Member.GetPermissions().Has(DiscordPermission.AttachFiles) || Message.Author.Member.GetPermissions().Has(DiscordPermission.Administrator)) //CHECK DE PERMISSIONS
+                {
+                    Message.Edit(new Discord.MessageEditProperties()
+                    {
+                        Content = "",
+                        Embed = embed
+                    });
+                    return;
+                }
             }
         }
 

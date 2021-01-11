@@ -8,3 +8,4 @@ C:\Users\RR\Documents\GitHub\RamokSelfbot-Rewrite\RamokSelfbot-Rewritten\bin\Deb
 C:\Users\RR\Documents\GitHub\RamokSelfbot-Rewrite\RamokSelfbot-Rewritten\bin\Debug\Newtonsoft.Json.xml
 C:\Users\RR\Documents\GitHub\RamokSelfbot-Rewrite\RamokSelfbot-Rewritten\obj\Debug\RamokSelfbot-Rewritten.csproj.CopyComplete
 C:\Users\RR\Documents\GitHub\RamokSelfbot-Rewrite\RamokSelfbot-Rewritten\obj\Debug\RamokSelfbot-Rewritten.csproj.Fody.CopyLocal.cache
+C:\Users\RR\Documents\GitHub\RamokSelfbot-Rewrite\RamokSelfbot-Rewritten\obj\Debug\RamokSelfbot-Rewritten.csprojAssemblyReference.cache

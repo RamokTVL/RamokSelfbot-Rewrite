@@ -37,16 +37,26 @@ namespace RamokSelfbot.Commands.Help
                 }
 
 
-                if (Message.Author.Member.GetPermissions().Has(DiscordPermission.AttachFiles) || Message.Author.Member.GetPermissions().Has(DiscordPermission.Administrator) || Client.GetCachedGuild(Message.Guild.Id).OwnerId == Program.id) //CHECK DE PERMISSIONS
+                if (Message.Guild == null)
                 {
-                    try
+                    Message.Edit(new Discord.MessageEditProperties()
                     {
-                        Message.Edit(new MessageEditProperties()
+                        Content = "",
+                        Embed = embed
+                    });
+                    return;
+                }
+                else
+                {
+                    if (Message.Author.Member.GetPermissions().Has(DiscordPermission.AttachFiles) || Message.Author.Member.GetPermissions().Has(DiscordPermission.Administrator)) //CHECK DE PERMISSIONS
+                    {
+                        Message.Edit(new Discord.MessageEditProperties()
                         {
                             Content = "",
                             Embed = embed
                         });
-                    } catch { }
+                        return;
+                    }
                 }
             }
         }

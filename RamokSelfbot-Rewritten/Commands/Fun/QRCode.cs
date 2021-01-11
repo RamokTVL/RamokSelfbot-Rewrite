@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace RamokSelfbot.Commands.Fun
 {
-    [Command("qrcode")]
+    [Command("qrcode", "Create a QRCode with the text specified. - FUN")]
     class QRCode : CommandBase
     {
         [Parameter("text")]
@@ -42,6 +42,24 @@ namespace RamokSelfbot.Commands.Fun
                         },
                     });
                 }
+                else
+                {
+                    if (Message.Guild == null)
+                    {
+                        Message.Edit(new Discord.MessageEditProperties()
+                        {
+                            Content = "",
+                            Embed = new EmbedMaker()
+                            {
+                                ImageUrl = url,
+                                Color = System.Drawing.Color.FromArgb(JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorr, JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorg, JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorb),
+                                Footer = footer
+                            },
+                        });
+                    }
+                }
+
+
 
             }
         }
