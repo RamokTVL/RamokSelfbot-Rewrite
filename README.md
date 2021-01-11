@@ -1,4 +1,4 @@
-# RamokSelfbot-Rewrite
+# RamokSelfbot-Rewritten
 
 
 # First start !
