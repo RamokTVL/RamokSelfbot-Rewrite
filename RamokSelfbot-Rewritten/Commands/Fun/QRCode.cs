@@ -29,9 +29,11 @@ namespace RamokSelfbot.Commands.Fun
 
                 footer.Text = "Selfbot rewritten by Ramok with <3";
 
-                if(Message.Author.Member.GetPermissions().Has(DiscordPermission.AttachFiles) || Message.Author.Member.GetPermissions().Has(DiscordPermission.Administrator) || Client.GetCachedGuild(Message.Guild.Id).OwnerId == Program.id) //CHECK DE PERMISSIONS
+
+
+                if (Message.Guild == null)
                 {
-                    Message.Edit(new MessageEditProperties()
+                    Message.Edit(new Discord.MessageEditProperties()
                     {
                         Content = "",
                         Embed = new EmbedMaker()
@@ -41,10 +43,11 @@ namespace RamokSelfbot.Commands.Fun
                             Footer = footer
                         },
                     });
+                    return;
                 }
                 else
                 {
-                    if (Message.Guild == null)
+                    if (Message.Author.Member.GetPermissions().Has(DiscordPermission.AttachFiles) || Message.Author.Member.GetPermissions().Has(DiscordPermission.Administrator)) //CHECK DE PERMISSIONS
                     {
                         Message.Edit(new Discord.MessageEditProperties()
                         {
@@ -56,6 +59,7 @@ namespace RamokSelfbot.Commands.Fun
                                 Footer = footer
                             },
                         });
+                        return;
                     }
                 }
 

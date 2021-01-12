@@ -61,6 +61,7 @@
     <Reference Include="System.Net" />
     <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -85,6 +86,7 @@
     <Compile Include="Commands\Moderation\Moderation.cs" />
     <Compile Include="Commands\Others\Others.cs" />
     <Compile Include="Commands\Others\Ping.cs" />
+    <Compile Include="Commands\Others\Restart.cs" />
     <Compile Include="Commands\Others\Start.cs" />
     <Compile Include="Commands\Utils\ColorEmbed.cs" />
     <Compile Include="Commands\Utils\Tinyurl.cs" />

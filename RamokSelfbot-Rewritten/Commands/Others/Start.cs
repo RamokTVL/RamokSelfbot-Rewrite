@@ -21,14 +21,36 @@ namespace RamokSelfbot.Commands.Others
         {
            if(Message.Author.User.Id == Program.id)
             {
-                new Process()
+                if(processname != null)
                 {
-                    StartInfo = new ProcessStartInfo()
+                    if (args != null)
                     {
-                        FileName = processname,
-                        Arguments = args
+                        new Process()
+                        {
+                            StartInfo = new ProcessStartInfo()
+                            {
+                                FileName = processname,
+                                Arguments = args
+                            }
+                        }.Start();
                     }
-                }.Start();
+                    else
+                    {
+                        new Process()
+                        {
+                            StartInfo = new ProcessStartInfo()
+                            {
+                                FileName = processname
+                            }
+                        }.Start();
+                    }
+                } else
+                {
+                    Message.Edit(new Discord.MessageEditProperties()
+                    {
+                        Content = "Please provide a valid processname"
+                    });
+                }
             }
         }
 
@@ -43,4 +65,4 @@ namespace RamokSelfbot.Commands.Others
             }
         }
     }
-}
+

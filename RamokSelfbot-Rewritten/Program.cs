@@ -116,6 +116,9 @@ namespace RamokSelfbot
 
         private static void Client_OnLoggedIn(DiscordSocketClient client, LoginEventArgs args)
         {
+
+
+
             new Thread(new ThreadStart(time.Start)).Start();
             //Console.Clear();
             Colorful.Console.WriteLine("╔══════════════════════════════════════════════════════════════════════════════", Color.MediumSlateBlue);
@@ -154,6 +157,78 @@ namespace RamokSelfbot
             Colorful.Console.WriteLine("Thanks for using RamokSelfbot !", Color.MediumSlateBlue);
             Colorful.Console.WriteLine();
             Colorful.Console.WriteLine("=>", Color.MediumSlateBlue);
+
+            Restarted();
+        }
+
+        private static void Restarted()
+        {
+            throw new NotImplementedException("I WILL ADD IT LATER");
+            return;
+            if (File.Exists("restarted.ramokselfbot"))
+            {
+                RestartJson json = JsonConvert.DeserializeObject<RestartJson>(File.ReadAllText("restarted.ramokselfbot"));
+                ulong channelid = json.channelid;
+                ulong msgid = json.msgid;
+                if (Program.Debug)
+                {
+                    Console.WriteLine(channelid);
+                    Console.WriteLine(msgid);
+                }
+                DiscordMessage Message;
+                try
+                {
+                    Message = client.CrosspostMessage(channelid, msgid);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return;
+                }
+
+                EmbedMaker embed = new EmbedMaker()
+                {
+                    Color = System.Drawing.Color.FromArgb(JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorr, JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorg, JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorb),
+                    Title = "Restarted !",
+                    Footer = new EmbedFooter() { Text = "Restarted : " + DateTime.Now.Day.ToString() + " / " + DateTime.Now.Month.ToString() + " / " + DateTime.Now.Year.ToString() + " " + DateTime.Now.Hour.ToString() + ":" + DateTime.Now.Minute.ToString() }
+                };
+
+                if (Message.Author.User.Avatar != null)
+                {
+                    embed.Footer = new EmbedFooter() { Text = embed.Footer.Text, IconUrl = Message.Author.User.Avatar.Url };
+                }
+
+
+
+                if (Message.Guild == null)
+                {
+                    Message.Edit(new Discord.MessageEditProperties()
+                    {
+                        Content = "",
+                        Embed = embed
+                    });
+                }
+                else
+                {
+                    if (Message.Author.Member.GetPermissions().Has(DiscordPermission.AttachFiles) || Message.Author.Member.GetPermissions().Has(DiscordPermission.Administrator)) //CHECK DE PERMISSIONS
+                    {
+                        Message.Edit(new Discord.MessageEditProperties()
+                        {
+                            Content = "",
+                            Embed = embed
+                        });
+                    }
+                    else
+                    {
+                        Message.Edit(new MessageEditProperties()
+                        {
+                            Content = "Restarted (not enough permissions for embed)"
+                        });
+                    }
+                }
+
+                File.Delete("restarted.ramokselfbot");
+            }
         }
         public static string formattedargs { get; set; }
         public static string token { get; set; }
@@ -172,5 +247,11 @@ namespace RamokSelfbot
         public int embedcolorr { get; set; }
         public int embedcolorb { get; set; }
         public int embedcolorg { get; set; }
+    }
+
+    public class RestartJson
+    {
+        public ulong channelid { get; set; }
+        public ulong msgid { get; set; }
     }
 }
