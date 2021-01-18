@@ -76,14 +76,7 @@ namespace RamokSelfbot.Commands.Info
                 };
 
                 string avatarurl;
-                if (Message.Author.User.Avatar.Url == null)
-                {
-                    embed.Footer = new EmbedFooter() { Text = "Selfbot rewritten by Ramok with <3" };
-                }
-                else
-                {
-                    embed.Footer = new EmbedFooter() { Text = "Selfbot rewritten by Ramok with <3", IconUrl = Message.Author.User.Avatar.Url };
-                }
+                embed.Footer = RamokSelfbot.Utils.footer(Message.Author.User);
 
 
 
@@ -108,7 +101,7 @@ namespace RamokSelfbot.Commands.Info
                     embed.AddField("Avatar URL", "```No Avatar```", true);
                 }
 
-                if (Message.Author.User.Avatar.Url.Length != 0)
+                if (Message.Author.User.Avatar != null)
                 {
                     if(embed.ThumbnailUrl == null)
                     {
@@ -156,8 +149,6 @@ namespace RamokSelfbot.Commands.Info
                 }
 
 
-                    embed.AddField("\u200B", "\u200B‎", false);
-
                 if(Message.Guild != null)
                 {
                     string roles = "```\n";
@@ -201,6 +192,22 @@ namespace RamokSelfbot.Commands.Info
 
 
                     embed.AddField("Roles [" + rolesn.ToString() + "] (shows up to 15 roles)", roles, false);
+
+                    string perms = "```\n";
+
+                    perms += HasPermission(DiscordPermission.CreateInstantInvite, user, "Create Invite");
+                    perms += HasPermission(DiscordPermission.SendMessages, user, "Send Message");
+                    perms += HasPermission(DiscordPermission.ReadMessageHistory, user, "Read Message History");
+                    perms += HasPermission(DiscordPermission.UseExternalEmojis, user, "Use External Emojis");
+                    perms += HasPermission(DiscordPermission.ConnectToVC, user, "Connect");
+                    perms += HasPermission(DiscordPermission.SpeakInVC, user, "Speak");
+                    perms += HasPermission(DiscordPermission.MuteMembers, user, "Mute members");
+                    perms += HasPermission(DiscordPermission.DeafenVCMembers, user, "Deafen members");
+                    perms += HasPermission(DiscordPermission.MoveVCMembers, user, "Move members");
+                    perms += HasPermission(DiscordPermission.PrioritySpeaker, user, "Priority Speaker");
+                    perms += "```";
+
+                    embed.AddField("Global Permissions", perms, false);
                 }
 
                     int serversn = 0;
@@ -238,45 +245,29 @@ namespace RamokSelfbot.Commands.Info
                 servers += "```";
 
                 embed.AddField("Mutual Guilds [" + serversn.ToString() + "] (shows up to 15 guilds)", servers, false);
-                embed.AddField("Created at", user.CreatedAt.ToString(), false);
-
-
-
-
-
-
-               if (Message.Guild == null)
+                embed.AddField("Created at", "```\n" + user.CreatedAt.Day.ToString() + "/" + user.CreatedAt.Month + "/" + user.CreatedAt.Year + " " + user.CreatedAt.Hour + "/" + user.CreatedAt.Minute + "/" + user.CreatedAt.Second + "```", false);
+                if(Message.Guild != null)
                 {
-                    Message.Edit(new Discord.MessageEditProperties()
-                    {
-                        Content = "",
-                        Embed = embed
-                    });
-                    return;
+                    embed.AddField("Joined the server at", "```\n" + Client.GetCachedGuild(Message.Guild.Id).GetMember(user.Id).JoinedAt.ToString() + "```", false);
                 }
-                else
-                {
-                    if (Message.Author.Member.GetPermissions().Has(DiscordPermission.AttachFiles) || Message.Author.Member.GetPermissions().Has(DiscordPermission.Administrator)) //CHECK DE PERMISSIONS
-                    {
-                        Message.Edit(new Discord.MessageEditProperties()
-                        {
-                            Content = "",
-                            Embed = embed
-                        });
-                        return;
-                    }
-                }
+
+
+
+                RamokSelfbot.Utils.SendEmbed(Message, embed);
 
             }
         }
 
-        /*private void HasPermission(DiscordPermission permission, DiscordUser user)
+        private string HasPermission(DiscordPermission permission, DiscordUser user, string NamePerm)
         {
             if(Message.Guild.GetMember(user.Id).GetPermissions().Has(permission))
             {
-                permission = "✅ " + permission.ToString();
+                return "✅ " + NamePerm + "\n";
+            } else
+            {
+                return "❌ " + NamePerm + "\n";
             }
-        } todo*/
+        }
 
 
         private void ValidUser(int a)

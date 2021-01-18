@@ -1,0 +1,46 @@
+﻿using Discord;
+using Discord.Commands;
+using Discord.Gateway;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace RamokSelfbot.Commands.StatusActivity
+{
+    [Command("watching", "Set your status to \"Watching\" - ACTIVITY")]
+    class Watching : CommandBase
+    {
+        [Parameter("name", false)]
+        public string name { get; set; }
+        public override void Execute()
+        {
+            if(Message.Author.User.Id == Program.id)
+            {
+                Message.Delete();
+                try
+                {
+
+                    Client.SetActivity(new ActivityProperties()
+                    {
+                        Name = name,
+                        Type = ActivityType.Streaming
+                    });
+
+                  
+                    
+                } catch(Exception ex)
+                {
+                    if(Program.Debug)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                }
+
+
+            }
+        }
+    }
+}

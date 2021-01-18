@@ -90,6 +90,7 @@ namespace RamokSelfbot
                 catch { }
 
                 client.OnLoggedIn += Client_OnLoggedIn;
+                client.OnMessageReceived += Client_OnMessageReceived;
                 client.CreateCommandHandler(JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).prefix);
                 try
                 {
@@ -112,6 +113,17 @@ namespace RamokSelfbot
                 verifiedtoken = true;
             } while (verifiedtoken == false);
             
+        }
+
+        private static void Client_OnMessageReceived(DiscordSocketClient client, MessageEventArgs args)
+        {
+            if(args.Message.Author.User.Id == Program.id)
+            {
+                MSGSent++;
+            } else
+            {
+                MSGRecieved++;
+            }
         }
 
         private static void Client_OnLoggedIn(DiscordSocketClient client, LoginEventArgs args)
@@ -156,7 +168,7 @@ namespace RamokSelfbot
             Console.WriteLine();
             Colorful.Console.WriteLine("Thanks for using RamokSelfbot !", Color.MediumSlateBlue);
             Colorful.Console.WriteLine();
-            Colorful.Console.WriteLine("=>", Color.MediumSlateBlue);
+            Colorful.Console.WriteLine("Logs =>\n", Color.MediumSlateBlue);
 
             Restarted();
         }
@@ -210,7 +222,7 @@ namespace RamokSelfbot
                 }
                 else
                 {
-                    if (Message.Author.Member.GetPermissions().Has(DiscordPermission.AttachFiles) || Message.Author.Member.GetPermissions().Has(DiscordPermission.Administrator)) //CHECK DE PERMISSIONS
+                    if (Message.Author.Member.GetPermissions().Has(DiscordPermission.AttachFiles)) //CHECK DE PERMISSIONS
                     {
                         Message.Edit(new Discord.MessageEditProperties()
                         {
@@ -233,7 +245,11 @@ namespace RamokSelfbot
         public static string formattedargs { get; set; }
         public static string token { get; set; }
 
-        public static bool Debug = true;
+
+        public static ulong MSGSent;
+        public static ulong MSGRecieved;
+
+        public static bool Debug = false;
         public static bool DynamicName = true;
 
         public static Stopwatch time = new Stopwatch();

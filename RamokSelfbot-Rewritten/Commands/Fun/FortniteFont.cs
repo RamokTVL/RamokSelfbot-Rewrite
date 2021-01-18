@@ -4,68 +4,71 @@ using Discord.Gateway;
 using Newtonsoft.Json;
 using System;
 using System.IO;
+using System.Net;
 
 namespace RamokSelfbot.Commands.Fun
 {
     [Command("fortnitefont", "Create a text with the fortnite font. - FUN")]
     class FortniteFont : CommandBase
     {
-        [Parameter("hexcolor")]
+        [Parameter("hexcolor", false)]
         public string color { get; private set; }
 
-        [Parameter("size")]
+        [Parameter("size", false)]
         public string size { get; private set; }
 
-        [Parameter("text")]
+        [Parameter("text", false)]
         public string text { get; private set; }
 
         public override void Execute()
         {
-            if(Message.Author.User.Id == Program.id)
+            if (Message.Author.User.Id == Program.id)
             {
-                string url = "http://fortnitefontgenerator.com/img.php?fontsize=" + size + "&textcolor=" + color +"&text=" + text.Replace(" ", "%20");
-                EmbedFooter footer = new EmbedFooter();
-                if (Message.Author.User.Avatar.Url != null)
-                {
-                    footer.IconUrl = Message.Author.User.Avatar.Url;
-                }
+                string url = "http://fortnitefontgenerator.com/img.php?fontsize=" + size + "&textcolor=" + color + "&text=" + text.Replace(" ", "%20");
 
-                footer.Text = "Selfbot rewritten by Ramok with <3";
 
-                if (Message.Guild == null)
+
+                if (color.Contains("#"))
                 {
-                    Message.Edit(new Discord.MessageEditProperties()
+                    EmbedMaker syntaxerror = new EmbedMaker()
                     {
-                        Content = "",
-                        Embed = new EmbedMaker()
-                        {
-                            ImageUrl = url,
-                            Color = System.Drawing.Color.FromArgb(JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorr, JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorg, JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorb),
-                            Footer = footer
-                        },
-                    });
-                    return;
+                        Color = System.Drawing.Color.FromArgb(JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorr, JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorg, JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorb),
+                        Description = "If you cant find ur error, try !!fun to get the informations.\nThe hexcolor is without \"#\".\n\nThe FortniteFont command cant be executed due to a syntaxerror, please retry with the good syntax.",
+                        Footer = RamokSelfbot.Utils.footer(Message.Author.User)
+                    };
+
+
+
+                    RamokSelfbot.Utils.SendEmbed(Message, syntaxerror);
                 }
                 else
                 {
-                    if (Message.Author.Member.GetPermissions().Has(DiscordPermission.AttachFiles) || Message.Author.Member.GetPermissions().Has(DiscordPermission.Administrator)) //CHECK DE PERMISSIONS
+                    if (new WebClient().DownloadString(url) == "")
                     {
-                        Message.Edit(new Discord.MessageEditProperties()
+                        EmbedMaker syntaxerror = new EmbedMaker()
                         {
-                            Content = "",
-                            Embed = new EmbedMaker()
-                            {
-                                ImageUrl = url,
-                                Color = System.Drawing.Color.FromArgb(JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorr, JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorg, JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorb),
-                                Footer = footer
-                            },
-                        });
-                        return;
+                            Color = System.Drawing.Color.FromArgb(JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorr, JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorg, JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorb),
+                            Description = "If you cant find ur error, try !!fun to get the informations.\nThe hexcolor is without \"#\".\n\nThe FortniteFont command cant be executed due to a syntaxerror, please retry with the good syntax.",
+                            Footer = RamokSelfbot.Utils.footer(Message.Author.User),
+                        };
+
+                        RamokSelfbot.Utils.SendEmbed(Message, syntaxerror);
                     }
+
+
+                    EmbedMaker embed = new EmbedMaker()
+                    {
+                        ImageUrl = url,
+                        Color = RamokSelfbot.Utils.EmbedColor(),
+                        Footer = RamokSelfbot.Utils.footer(Message.Author.User),
+                    };
+
+
+                    RamokSelfbot.Utils.SendEmbed(Message, embed);
+
+
+
                 }
-
-
-
             }
         }
 

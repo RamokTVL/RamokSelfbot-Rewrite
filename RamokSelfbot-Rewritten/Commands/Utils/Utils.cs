@@ -43,14 +43,7 @@ namespace RamokSelfbot.Commands.Utils
 
                 }
 
-                if (Message.Author.User.Avatar.Url == null)
-                {
-                    embed.Footer = new EmbedFooter() { Text = "Selfbot rewritten by Ramok with <3" };
-                }
-                else
-                {
-                    embed.Footer = new EmbedFooter() { Text = "Selfbot rewritten by Ramok with <3", IconUrl = Message.Author.User.Avatar.Url };
-                }
+                embed.Footer = RamokSelfbot.Utils.footer(Message.Author.User);
 
                 if (Message.Guild == null)
                 {

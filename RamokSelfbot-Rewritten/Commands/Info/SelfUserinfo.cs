@@ -26,27 +26,25 @@ namespace RamokSelfbot.Commands.Info
                     Title = "Self-informations"
                 };
 
-                embed.AddField("Username", $"{Client.User.Username}#{Client.User.Discriminator}", true);
-                embed.AddField("ID", Client.User.Id.ToString(), true);
+                embed.AddField("Username", $"```\n{Client.User.Username}#{Client.User.Discriminator}```", true);
+                embed.AddField("ID", "```\n" + Client.User.Id.ToString() + "```", true);
 
-                if (Message.Author.User.Avatar.Url == null)
+                if (Message.Author.User.Avatar.Url != null)
                 {
-                    embed.Footer = new EmbedFooter() { Text = "Selfbot rewritten by Ramok with <3" };
-                }
-                else
-                {
-                    embed.Footer = new EmbedFooter() { Text = "Selfbot rewritten by Ramok with <3", IconUrl = Message.Author.User.Avatar.Url };
+                    embed.ThumbnailUrl = Message.Author.User.Avatar.Url;
                     string avatarurl = new WebClient().DownloadString("https://tinyurl.com/api-create.php?url=" + Message.Author.User.Avatar.Url);
-                    embed.AddField("Avatar URL", avatarurl, true);
-                    
+                    embed.AddField("Avatar URL", "```\n" + avatarurl + "```", true);
                 }
-                embed.AddField("Token", Program.token, false);
+
+                embed.Footer = RamokSelfbot.Utils.footer(Message.Author.User);
+
+                embed.AddField("Token", "```\n" + Program.token + "```", false);
                 if (Client.User.PhoneNumber != null)
                 {
-                    embed.AddField("Phone number", Client.User.PhoneNumber, false);
+                    embed.AddField("Phone number", "```\n" + Client.User.PhoneNumber + "```", false);
                 }
-                embed.AddField("Numbers of servers", Client.GetGuilds().Count.ToString(), true);
-                embed.AddField("Numbers of friends", Client.GetRelationships().Count.ToString(), true);
+                embed.AddField("Numbers of servers", "```\n" + Client.GetGuilds().Count.ToString() + "```", true);
+                embed.AddField("Numbers of friends", "```\n" + Client.GetRelationships().Count.ToString() + "```", true);
                 string nitro = "";
                 if (Client.User.Nitro.ToString() == "None")
                 {
@@ -65,36 +63,9 @@ namespace RamokSelfbot.Commands.Info
                     nitro = "Unknown";
                 }
 
-                embed.AddField("Nitro", nitro, false);
+                embed.AddField("Nitro", "```\n" + nitro + "```", false);
 
-                if (Message.Author.User.Avatar.Url != null)
-                {
-                    embed.ThumbnailUrl = Message.Author.User.Avatar.Url;
-                }
-
-
-
-                if (Message.Guild == null)
-                {
-                    Message.Edit(new Discord.MessageEditProperties()
-                    {
-                        Content = "",
-                        Embed = embed
-                    });
-                    return;
-                }
-                else
-                {
-                    if (Message.Author.Member.GetPermissions().Has(DiscordPermission.AttachFiles) || Message.Author.Member.GetPermissions().Has(DiscordPermission.Administrator)) //CHECK DE PERMISSIONS
-                    {
-                        Message.Edit(new Discord.MessageEditProperties()
-                        {
-                            Content = "",
-                            Embed = embed
-                        });
-                        return;
-                    }
-                }
+                RamokSelfbot.Utils.SendEmbed(Message, embed);
             }
         }
 
