@@ -3,6 +3,8 @@ DISCORD : https://discord.gg/GxvKJ5kgPR
 
 I made this project for learn c#, this is not the best selfbot ever (lol its a beta and the only opensource selfbot in c# that i know the existence) 
 
+The github repository is like ~250 mo, so if you want to download the sources, download the latest release and put it in DNSpy, this can be a alternative for bad connexions !
+
 # First start !
 When you download the selfbot, the first thing you need to do before launching the bot is : 
 
