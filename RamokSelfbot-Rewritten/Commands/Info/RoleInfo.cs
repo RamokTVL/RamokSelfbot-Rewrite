@@ -95,6 +95,10 @@ namespace RamokSelfbot.Commands.Info
                 embed.AddField("Permissions", perms);
 
                 embed.AddField("Role position", "```\n" + roles.Position.ToString() + "```", false);
+
+                embed.Footer = RamokSelfbot.Utils.footer(Message.Author.User);
+
+                RamokSelfbot.Utils.SendEmbed(Message, embed);
             }
         }
 

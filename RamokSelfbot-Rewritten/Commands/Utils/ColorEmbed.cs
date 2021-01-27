@@ -40,6 +40,8 @@ namespace RamokSelfbot.Commands.Utils
                 Footer = RamokSelfbot.Utils.footer(Message.Author.User)
             };
 
+            embed.Footer = RamokSelfbot.Utils.footer(Message.Author.User);
+
             embed.AddField("R", JsonConvert.DeserializeObject<RamokSelfbot.JSON>(File.ReadAllText("config.json")).embedcolorr.ToString(), true);
             embed.AddField("G", JsonConvert.DeserializeObject<RamokSelfbot.JSON>(File.ReadAllText("config.json")).embedcolorg.ToString(), true);
             embed.AddField("B", JsonConvert.DeserializeObject<RamokSelfbot.JSON>(File.ReadAllText("config.json")).embedcolorb.ToString(), true);

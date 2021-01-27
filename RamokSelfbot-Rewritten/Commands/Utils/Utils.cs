@@ -45,27 +45,7 @@ namespace RamokSelfbot.Commands.Utils
 
                 embed.Footer = RamokSelfbot.Utils.footer(Message.Author.User);
 
-                if (Message.Guild == null)
-                {
-                    Message.Edit(new Discord.MessageEditProperties()
-                    {
-                        Content = "",
-                        Embed = embed
-                    });
-                    return;
-                }
-                else
-                {
-                    if (Message.Author.Member.GetPermissions().Has(DiscordPermission.AttachFiles) || Message.Author.Member.GetPermissions().Has(DiscordPermission.Administrator)) //CHECK DE PERMISSIONS
-                    {
-                        Message.Edit(new Discord.MessageEditProperties()
-                        {
-                            Content = "",
-                            Embed = embed
-                        });
-                        return;
-                    }
-                }
+                RamokSelfbot.Utils.SendEmbed(Message, embed);
             }
         }
 

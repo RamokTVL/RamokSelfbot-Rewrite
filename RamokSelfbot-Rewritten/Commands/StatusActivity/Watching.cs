@@ -1,12 +1,9 @@
-﻿using Discord;
+﻿
 using Discord.Commands;
 using Discord.Gateway;
-using Newtonsoft.Json;
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace RamokSelfbot.Commands.StatusActivity
 {

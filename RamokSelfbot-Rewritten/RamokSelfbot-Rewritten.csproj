@@ -1,5 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\CefSharp.WinForms.86.0.241\build\CefSharp.WinForms.props" Condition="Exists('..\packages\CefSharp.WinForms.86.0.241\build\CefSharp.WinForms.props')" />
+  <Import Project="..\packages\CefSharp.Common.86.0.241\build\CefSharp.Common.props" Condition="Exists('..\packages\CefSharp.Common.86.0.241\build\CefSharp.Common.props')" />
+  <Import Project="..\packages\cef.redist.x86.86.0.24\build\cef.redist.x86.props" Condition="Exists('..\packages\cef.redist.x86.86.0.24\build\cef.redist.x86.props')" />
+  <Import Project="..\packages\cef.redist.x64.86.0.24\build\cef.redist.x64.props" Condition="Exists('..\packages\cef.redist.x64.86.0.24\build\cef.redist.x64.props')" />
   <Import Project="..\packages\Costura.Fody.4.1.0\build\Costura.Fody.props" Condition="Exists('..\packages\Costura.Fody.4.1.0\build\Costura.Fody.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -75,6 +79,9 @@
     </Reference>
     <Reference Include="libvideo, Version=3.0.9.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\VideoLibrary.3.0.9\lib\netstandard1.1\libvideo.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialSkin.Updated.0.2.2\lib\MaterialSkin.dll</HintPath>
     </Reference>
     <Reference Include="MediaToolkit, Version=1.1.0.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MediaToolkit.1.1.0.1\lib\net40\MediaToolkit.dll</HintPath>
@@ -306,9 +313,31 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\Covid\Covid.cs" />
+    <Compile Include="Commands\Covid\GetData.cs" />
+    <Compile Include="Commands\Experimental\Experimental.cs" />
+    <Compile Include="Commands\Experimental\Forms\Github.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Commands\Experimental\Forms\Github.Designer.cs">
+      <DependentUpon>Github.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Commands\Experimental\Forms\Trello.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Commands\Experimental\Forms\Trello.Designer.cs">
+      <DependentUpon>Trello.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Commands\Experimental\Github.cs" />
+    <Compile Include="Commands\Experimental\Test.cs" />
+    <Compile Include="Commands\Experimental\Trello.cs" />
+    <Compile Include="Commands\Fun\Corona.cs" />
     <Compile Include="Commands\Fun\DynamicName.cs" />
     <Compile Include="Commands\Fun\FakeInvite.cs" />
-    <Compile Include="Commands\Fun\Gif.cs" />
+    <Compile Include="Commands\Fun\GayPercent.cs" />
+    <Compile Include="Commands\Fun\GetGuildProfilePicture.cs" />
+    <Compile Include="Commands\Fun\Hakor.cs" />
+    <Compile Include="Commands\Fun\IQ.cs" />
     <Compile Include="Commands\Fun\PickRandomUserReaction.cs" />
     <Compile Include="Commands\Fun\Say.cs" />
     <Compile Include="Commands\Fun\SelfDynamicName.cs" />
@@ -317,11 +346,15 @@
     <Compile Include="Commands\Fun\PaperRockScissors.cs" />
     <Compile Include="Commands\Fun\QRCode.cs" />
     <Compile Include="Commands\Fun\StealPP.cs" />
+    <Compile Include="Commands\Fun\StopHac.cs" />
     <Compile Include="Commands\Fun\TrafficLight.cs" />
     <Compile Include="Commands\Hash\MD5.cs" />
     <Compile Include="Commands\Hash\Hash.cs" />
+    <Compile Include="Commands\Hash\SHA256.cs" />
     <Compile Include="Commands\Help\Help.cs" />
     <Compile Include="Commands\Info\AboutMe.cs" />
+    <Compile Include="Commands\Info\CheckForUpdates.cs" />
+    <Compile Include="Commands\Info\Credits.cs" />
     <Compile Include="Commands\Info\Info.cs" />
     <Compile Include="Commands\Info\RoleInfo.cs" />
     <Compile Include="Commands\Info\SelfUserinfo.cs" />
@@ -331,6 +364,21 @@
     <Compile Include="Commands\Moderation\Ban.cs" />
     <Compile Include="Commands\Moderation\Kick.cs" />
     <Compile Include="Commands\Moderation\Moderation.cs" />
+    <Compile Include="Commands\Music\Play.cs" />
+    <Compile Include="Commands\NSFW\Anal.cs" />
+    <Compile Include="Commands\NSFW\Pussy.cs" />
+    <Compile Include="Commands\NSFW\Ass.cs" />
+    <Compile Include="Commands\NSFW\HBoobs.cs" />
+    <Compile Include="Commands\NSFW\Hkitsune.cs" />
+    <Compile Include="Commands\NSFW\Boobs.cs" />
+    <Compile Include="Commands\NSFW\Neko.cs" />
+    <Compile Include="Commands\NSFW\Hneko.cs" />
+    <Compile Include="Commands\NSFW\Hentai.cs" />
+    <Compile Include="Commands\NSFW\PGif.cs" />
+    <Compile Include="Commands\NSFW\HmiDriff.cs" />
+    <Compile Include="Commands\NSFW\HAss.cs" />
+    <Compile Include="Commands\NSFW\4k.cs" />
+    <Compile Include="Commands\NSFW\NSFW.cs" />
     <Compile Include="Commands\Others\Others.cs" />
     <Compile Include="Commands\Others\Ping.cs" />
     <Compile Include="Commands\Others\Restart.cs" />
@@ -339,23 +387,53 @@
     <Compile Include="Commands\Raid\BanAll.cs" />
     <Compile Include="Commands\Raid\DeleteAllChannels.cs" />
     <Compile Include="Commands\Raid\DeleteAllRoles.cs" />
+    <Compile Include="Commands\Raid\KickAll.cs" />
     <Compile Include="Commands\Raid\Raid.cs" />
     <Compile Include="Commands\Raid\RenameAll.cs" />
     <Compile Include="Commands\Raid\UnbanAll.cs" />
     <Compile Include="Commands\StatusActivity\Activity.cs" />
+    <Compile Include="Commands\StatusActivity\Playing.cs" />
     <Compile Include="Commands\StatusActivity\Listening.cs" />
+    <Compile Include="Commands\StatusActivity\Streaming.cs" />
     <Compile Include="Commands\StatusActivity\Watching.cs" />
+    <Compile Include="Commands\Utils\DeleteWebhook.cs" />
+    <Compile Include="Commands\Utils\Forms\GUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Commands\Utils\Forms\GUI.Designer.cs">
+      <DependentUpon>GUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Commands\Utils\MyIP.cs" />
+    <Compile Include="Commands\Utils\OpenGui.cs" />
+    <Compile Include="Commands\Utils\OwnerServers.cs" />
     <Compile Include="Commands\Utils\ColorEmbed.cs" />
+    <Compile Include="Commands\Utils\Read.cs" />
+    <Compile Include="Commands\Utils\StickyNotes.cs" />
     <Compile Include="Commands\Utils\Tinyurl.cs" />
     <Compile Include="Commands\Utils\Utils.cs" />
+    <Compile Include="Commands\Utils\YT.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
     <None Include="App.config" />
     <Compile Include="Commands\Info\Stats.cs" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Commands\Experimental\Forms\Github.resx">
+      <DependentUpon>Github.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Commands\Experimental\Forms\Trello.resx">
+      <DependentUpon>Trello.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Commands\Utils\Forms\GUI.resx">
+      <DependentUpon>GUI.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
@@ -370,5 +448,13 @@ del /s *.xml</PostBuildEvent>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Fody.6.0.0\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.6.0.0\build\Fody.targets'))" />
     <Error Condition="!Exists('..\packages\Costura.Fody.4.1.0\build\Costura.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Costura.Fody.4.1.0\build\Costura.Fody.props'))" />
+    <Error Condition="!Exists('..\packages\cef.redist.x64.86.0.24\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x64.86.0.24\build\cef.redist.x64.props'))" />
+    <Error Condition="!Exists('..\packages\cef.redist.x86.86.0.24\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x86.86.0.24\build\cef.redist.x86.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Common.86.0.241\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.86.0.241\build\CefSharp.Common.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Common.86.0.241\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.86.0.241\build\CefSharp.Common.targets'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.WinForms.86.0.241\build\CefSharp.WinForms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.WinForms.86.0.241\build\CefSharp.WinForms.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.WinForms.86.0.241\build\CefSharp.WinForms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.WinForms.86.0.241\build\CefSharp.WinForms.targets'))" />
   </Target>
+  <Import Project="..\packages\CefSharp.Common.86.0.241\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.86.0.241\build\CefSharp.Common.targets')" />
+  <Import Project="..\packages\CefSharp.WinForms.86.0.241\build\CefSharp.WinForms.targets" Condition="Exists('..\packages\CefSharp.WinForms.86.0.241\build\CefSharp.WinForms.targets')" />
 </Project>

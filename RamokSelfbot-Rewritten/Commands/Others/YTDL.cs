@@ -13,8 +13,6 @@ namespace RamokSelfbot.Commands.Others
     class YTDL : CommandBase
     {
 
-
-
         [Parameter("link")]
         public string link { get; set; }
 
@@ -59,7 +57,7 @@ namespace RamokSelfbot.Commands.Others
 
                 embed.AddField("⌚ Time to download the video", sw.Elapsed.Minutes + " minutes and " + sw.Elapsed.Seconds + " seconds", false);
                 embed.AddField("📁 Saved at", RamokSelfbot.Utils.GetFileName() + "\\ytdl\\" + video.FullName, false);
-
+              
                 RamokSelfbot.Utils.SendEmbed(Message, embed);
 
             }

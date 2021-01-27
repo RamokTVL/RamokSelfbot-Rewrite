@@ -22,13 +22,13 @@ namespace RamokSelfbot.Commands.Fun
         public string Name { get; private set; }
 
 
-        public static DiscordUser user;
+        public static GuildMember user;
         public override void Execute()
         {
             if (Message.Author.User.Id == Program.id)
             {
                 Message.Delete();
-                user = Client.GetUser(Program.id);
+                user = Client.GetGuildMember(Message.Guild.Id, Program.id);
                 if (ID == null)
                 {
                     ValidUser(1);
@@ -40,7 +40,7 @@ namespace RamokSelfbot.Commands.Fun
                     {
                         try
                         {
-                            user = Client.GetUser(ulong.Parse(ID));
+                            user = Client.GetGuildMember(Message.Guild.Id, ulong.Parse(ID));
                         }
                         catch (Exception ex)
                         {
@@ -59,7 +59,7 @@ namespace RamokSelfbot.Commands.Fun
                     {
                         try
                         {
-                            user = Client.GetUser(Message.Mentions[0].Id);
+                            user = Client.GetGuildMember(Message.Guild.Id, Message.Mentions[0].Id);
                         }
                         catch (Exception ex)
                         {
@@ -103,7 +103,7 @@ namespace RamokSelfbot.Commands.Fun
                         currentNick += Name[i];
                         if (Message.Author.Member.GetPermissions().Has(DiscordPermission.ManageNicknames))
                         {
-                            Message.Guild.SetNickname(currentNick);
+                            
                         }
                         else
                         {

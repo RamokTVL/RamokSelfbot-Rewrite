@@ -21,7 +21,7 @@ namespace RamokSelfbot.Commands.Info
                 DiscordUser user = Client.GetUser(Program.id);
                 if(id == null)
                 {
-                    ValidUser(1);
+                    RamokSelfbot.Utils.ValidUser(1, Message);
                     return;
                 } else
                 {
@@ -35,7 +35,7 @@ namespace RamokSelfbot.Commands.Info
                         {
                             if (ex.Message.Contains("Unknown User"))
                             {
-                                ValidUser(3);
+                                RamokSelfbot.Utils.ValidUser(2, Message);
                                 return;
                             }
                             else
@@ -54,7 +54,7 @@ namespace RamokSelfbot.Commands.Info
                             Console.WriteLine(ex.Message);
                             if (ex.Message.Contains("Unknown User"))
                             {
-                                ValidUser(3);
+                                RamokSelfbot.Utils.ValidUser(3, Message);
                                 return;
                             }
                             else
@@ -64,7 +64,7 @@ namespace RamokSelfbot.Commands.Info
                         }
                     } else
                     {
-                        ValidUser(2);
+                        RamokSelfbot.Utils.ValidUser(4, Message);
                         return;
                     }
                 }
@@ -270,50 +270,6 @@ namespace RamokSelfbot.Commands.Info
         }
 
 
-        private void ValidUser(int a)
-        {
-            if(Program.Debug == true)
-            {
-                Console.WriteLine(a.ToString());
-            }
-
-            EmbedMaker embed = new EmbedMaker()
-            {
-                Color = System.Drawing.Color.FromArgb(JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorr, JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorg, JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorb),
-                Description = "<@" + Message.Author.User.Id.ToString() + ">, please mention a valid user !"
-            };
-
-            if (Message.Author.User.Avatar.Url == null)
-            {
-                embed.Footer = new EmbedFooter() { Text = "Selfbot rewritten by Ramok with <3" };
-            }
-            else
-            {
-                embed.Footer = new EmbedFooter() { Text = "Selfbot rewritten by Ramok with <3", IconUrl = Message.Author.User.Avatar.Url };
-            }
-
-            if (Message.Guild == null)
-            {
-                Message.Edit(new Discord.MessageEditProperties()
-                {
-                    Content = "",
-                    Embed = embed
-                });
-                return;
-            }
-            else
-            {
-                if (Message.Author.Member.GetPermissions().Has(DiscordPermission.AttachFiles) || Message.Author.Member.GetPermissions().Has(DiscordPermission.Administrator)) //CHECK DE PERMISSIONS
-                {
-                    Message.Edit(new Discord.MessageEditProperties()
-                    {
-                        Content = "",
-                        Embed = embed
-                    });
-                    return;
-                }
-            }
-        }
 
         public override void HandleError(string parameterName, string providedValue, Exception exception)
         {

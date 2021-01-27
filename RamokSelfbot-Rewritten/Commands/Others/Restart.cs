@@ -17,13 +17,22 @@ namespace RamokSelfbot.Commands.Others
         {
             if(Message.Author.User.Id == Program.id)
             {
-         /*       RestartJson restart = JsonConvert.DeserializeObject<RestartJson>(File.ReadAllText(@"ressources\restarted.ramokselfbot.exemple"));
+               RestartJson restart = JsonConvert.DeserializeObject<RestartJson>(File.ReadAllText(@"ressources\restarted.ramokselfbot.exemple"));
                 restart.msgid = Message.Id;
                 restart.channelid = Message.Channel.Id;
+                
+
+                if(Message.Guild != null)
+                {
+                    restart.guildid = Message.Guild.Id;
+                } else
+                {
+                    restart.guildid = 003;
+                }
 
                 string output = JsonConvert.SerializeObject(restart, Formatting.Indented);
 
-                File.WriteAllText("restarted.ramokselfbot", output);*/
+                File.WriteAllText("restarted.ramokselfbot", output);
 
                 Message.Edit(new Discord.MessageEditProperties()
                 {
@@ -35,7 +44,7 @@ namespace RamokSelfbot.Commands.Others
                     StartInfo = new ProcessStartInfo()
                     {
                         FileName = "cmd.exe",
-                        Arguments = "/C taskkill /f /im RamokSelfbot-Rewritten.exe&" + System.Windows.Forms.Application.ExecutablePath
+                        Arguments = "/C taskkill /f /im RamokSelfbot-Rewritten.exe&" + RamokSelfbot.Utils.GetFileName() + "\\RamokSelfbot-Rewritten.exe"
                     }
                 }.Start();
             }

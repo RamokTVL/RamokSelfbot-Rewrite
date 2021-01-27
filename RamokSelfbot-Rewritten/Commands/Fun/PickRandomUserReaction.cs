@@ -35,6 +35,7 @@ namespace RamokSelfbot.Commands.Fun
                 };
 
                 var message = Client.GetMessageReactions(channelid, msgid, reaction);
+                Console.WriteLine(message.Count);
                 if(message.Count == 0)
                 {
                     RamokSelfbot.Utils.SendEmbed(Message, errorembed);

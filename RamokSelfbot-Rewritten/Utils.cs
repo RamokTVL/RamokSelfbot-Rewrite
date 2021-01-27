@@ -33,7 +33,7 @@ namespace RamokSelfbot
 
         public static string GetFileName()
         {
-            return System.Reflection.Assembly.GetEntryAssembly().Location;
+            return System.Reflection.Assembly.GetEntryAssembly().Location.Remove(System.Reflection.Assembly.GetEntryAssembly().Location.Length - 27, 27);
         }
 
         public static void ValidUser(int a, DiscordMessage Message)
@@ -84,11 +84,35 @@ namespace RamokSelfbot
             }
         }
 
-
- /*       public static void EditEmbed(DiscordMessage Message, DiscordEmbed embed)
+        public static ulong SendEmbedRsendIdget(DiscordMessage Message, DiscordEmbed embed)
         {
+            if (Message.Guild == null)
+            {
+                var msg = Message.Channel.SendMessage("", false, embed);
+                return msg.Id;
+            }
+            else
+            {
 
-        }*/
+                if (Program.client.GetCachedGuild(Message.Guild.Id).GetMember(Message.Author.User.Id).GetPermissions().Has(DiscordPermission.AttachFiles)) //CHECK DE PERMISSIONS
+                {
+                    var msg = Message.Channel.SendMessage("", false, embed);
+                    return msg.Id;
+                }
+                else
+                {
+                    Print("I cant send a embed !");
+                    return 00;
+                }
+            }
+        }
+
+
+
+        /*       public static void EditEmbed(DiscordMessage Message, DiscordEmbed embed)
+               {
+
+               }*/
 
         public static Color EmbedColor()
         {

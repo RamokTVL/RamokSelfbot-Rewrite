@@ -37,39 +37,12 @@ namespace RamokSelfbot.Commands.Utils
                     embed.ThumbnailUrl = Message.Author.User.Avatar.Url;
                 }
 
-                if (Message.Author.User.Avatar.Url == null)
-                {
-                    embed.Footer = new EmbedFooter() { Text = "Selfbot rewritten by Ramok with <3" };
-                }
-                else
-                {
-                    embed.Footer = new EmbedFooter() { Text = "Selfbot rewritten by Ramok with <3", IconUrl = Message.Author.User.Avatar.Url };
-                }
+                embed.Footer = RamokSelfbot.Utils.footer(Message.Author.User);
 
                 embed.AddField("Original Link", link, true);
                 embed.AddField("Shorten Link", new WebClient().DownloadString("https://tinyurl.com/api-create.php?url=" + link), true);
                 embed.AddField("Time elapsed", sw.ElapsedMilliseconds.ToString(), true);
-                if (Message.Guild == null)
-                {
-                    Message.Edit(new Discord.MessageEditProperties()
-                    {
-                        Content = "",
-                        Embed = embed
-                    });
-                    return;
-                }
-                else
-                {
-                    if (Message.Author.Member.GetPermissions().Has(DiscordPermission.AttachFiles) || Message.Author.Member.GetPermissions().Has(DiscordPermission.Administrator)) //CHECK DE PERMISSIONS
-                    {
-                        Message.Edit(new Discord.MessageEditProperties()
-                        {
-                            Content = "",
-                            Embed = embed
-                        });
-                        return;
-                    }
-                }
+                RamokSelfbot.Utils.SendEmbed(Message, embed);
                 sw.Reset();
             }
         }
