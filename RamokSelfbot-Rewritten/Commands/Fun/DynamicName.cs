@@ -80,9 +80,11 @@ namespace RamokSelfbot.Commands.Fun
                         ValidUser(2);
                         return;
                     }
+
+
                     Program.DynamicName = true;
-                    Thread thread = new Thread(new ThreadStart(WorkThreadFunction));
-                    thread.Start();
+                   new Thread(new ThreadStart(WorkThreadFunction)).Start();
+                   
                 }
             }
 
@@ -103,7 +105,10 @@ namespace RamokSelfbot.Commands.Fun
                         currentNick += Name[i];
                         if (Message.Author.Member.GetPermissions().Has(DiscordPermission.ManageNicknames))
                         {
-                            
+                            user.Modify(new GuildMemberProperties()
+                            {
+                                Nickname = currentNick
+                            });
                         }
                         else
                         {
