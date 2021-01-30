@@ -356,7 +356,7 @@ namespace RamokSelfbot
 
         private static void Client_OnLoggedIn(DiscordSocketClient client, LoginEventArgs args)
         {
-
+            Program.Debug = JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).debug;
 
             new Thread(new ThreadStart(CheckInternet)).Start();
             new Thread(new ThreadStart(VerifyMD5)).Start();
@@ -381,6 +381,9 @@ namespace RamokSelfbot
             Colorful.Console.WriteLine("╠══════════════════════════════════════════════════════════════════════════════", Color.MediumSlateBlue);
             Colorful.Console.WriteLine($"╠--> Relationships : {args.Relationships.Count}", Color.MediumSlateBlue);
             Colorful.Console.WriteLine("╠══════════════════════════════════════════════════════════════════════════════", Color.MediumSlateBlue);
+            Colorful.Console.WriteLine($"╠--> Debug : {Program.Debug}", Color.MediumSlateBlue);
+            Colorful.Console.WriteLine("╠══════════════════════════════════════════════════════════════════════════════", Color.MediumSlateBlue);
+            
             if(formattedargs.Contains("-showtoken"))
             {
                 Colorful.Console.WriteLine($"╠--> Token : {token}", Color.MediumSlateBlue);
@@ -498,6 +501,7 @@ namespace RamokSelfbot
         public bool nitrosniper { get; set; }
         public bool antieveryone { get; set; }
         public bool nsfw { get; set; }
+        public bool debug { get; set; }
         public string twitchlink { get; set; }
         public string youtubeapikey { get; set; }
         public int embedcolorr { get; set; }
