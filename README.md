@@ -14,6 +14,10 @@ When you download the selfbot, the first thing you need to do before launching t
 - Set your token at token.txt
 - Customize the bot
 
+Or : 
+
+- Open the selfbot with argument "/config"
+
  # Set your token 
    
    - Use this tutorial to get your token, and then put it in token.txt : https://www.youtube.com/watch?v=YEgFvgg7ZPI
