@@ -5,6 +5,9 @@ I made this project for learn c#, this is not the best selfbot ever (lol its a b
 
 The github repository is like ~250 mo, so if you want to download the sources, download the latest release and put it in DNSpy, this can be a alternative for bad connexions !
 
+# Legality
+The selfbot has been made for educational purposes. I do not take responsability on the bad usage of this selfbot.
+
 # First start !
 When you download the selfbot, the first thing you need to do before launching the bot is : 
 
