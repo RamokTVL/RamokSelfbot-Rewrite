@@ -245,7 +245,7 @@ namespace RamokSelfbot.Commands.Info
                 servers += "```";
 
                 embed.AddField("Mutual Guilds [" + serversn.ToString() + "] (shows up to 15 guilds)", servers, false);
-                embed.AddField("Created at", "```\n" + user.CreatedAt.Day.ToString() + "/" + user.CreatedAt.Month + "/" + user.CreatedAt.Year + " " + user.CreatedAt.Hour + "/" + user.CreatedAt.Minute + "/" + user.CreatedAt.Second + "```", false);
+                embed.AddField("Created at", "```\n" + user.CreatedAt.Day.ToString() + "/" + user.CreatedAt.Month + "/" + user.CreatedAt.Year + " " + user.CreatedAt.Hour + "hours " + user.CreatedAt.Minute + "min " + user.CreatedAt.Second + "seconds\n```", false);
                 if(Message.Guild != null)
                 {
                     embed.AddField("Joined the server at", "```\n" + Client.GetCachedGuild(Message.Guild.Id).GetMember(user.Id).JoinedAt.ToString() + "```", false);

@@ -21,7 +21,240 @@ namespace RamokSelfbot
         public static ulong id = 1;
         static void Main(string[] args)
         {
-            if(Program.Debug)
+            if (args.Length > 1 || args.Length == 1)
+            {
+                Program.formattedargs = args[0];
+            }
+            else
+            {
+                Program.formattedargs = "no";
+            }
+
+
+            if(formattedargs.Contains("/?"))
+            {
+                Colorful.Console.Write("Project created by RamokTV\nNitro sniper credits : https://github.com/Stanley-GF/StanSniper by Stanley-GF\n\n\n", Color.MediumPurple);
+                Colorful.Console.Write("Avaliable arguments start function : \n\n", Color.BlueViolet);
+                Colorful.Console.Write("/? - show this menu\n", Color.Gold);
+                Colorful.Console.Write("/config - config the selfbot\n", Color.Gold);
+                Colorful.Console.Write("-showtoken - Show ur token when the selfbot is connected to discord", Color.Gold);
+
+                System.Threading.Thread.Sleep(-1);
+            }
+
+            if(formattedargs.Contains("/config"))
+            {
+                Colorful.Console.Write("Prefix : ", Color.IndianRed);
+                string prefix = Console.ReadLine();
+                Colorful.Console.Write("Twitchlink : ", Color.IndianRed);
+                string twitchlink = Console.ReadLine();
+                Colorful.Console.Write("Youtube API Key : ", Color.IndianRed);
+                string ytapikey = Console.ReadLine();
+                Colorful.Console.Write("Embed Color (R) :", Color.IndianRed);
+                string embedcolorr = Console.ReadLine();      
+                Colorful.Console.Write("Embed Color (G) :", Color.IndianRed);
+                string embedcolorg = Console.ReadLine();   
+                Colorful.Console.Write("Embed Color (B) : ", Color.IndianRed);
+                string embedcolorb = Console.ReadLine();
+                Colorful.Console.Write("Nitro Sniper (true/false) : ", Color.IndianRed);
+                string nitrosniper = Console.ReadLine();
+                Colorful.Console.Write("Anti Everyone (true/false) : ", Color.IndianRed);
+                string antieveryone = Console.ReadLine();
+                Colorful.Console.Write("NSFW (true/false) : ", Color.IndianRed);
+                string nsfw = Console.ReadLine();
+                Colorful.Console.Write("Debug (true/false) : ", Color.IndianRed);
+                string debug = Console.ReadLine();
+                Colorful.Console.Write("Experimental Commands (true/false) : ", Color.IndianRed);
+                string experimentalcommand = Console.ReadLine();
+
+                JSON config = JsonConvert.DeserializeObject<JSON>(new WebClient().DownloadString("https://pastebin.com/raw/WhDt5kef"));
+                config.prefix = prefix;
+                config.twitchlink = twitchlink;
+                config.youtubeapikey = ytapikey;
+                config.embedcolorr = int.Parse(embedcolorr);
+                config.embedcolorg = int.Parse(embedcolorg);
+                config.embedcolorb = int.Parse(embedcolorb);
+                config.nitrosniper = nitrosniper.ToLower().Contains("true");
+                config.antieveryone = antieveryone.ToLower().Contains("true");
+                config.nsfw = nsfw.ToLower().Contains("true");
+                config.debug = debug.ToLower().Contains("true");
+                config.experimentalcommands = experimentalcommand.ToLower().Contains("true");
+
+                var configoutput = JsonConvert.SerializeObject(config, Formatting.Indented);
+                System.IO.File.WriteAllText("config.json", configoutput);
+
+                try
+                {
+                    File.WriteAllText("config.json", configoutput);
+                } catch { }
+
+                Colorful.Console.WriteLine("\n\nApplied config !", Color.Gold);
+                Thread.Sleep(-1);
+            }
+
+            if(formattedargs.Contains("/checkfiles"))
+            {
+                if(File.ReadAllText("token.txt").Length > 59 || File.ReadAllText("token.txt").Length == 59)
+                {
+                    Colorful.Console.WriteLine("Token detected ! (" + File.ReadAllText("token.txt") + ")", Color.LightGreen);
+                };
+
+                if(File.ReadAllLines("token.txt").Length != 1)
+                {
+                    Colorful.Console.WriteLine("Token invalid format detected !", Color.IndianRed);
+                }
+
+                bool ressourcesexists = false;
+
+                Directory.CreateDirectory("ytdl");
+                Directory.CreateDirectory("avatar");
+                Directory.CreateDirectory("discordcrasher");
+                if(Directory.Exists("ressources"))
+                {
+                    Colorful.Console.WriteLine("Directory ressources exists", Color.LightGreen);
+                    ressourcesexists = true;
+                } else
+                {
+                    Colorful.Console.WriteLine("Directory ressources doesn't exists", Color.IndianRed);
+                    ressourcesexists = false;
+                }
+
+                if(ressourcesexists)
+                {
+                    if (File.Exists("ressources\\channellocker.jpeg"))
+                    {
+                        if (RamokSelfbot.Utils.CalculateMD5("ressources\\channellocker.jpeg").ToLower() == "c102d9c4b4d24c0335e7cb38d64f4784")
+                        {
+                            Colorful.Console.WriteLine("Channel locker file seems good", Color.LightGreen);
+                        }
+                        else
+                        {
+                            Colorful.Console.WriteLine("Channel locker file edited", Color.IndianRed);
+                        }
+                    }
+                    else
+                    {
+                        Colorful.Console.WriteLine("Unable to find file channel locker", Color.IndianRed);
+                    }
+
+                    if (File.Exists("ressources\\discord-logo.jpg"))
+                    {
+                        if (RamokSelfbot.Utils.CalculateMD5("ressources\\discord-logo.jpg").ToLower() == "aa9f817a0a7f8c5b4ea03cf5261b4c5b")
+                        {
+                            Colorful.Console.WriteLine("Discord Logo file seems good", Color.LightGreen);
+                        }
+                        else
+                        {
+                            Colorful.Console.WriteLine("Discord Logo file edited", Color.IndianRed);
+                        }
+                    }
+                    else
+                    {
+                        Colorful.Console.WriteLine("Unable to find file discord logo", Color.IndianRed);
+                    }
+
+                    if (File.Exists("ressources\\listhetero.selfbot"))
+                    {
+                        Colorful.Console.WriteLine("Listhetero.selfbot exists !", Color.LightGreen);
+                    }
+                    else
+                    {
+                        Colorful.Console.WriteLine("Listhetero.selfbot do not exists!", Color.IndianRed);
+                    }
+
+                    if (File.Exists("ressources\\restarted.ramokselfbot.exemple"))
+                    {
+                        if (RamokSelfbot.Utils.CalculateMD5("ressources\\restarted.ramokselfbot.exemple").ToLower() == "b0a8efe3829852b460c9052f7d04d447")
+                        {
+                            Colorful.Console.WriteLine("restarted.ramokselfbot.exemple file seems good", Color.LightGreen);
+                        }
+                        else
+                        {
+                            Colorful.Console.WriteLine("restarted.ramokselfbot.exemple file edited (potencielly broken)", Color.IndianRed);
+                        }
+                    }
+                    else
+                    {
+                        Colorful.Console.WriteLine("restarted.ramokselfbot.exemple do not exists!", Color.IndianRed);
+                    }
+                }
+
+                if(File.Exists("config.json"))
+                {
+                    if(File.ReadAllLines("config.json").Length == 13)
+                    {
+                        Colorful.Console.WriteLine("config.json file lines seems good !", Color.LightGreen);
+                    } else
+                    {
+                        Colorful.Console.WriteLine("config.json format is not good!", Color.IndianRed);
+                    }
+                } else
+                {
+                    Colorful.Console.WriteLine("config.json do not exists !", Color.IndianRed);
+                }
+
+                int ff = 0;
+
+                if(File.Exists("ffmpeg.exe"))
+                {
+                    ff++;
+                }
+
+                if(File.Exists("ffplay.exe"))
+                {
+                    ff++;
+                }
+
+                if(File.Exists("ffprobe.exe"))
+                {
+                    ff++;
+                }
+
+                if(ff == 3)
+                {
+                    Colorful.Console.WriteLine("FFMPEG INSTALLED !", Color.LightGreen);
+                } else
+                {
+                    Colorful.Console.WriteLine("FFMPEG NOT INSTALLED !", Color.IndianRed);
+                    Colorful.Console.Write("Do you want to download FFMPEG ? (Y/N) : ", Color.IndianRed);
+                    switch(Console.ReadLine().ToLower())
+                    {
+                        case "y":
+                            Process.Start("https://www.gyan.dev/ffmpeg/builds/packages/ffmpeg-4.3.1-2021-01-26-full_build.7z");
+                            break;
+                        case "yes":
+                            Process.Start("https://www.gyan.dev/ffmpeg/builds/packages/ffmpeg-4.3.1-2021-01-26-full_build.7z");
+                            break;
+                        case "n":
+                            Colorful.Console.WriteLine("Discord Crasher command will not work!");
+                            break;
+                        case "no":
+                            Colorful.Console.WriteLine("Discord Crasher command will not work!");
+                            break;
+                    }
+                }
+
+                Details json = JsonConvert.DeserializeObject<Details>(new System.Net.WebClient().DownloadString("https://ramokselfbot.netlify.app/api/v1/ramokselfbot/details.json"));
+                var versionInfo = FileVersionInfo.GetVersionInfo(RamokSelfbot.Utils.GetFileName() + "\\RamokSelfbot-Rewritten.exe");
+                string version = versionInfo.FileVersion;
+                bool updated = false;
+                if (json.version == version)
+                    updated = true;
+
+                if (updated == false)
+                {
+                    Colorful.Console.WriteLine("You are not up to date.\n\nLatest update : " + json.version + "\nYour current file version : " + version + "\n\nUpdate link : " + json.link, Color.Gold);
+                }
+                else
+                {
+                    Colorful.Console.WriteLine("You are up to date ", Color.Gold);
+                   
+                }
+
+                Thread.Sleep(-1);
+            }
+
+            if (Program.Debug)
             {
                 Console.WriteLine(RamokSelfbot.Utils.GetFileName());
             }
@@ -46,31 +279,16 @@ namespace RamokSelfbot
             System.Threading.Thread.Sleep(500);
             // BIG CONSOLE : Console.SetWindowSize(129, 30);
             bool verifiedtoken = false;
-            TokenLogin:
+
+
+
+
+            
               do
                {
                 Console.Clear();
-                token = "";
-                if(File.Exists("token.txt"))
-                {
-                    token = File.ReadAllText("token.txt");
-                } else
-                {
-                    Colorful.Console.Write("Token : ", Color.IndianRed);
-                    token = Console.ReadLine();
-                    if (token == "")
-                    {
-                        goto TokenLogin;
-                    }
-                }
 
-                if(args.Length == 1)
-                {
-                    Program.formattedargs = args[0];
-                } else
-                {
-                    Program.formattedargs = "no";
-                }
+
 
                 try
                 {
@@ -107,25 +325,42 @@ namespace RamokSelfbot
                 client.CreateCommandHandler(JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).prefix);
                 try
                 {
-                    client.Login(token);
-                    if (!File.Exists("token.txt"))
-                    {
-                        File.WriteAllText("token.txt", token);
-                    } else
-                    {
-                        if (File.ReadAllText("token.txt") == null)
-                        {
-                            File.WriteAllText("token.txt", token);
-                        }
-                    }
+                    Login();
                 } catch
                 {
-                    goto TokenLogin;
+                    Login();
                 }
                 System.Threading.Thread.Sleep(-1);
                 verifiedtoken = true;
             } while (verifiedtoken == false);
             
+        }
+
+        private static void Login()
+        {
+      
+                if(File.Exists("token.txt"))
+                {
+                    if(File.ReadAllText("token.txt").Length != 0)
+                    {
+                        try
+                        {
+                            Colorful.Console.WriteLine("Press any key to connect the selfbot to Discord !\n(Copy the content in token.txt in the token login)");
+                            Console.ReadKey();
+                        Console.Clear();
+                            Program.token = File.ReadAllText("token.txt");
+                            client.Login(token);
+                        }catch(Exception ex)
+                        {
+                            Console.WriteLine("\nEXCEPTION HANDLER : ERROR\n\nError message : " + ex.Message);
+                        Console.WriteLine("Press any key to retry");
+                        Console.ReadKey();
+                        Console.Clear();
+                        Login();
+                        }
+                    }
+                }
+       
         }
 
 
@@ -358,10 +593,10 @@ namespace RamokSelfbot
         {
             Program.Debug = JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).debug;
 
-            new Thread(new ThreadStart(CheckInternet)).Start();
+        // FIXME   new Thread(new ThreadStart(CheckInternet)).Start();
             new Thread(new ThreadStart(VerifyMD5)).Start();
             new Thread(new ThreadStart(time.Start)).Start();
-            //Console.Clear();
+            Console.Clear();
             Colorful.Console.WriteLine("╔══════════════════════════════════════════════════════════════════════════════", Color.MediumSlateBlue);
             Colorful.Console.WriteLine($"╠--> Username : {args.User.Username}#{args.User.Discriminator} ({args.User.Id})", Color.MediumSlateBlue);
             Colorful.Console.WriteLine("╠══════════════════════════════════════════════════════════════════════════════", Color.MediumSlateBlue);

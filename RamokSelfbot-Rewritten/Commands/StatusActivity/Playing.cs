@@ -28,7 +28,7 @@ namespace RamokSelfbot.Commands.StatusActivity
                         Name = game, 
                         Details = "RamokSelfbot on the flux",
                         Elapsed = Program.time.Elapsed,
-                        State = "discord.gg/VCNFFrmGM4"
+                        State = "discord.gg/bPfPw5PASR"
                     });
 
 

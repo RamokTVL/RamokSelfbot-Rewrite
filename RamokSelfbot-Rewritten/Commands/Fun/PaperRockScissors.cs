@@ -107,33 +107,33 @@ namespace RamokSelfbot.Commands.Fun
                         {
                             if (number2 == 2)
                             {
-                                embed.AddField(fighter.Username + " winned !", "You used stone against leaf !");
+                                embed.AddField(fighter.Username + " won !", "You used stone against leaf !");
                             }
                             else if (number2 == 3)
                             {
-                                embed.AddField(Message.Author.User.Username + " winned !", "You used stone against scissors !");
+                                embed.AddField(Message.Author.User.Username + " won !", "You used stone against scissors !");
                             }
                         }
                         else if (number == 2)
                         {
                             if (number2 == 1)
                             {
-                                embed.AddField(Message.Author.User.Username + " winned !", "You used sheet against stone !");
+                                embed.AddField(Message.Author.User.Username + " won !", "You used sheet against stone !");
                             }
                             else if (number2 == 3)
                             {
-                                embed.AddField(fighter.Username + " winned !", "You used leaf against scissors !");
+                                embed.AddField(fighter.Username + " won !", "You used leaf against scissors !");
                             }
                         }
                         else if (number == 3)
                         {
                             if (number2 == 1)
                             {
-                                embed.AddField(fighter.Username + " winned !", "You used scissors against stone !");
+                                embed.AddField(fighter.Username + " won !", "You used scissors against stone !");
                             }
                             else if (number2 == 2)
                             {
-                                embed.AddField(Message.Author.User.Username + " winned !", "You used scissors against leaf !");
+                                embed.AddField(Message.Author.User.Username + " won !", "You used scissors against leaf !");
                             }
                         }
                     }

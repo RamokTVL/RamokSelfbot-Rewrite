@@ -48,13 +48,14 @@ namespace RamokSelfbot.Commands.Utils.Forms
             this.textBoxYoutubeAPIKEY = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.textBoxConnected = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.materialCheckBox4 = new MaterialSkin.Controls.MaterialCheckBox();
+            this.materialCheckBox5 = new MaterialSkin.Controls.MaterialCheckBox();
             this.SuspendLayout();
             // 
             // materialCheckBox1
             // 
             this.materialCheckBox1.Depth = 0;
             this.materialCheckBox1.Font = new System.Drawing.Font("Roboto", 10F);
-            this.materialCheckBox1.Location = new System.Drawing.Point(543, 344);
+            this.materialCheckBox1.Location = new System.Drawing.Point(543, 315);
             this.materialCheckBox1.Margin = new System.Windows.Forms.Padding(0);
             this.materialCheckBox1.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialCheckBox1.MouseState = MaterialSkin.MouseState.HOVER;
@@ -70,7 +71,7 @@ namespace RamokSelfbot.Commands.Utils.Forms
             // 
             this.materialCheckBox2.Depth = 0;
             this.materialCheckBox2.Font = new System.Drawing.Font("Roboto", 10F);
-            this.materialCheckBox2.Location = new System.Drawing.Point(543, 311);
+            this.materialCheckBox2.Location = new System.Drawing.Point(543, 282);
             this.materialCheckBox2.Margin = new System.Windows.Forms.Padding(0);
             this.materialCheckBox2.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialCheckBox2.MouseState = MaterialSkin.MouseState.HOVER;
@@ -86,7 +87,7 @@ namespace RamokSelfbot.Commands.Utils.Forms
             // 
             this.materialCheckBox3.Depth = 0;
             this.materialCheckBox3.Font = new System.Drawing.Font("Roboto", 10F);
-            this.materialCheckBox3.Location = new System.Drawing.Point(543, 278);
+            this.materialCheckBox3.Location = new System.Drawing.Point(543, 249);
             this.materialCheckBox3.Margin = new System.Windows.Forms.Padding(0);
             this.materialCheckBox3.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialCheckBox3.MouseState = MaterialSkin.MouseState.HOVER;
@@ -341,11 +342,28 @@ namespace RamokSelfbot.Commands.Utils.Forms
             this.materialCheckBox4.UseVisualStyleBackColor = true;
             this.materialCheckBox4.CheckedChanged += new System.EventHandler(this.materialCheckBox4_CheckedChanged);
             // 
+            // materialCheckBox5
+            // 
+            this.materialCheckBox5.Depth = 0;
+            this.materialCheckBox5.Font = new System.Drawing.Font("Roboto", 10F);
+            this.materialCheckBox5.Location = new System.Drawing.Point(543, 345);
+            this.materialCheckBox5.Margin = new System.Windows.Forms.Padding(0);
+            this.materialCheckBox5.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.materialCheckBox5.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialCheckBox5.Name = "materialCheckBox5";
+            this.materialCheckBox5.Ripple = true;
+            this.materialCheckBox5.Size = new System.Drawing.Size(191, 30);
+            this.materialCheckBox5.TabIndex = 19;
+            this.materialCheckBox5.Text = "Debug";
+            this.materialCheckBox5.UseVisualStyleBackColor = true;
+            this.materialCheckBox5.CheckedChanged += new System.EventHandler(this.materialCheckBox5_CheckedChanged);
+            // 
             // GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(743, 418);
+            this.Controls.Add(this.materialCheckBox5);
             this.Controls.Add(this.materialCheckBox4);
             this.Controls.Add(this.textBoxConnected);
             this.Controls.Add(this.textBoxYoutubeAPIKEY);
@@ -396,5 +414,6 @@ namespace RamokSelfbot.Commands.Utils.Forms
         private MaterialSkin.Controls.MaterialSingleLineTextField textBoxYoutubeAPIKEY;
         private MaterialSkin.Controls.MaterialSingleLineTextField textBoxConnected;
         private MaterialSkin.Controls.MaterialCheckBox materialCheckBox4;
+        private MaterialSkin.Controls.MaterialCheckBox materialCheckBox5;
     }
 }

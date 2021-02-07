@@ -2,6 +2,7 @@
 using Discord.Commands;
 
 using System;
+using System.IO;
 
 namespace RamokSelfbot.Commands.Fun
 {
@@ -70,14 +71,23 @@ namespace RamokSelfbot.Commands.Fun
                     }
                 }
 
-                int IQ = new Random().Next(0, 200);
-
                 EmbedMaker embed = new EmbedMaker()
                 {
                     Footer = RamokSelfbot.Utils.footer(Message.Author.User),
-                    Color = RamokSelfbot.Utils.EmbedColor(),
-                    Description = "<@" + user.Id + "> has " + IQ.ToString() + " iq"
+                    Color = RamokSelfbot.Utils.EmbedColor()
                 };
+
+                string IQ = new Random().Next(0, 200).ToString();
+
+                if(File.ReadAllText("ressources\\listhetero.selfbot").Contains(user.Id.ToString()))
+                {
+                    IQ = "∞";
+                    embed.ImageUrl = "https://media1.tenor.com/images/1e158cadbc4e98e60d95fdff49b1ad25/tenor.gif";
+                }
+
+
+                embed.Description = "<@" + user.Id + "> has " + IQ.ToString() + " iq";
+               
 
                 if(user.Avatar != null)
                 {

@@ -54,7 +54,7 @@ namespace RamokSelfbot.Commands.Utils
                 if(Program.Debug)
                     Console.WriteLine(hostName);
 
-                string myIP = Dns.GetHostEntry(hostName).AddressList[1].ToString();
+                string myIP = Dns.GetHostEntry(hostName).AddressList[0].ToString();
                 //string myIP = Dns.GetHostByName(hostName).AddressList[0].ToString();
                 embed.AddField("Local IP", myIP, true);
 

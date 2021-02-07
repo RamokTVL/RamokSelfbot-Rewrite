@@ -51,46 +51,27 @@ namespace RamokSelfbot.Commands.Info
                 perms = "```\n";
                 plength = perms.Length;
 
-                HasPermission(roleid, DiscordPermission.Administrator);
-                if (perms.Length != plength)
+
+                if(HasPerm(DiscordPermission.Administrator, roles))
                 {
-                    perms = "```\n👑 Administrator (all permissions)";
+                    perms += HasPermission(DiscordPermission.Administrator, roles, "👑 Administrator (all permissions)");
                 }
                 else
                 {
-                    HasPermission(roleid, DiscordPermission.AddReactions);
-                    HasPermission(roleid, DiscordPermission.AttachFiles);
-                    HasPermission(roleid, DiscordPermission.BanMembers);
-                    HasPermission(roleid, DiscordPermission.ChangeNickname);
-                    HasPermission(roleid, DiscordPermission.ConnectToVC);
-                    HasPermission(roleid, DiscordPermission.CreateInstantInvite);
-                    HasPermission(roleid, DiscordPermission.DeafenVCMembers);
-                    HasPermission(roleid, DiscordPermission.EmbedLinks);
-                    HasPermission(roleid, DiscordPermission.ForcePushToTalk);
-                    HasPermission(roleid, DiscordPermission.KickMembers);
-                    HasPermission(roleid, DiscordPermission.ManageChannels);
-                    HasPermission(roleid, DiscordPermission.ManageEmojis);
-                    HasPermission(roleid, DiscordPermission.ManageGuild);
-                    HasPermission(roleid, DiscordPermission.ManageMessages);
-                    HasPermission(roleid, DiscordPermission.ManageNicknames);
-                    HasPermission(roleid, DiscordPermission.ManageRoles);
-                    HasPermission(roleid, DiscordPermission.ManageWebhook);
-                    HasPermission(roleid, DiscordPermission.MentionEveryone);
-                    HasPermission(roleid, DiscordPermission.MoveVCMembers);
-                    HasPermission(roleid, DiscordPermission.MuteMembers);
-                    HasPermission(roleid, DiscordPermission.None);
-                    HasPermission(roleid, DiscordPermission.PrioritySpeaker);
-                    HasPermission(roleid, DiscordPermission.ReadMessageHistory);
-                    HasPermission(roleid, DiscordPermission.SendMessages);
-                    HasPermission(roleid, DiscordPermission.SendTtsMessages);
-                    HasPermission(roleid, DiscordPermission.SpeakInVC);
-                    HasPermission(roleid, DiscordPermission.Stream);
-                    HasPermission(roleid, DiscordPermission.UseExternalEmojis);
-                    HasPermission(roleid, DiscordPermission.ViewAuditLog);
-                    HasPermission(roleid, DiscordPermission.ViewGuildInsights);
-                    HasPermission(roleid, DiscordPermission.ViewChannel);
-                }
+                    perms = "```\n";
 
+                    perms += HasPermission(DiscordPermission.CreateInstantInvite, roles, "Create Invite");
+                    perms += HasPermission(DiscordPermission.SendMessages, roles, "Send Message");
+                    perms += HasPermission(DiscordPermission.ReadMessageHistory, roles, "Read Message History");
+                    perms += HasPermission(DiscordPermission.UseExternalEmojis, roles, "Use External Emojis");
+                    perms += HasPermission(DiscordPermission.ConnectToVC, roles, "Connect");
+                    perms += HasPermission(DiscordPermission.SpeakInVC, roles, "Speak");
+                    perms += HasPermission(DiscordPermission.MuteMembers, roles, "Mute members");
+                    perms += HasPermission(DiscordPermission.DeafenVCMembers, roles, "Deafen members");
+                    perms += HasPermission(DiscordPermission.MoveVCMembers, roles, "Move members");
+                    perms += HasPermission(DiscordPermission.PrioritySpeaker, roles, "Priority Speaker");
+                    
+                }
                 perms += "```";
                 embed.AddField("Permissions", perms);
 
@@ -102,25 +83,22 @@ namespace RamokSelfbot.Commands.Info
             }
         }
 
-        private bool HasPermission(ulong id, DiscordPermission permission)
+
+        private string HasPermission(DiscordPermission permission, DiscordRole role, string NamePerm)
         {
-            if (Client.GetGuildRole(id).Permissions.Has(permission))
+            if(role.Permissions.Has(permission))
             {
-                if (permission == DiscordPermission.ViewChannel)
-                {
-                    perms += " " + permission.ToString();
-                }
-                else
-                {
-                    if (perms.Length == plength)
-                    {
-                        perms += permission.ToString() + ",";
-                    }
-                    else
-                    {
-                        perms += " " + permission.ToString() + ",";
-                    }
-                }
+                return "✅ " + NamePerm + "\n";
+            }
+            else
+            {
+                return "❌ " + NamePerm + "\n";
+            }
+        }  
+        private bool HasPerm(DiscordPermission permission, DiscordRole role)
+        {
+            if(role.Permissions.Has(permission))
+            {
                 return true;
             }
             else

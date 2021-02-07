@@ -1,7 +1,6 @@
 ﻿using Discord.Commands;
 using Discord;
 using System;
-using Discord.Gateway;
 using Newtonsoft.Json;
 using System.IO;
 
@@ -82,50 +81,44 @@ namespace RamokSelfbot.Commands.Help
 
                     foreach (var cmds in Client.CommandHandler.Commands.Values)
                     {
-                        if (cmds.Description.Contains("- FUN"))
+                        switch (cmds.Description)
                         {
-                            fun++;
-                        }
-                        else if (cmds.Description.Contains("- HASH"))
-                        {
-                            hash++;
-                        }
-                        else if (cmds.Description.Contains("- RAID"))
-                        {
-                            raid++;
-                        }
-                        else if (cmds.Description.Contains("- UTILS"))
-                        {
-                            utils++;
-                        }
-                        else if (cmds.Description.Contains("- MODERATION"))
-                        {
-                            moderation++;
-                        }
-                        else if (cmds.Description.Contains("- ACTIVITY"))
-                        {
-                            activity++;
-                        }
-                        else if (cmds.Description.Contains("- OTHERS"))
-                        {
-                            others++;
-                        }
-                        else if (cmds.Description.Contains("- INFO"))
-                        {
-                            info++;
-                        }
-                        else if (cmds.Description.Contains("- EXPERIMENTAL"))
-                        {
-                            experimental++;
-                        }
-                        else if (cmds.Description.Contains("- COVID"))
-                        {
-                            covid++;
-                        }
-                        else if (cmds.Description.Contains("- NSFW"))
-                        {
-                            nsfw++;
-                        }
+                            case string a when a.Contains("- FUN"):
+                                fun++;
+                                break;
+                            case string b when b.Contains("- HASH"):
+                                hash++;
+                                break;                     
+                             case string c when c.Contains("- RAID"):
+                                raid++;
+                                break;               
+                            case string d when d.Contains("- UTILS"):
+                                utils++;
+                                break;                     
+                            case string e when e.Contains("- MODERATION"):
+                                moderation++;
+                                break;              
+                            case string f when f.Contains("- ACTIVITY"):
+                                activity++;
+                                break;             
+                            case string g when g.Contains("- OTHERS"):
+                                others++;
+                                break;              
+                            case string h when h.Contains("- INFO"):
+                                info++;
+                                break;            
+                            case string i when i.Contains("- EXPERIMENTAL"):
+                                experimental++;
+                                break;                
+                            case string j when j.Contains("- COVID"):
+                                covid++;
+                                break;                
+                            case string k when k.Contains("- NSFW"):
+                                nsfw++;
+                                break;
+                        };
+
+
                     }
                     EmbedMaker embed = new EmbedMaker()
                     {

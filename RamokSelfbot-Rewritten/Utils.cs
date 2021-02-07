@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Drawing;
 using System.IO;
+using System.Security.Cryptography;
 
 namespace RamokSelfbot
 {
@@ -15,6 +16,18 @@ namespace RamokSelfbot
             Colorful.Console.Write(DateTime.Now.Hour + ":" + DateTime.Now.Minute + ":" + DateTime.Now.Second, Color.IndianRed);
             Console.Write("] ");
             Colorful.Console.WriteLine(text, Color.IndianRed);
+        }
+
+        public static string CalculateMD5(string filename)
+        {
+            using (var md5 = MD5.Create())
+            {
+                using (var stream = File.OpenRead(filename))
+                {
+                    var hash = md5.ComputeHash(stream);
+                    return BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
+                }
+            }
         }
 
         public static EmbedFooter footer(DiscordUser user)
@@ -29,6 +42,17 @@ namespace RamokSelfbot
                 footer.IconUrl = user.Avatar.Url;
             }
             return footer;
+        }
+
+        public bool IsClient(DiscordMessage msg)
+        {
+            if(msg.Author.User.Id == Program.id)
+            {
+                return true;
+            } else
+            {
+                return false;
+            }
         }
 
         public static string GetFileName()

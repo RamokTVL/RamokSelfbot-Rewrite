@@ -13,6 +13,9 @@ namespace RamokSelfbot.Commands.Others
     class YTDL : CommandBase
     {
 
+        [Parameter("format")]
+        public string format { get; set; }
+
         [Parameter("link")]
         public string link { get; set; }
 
@@ -30,12 +33,12 @@ namespace RamokSelfbot.Commands.Others
                 var youtube = YouTube.Default;
                 var video = youtube.GetVideo(link);
                 File.WriteAllBytes("ytdl\\" + video.FullName, video.GetBytes());
-                sw.Stop();
+                
                 if (Program.Debug)
                     Console.WriteLine("1");
 
                 var inputFile = new MediaToolkit.Model.MediaFile { Filename = "ytdl\\" + video.FullName };
-                var outputFile = new MediaToolkit.Model.MediaFile { Filename = "ytdl\\" + video.FullName + ".mp3" };
+                var outputFile = new MediaToolkit.Model.MediaFile { Filename = ("ytdl\\" + video.FullName).Remove(("ytdl\\" + video.FullName).Length - 4, 4) + ".mp3" };
                 if (Program.Debug)
                     Console.WriteLine("2");
                 using (var enging = new Engine())
@@ -46,7 +49,21 @@ namespace RamokSelfbot.Commands.Others
                 if (Program.Debug)
                     Console.WriteLine("3");
 
+                switch(format.ToLower())
+                {
+                    case "mp3":
+                        File.Delete("ytdl\\" + video.FullName);
+                        break;
 
+                    case "mp4":
+                        File.Delete(("ytdl\\" + video.FullName).Remove(("ytdl\\" + video.FullName).Length - 4, 4) + ".mp3");
+                        break;
+                    default:
+                        //i do not delete anything
+                        break;
+                }
+
+               
                 EmbedMaker embed = new EmbedMaker()
                 {
                     Color = RamokSelfbot.Utils.EmbedColor(),
@@ -54,7 +71,7 @@ namespace RamokSelfbot.Commands.Others
                     Description = "If your connexion is bad, the download time is sweaty",
                     Title = "YouTube Download"
                 };
-
+                sw.Stop();
                 embed.AddField("⌚ Time to download the video", sw.Elapsed.Minutes + " minutes and " + sw.Elapsed.Seconds + " seconds", false);
                 embed.AddField("📁 Saved at", RamokSelfbot.Utils.GetFileName() + "\\ytdl\\" + video.FullName, false);
               

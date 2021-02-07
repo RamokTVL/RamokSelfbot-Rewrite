@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -20,7 +21,7 @@ namespace RamokSelfbot.Commands.Experimental
                 if (JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).experimentalcommands == true)
                 {
                     Message.Delete();
-                    new Thread(new ThreadStart(OpenForm)).Start();
+                    Process.Start("https://github.com/RamokTVL/RamokSelfbot-Rewritten");
                 }
                 else
                 {
@@ -30,10 +31,5 @@ namespace RamokSelfbot.Commands.Experimental
             }
         }
 
-        public static void OpenForm()
-        {
-            RamokSelfbot.Utils.Print("Just ignore the log from CEFSharp");
-            new Forms.Github().ShowDialog();
-        }
     }
 }
