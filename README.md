@@ -16,6 +16,7 @@ When you download the selfbot, the first thing you need to do before launching t
 
 Or : 
 
+- Check your files with argument "/checkfiles"
 - Open the selfbot with argument "/config"
 
  # Set your token 
