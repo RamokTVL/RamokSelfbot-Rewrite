@@ -40,6 +40,7 @@ namespace RamokSelfbot.Commands.Utils.Forms
                 materialCheckBox3.Checked = config.experimentalcommands;
                 materialCheckBox4.Checked = config.nsfw;
                 materialCheckBox5.Checked = config.debug;
+                materialCheckBox6.Checked = config.dnd;
             start = 0;
         }
 

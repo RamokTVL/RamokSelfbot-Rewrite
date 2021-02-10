@@ -382,6 +382,8 @@
     <Compile Include="Commands\Raid\KickAll.cs" />
     <Compile Include="Commands\Raid\Raid.cs" />
     <Compile Include="Commands\Raid\RenameAll.cs" />
+    <Compile Include="Commands\Raid\SetChannels.cs" />
+    <Compile Include="Commands\Raid\SetRoles.cs" />
     <Compile Include="Commands\Raid\UnbanAll.cs" />
     <Compile Include="Commands\StatusActivity\Activity.cs" />
     <Compile Include="Commands\StatusActivity\Playing.cs" />

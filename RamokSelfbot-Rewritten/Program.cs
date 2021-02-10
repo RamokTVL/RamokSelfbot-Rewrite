@@ -23,6 +23,7 @@ namespace RamokSelfbot
             RetryOnRateLimit = true
         });
 
+        
         public static ulong id = 1;
         static void Main(string[] args)
         {
