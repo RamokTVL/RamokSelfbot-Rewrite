@@ -49,13 +49,14 @@ namespace RamokSelfbot.Commands.Utils.Forms
             this.textBoxConnected = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.materialCheckBox4 = new MaterialSkin.Controls.MaterialCheckBox();
             this.materialCheckBox5 = new MaterialSkin.Controls.MaterialCheckBox();
+            this.materialCheckBox6 = new MaterialSkin.Controls.MaterialCheckBox();
             this.SuspendLayout();
             // 
             // materialCheckBox1
             // 
             this.materialCheckBox1.Depth = 0;
             this.materialCheckBox1.Font = new System.Drawing.Font("Roboto", 10F);
-            this.materialCheckBox1.Location = new System.Drawing.Point(543, 315);
+            this.materialCheckBox1.Location = new System.Drawing.Point(543, 293);
             this.materialCheckBox1.Margin = new System.Windows.Forms.Padding(0);
             this.materialCheckBox1.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialCheckBox1.MouseState = MaterialSkin.MouseState.HOVER;
@@ -71,7 +72,7 @@ namespace RamokSelfbot.Commands.Utils.Forms
             // 
             this.materialCheckBox2.Depth = 0;
             this.materialCheckBox2.Font = new System.Drawing.Font("Roboto", 10F);
-            this.materialCheckBox2.Location = new System.Drawing.Point(543, 282);
+            this.materialCheckBox2.Location = new System.Drawing.Point(543, 260);
             this.materialCheckBox2.Margin = new System.Windows.Forms.Padding(0);
             this.materialCheckBox2.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialCheckBox2.MouseState = MaterialSkin.MouseState.HOVER;
@@ -87,7 +88,7 @@ namespace RamokSelfbot.Commands.Utils.Forms
             // 
             this.materialCheckBox3.Depth = 0;
             this.materialCheckBox3.Font = new System.Drawing.Font("Roboto", 10F);
-            this.materialCheckBox3.Location = new System.Drawing.Point(543, 249);
+            this.materialCheckBox3.Location = new System.Drawing.Point(543, 227);
             this.materialCheckBox3.Margin = new System.Windows.Forms.Padding(0);
             this.materialCheckBox3.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialCheckBox3.MouseState = MaterialSkin.MouseState.HOVER;
@@ -330,7 +331,7 @@ namespace RamokSelfbot.Commands.Utils.Forms
             // 
             this.materialCheckBox4.Depth = 0;
             this.materialCheckBox4.Font = new System.Drawing.Font("Roboto", 10F);
-            this.materialCheckBox4.Location = new System.Drawing.Point(543, 374);
+            this.materialCheckBox4.Location = new System.Drawing.Point(543, 352);
             this.materialCheckBox4.Margin = new System.Windows.Forms.Padding(0);
             this.materialCheckBox4.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialCheckBox4.MouseState = MaterialSkin.MouseState.HOVER;
@@ -346,7 +347,7 @@ namespace RamokSelfbot.Commands.Utils.Forms
             // 
             this.materialCheckBox5.Depth = 0;
             this.materialCheckBox5.Font = new System.Drawing.Font("Roboto", 10F);
-            this.materialCheckBox5.Location = new System.Drawing.Point(543, 345);
+            this.materialCheckBox5.Location = new System.Drawing.Point(543, 323);
             this.materialCheckBox5.Margin = new System.Windows.Forms.Padding(0);
             this.materialCheckBox5.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialCheckBox5.MouseState = MaterialSkin.MouseState.HOVER;
@@ -358,11 +359,28 @@ namespace RamokSelfbot.Commands.Utils.Forms
             this.materialCheckBox5.UseVisualStyleBackColor = true;
             this.materialCheckBox5.CheckedChanged += new System.EventHandler(this.materialCheckBox5_CheckedChanged);
             // 
+            // materialCheckBox6
+            // 
+            this.materialCheckBox6.Depth = 0;
+            this.materialCheckBox6.Font = new System.Drawing.Font("Roboto", 10F);
+            this.materialCheckBox6.Location = new System.Drawing.Point(543, 382);
+            this.materialCheckBox6.Margin = new System.Windows.Forms.Padding(0);
+            this.materialCheckBox6.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.materialCheckBox6.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialCheckBox6.Name = "materialCheckBox6";
+            this.materialCheckBox6.Ripple = true;
+            this.materialCheckBox6.Size = new System.Drawing.Size(191, 30);
+            this.materialCheckBox6.TabIndex = 20;
+            this.materialCheckBox6.Text = "Do Not Disturb";
+            this.materialCheckBox6.UseVisualStyleBackColor = true;
+            this.materialCheckBox6.CheckedChanged += new System.EventHandler(this.materialCheckBox6_CheckedChanged);
+            // 
             // GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(743, 418);
+            this.Controls.Add(this.materialCheckBox6);
             this.Controls.Add(this.materialCheckBox5);
             this.Controls.Add(this.materialCheckBox4);
             this.Controls.Add(this.textBoxConnected);
@@ -415,5 +433,6 @@ namespace RamokSelfbot.Commands.Utils.Forms
         private MaterialSkin.Controls.MaterialSingleLineTextField textBoxConnected;
         private MaterialSkin.Controls.MaterialCheckBox materialCheckBox4;
         private MaterialSkin.Controls.MaterialCheckBox materialCheckBox5;
+        private MaterialSkin.Controls.MaterialCheckBox materialCheckBox6;
     }
 }

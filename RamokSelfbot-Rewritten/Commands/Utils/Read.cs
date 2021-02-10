@@ -20,8 +20,8 @@ namespace RamokSelfbot.Commands.Utils
                     try
                     {
                         i++;
-                        guilds.AcknowledgeMessagesAsync();
-                        RamokSelfbot.Utils.Print("Readed " + i + "/" + guildscount + " guilds !");
+                        guilds.AcknowledgeMessages();
+                        RamokSelfbot.Utils.Print("Reading all messages for : " + guilds.Name + " (" + i + "/" + guildscount + ")");
                     } catch(Exception ex)
                     {
                         if(Program.Debug)

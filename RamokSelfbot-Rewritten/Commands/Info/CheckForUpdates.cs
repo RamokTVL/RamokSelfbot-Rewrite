@@ -14,11 +14,13 @@ namespace RamokSelfbot.Commands.Info
             if(Message.Author.User.Id == Program.id)
             {
                 Details json = JsonConvert.DeserializeObject<Details>(new System.Net.WebClient().DownloadString("https://ramokselfbot.netlify.app/api/v1/ramokselfbot/details.json"));
-                var versionInfo = FileVersionInfo.GetVersionInfo(RamokSelfbot.Utils.GetFileName());
+                var versionInfo = FileVersionInfo.GetVersionInfo(RamokSelfbot.Utils.GetFileName() + "\\RamokSelfbot-Rewritten.exe");
                 string version = versionInfo.FileVersion;
                 bool updated = false;
                 if (json.version == version)
+                {
                     updated = true;
+                }
 
                 EmbedMaker embed = new EmbedMaker()
                 {

@@ -41,7 +41,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\Debug\</OutputPath>
+    <OutputPath>..\..\..\RamokSelfbot-1.8\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DebugType>full</DebugType>
@@ -326,10 +326,10 @@
     <Compile Include="Commands\Fun\Hakor.cs" />
     <Compile Include="Commands\Fun\IQ.cs" />
     <Compile Include="Commands\Fun\LockChannel.cs" />
-    <Compile Include="Commands\Fun\LongStatus.cs" />
     <Compile Include="Commands\Fun\Mooscles.cs" />
     <Compile Include="Commands\Fun\PickRandomUserReaction.cs" />
     <Compile Include="Commands\Fun\Say.cs" />
+    <Compile Include="Commands\Fun\SelfDynamicStatus.cs" />
     <Compile Include="Commands\Fun\SelfDynamicName.cs" />
     <Compile Include="Commands\Fun\FortniteFont.cs" />
     <Compile Include="Commands\Fun\Fun.cs" />
@@ -388,6 +388,7 @@
     <Compile Include="Commands\StatusActivity\Listening.cs" />
     <Compile Include="Commands\StatusActivity\Streaming.cs" />
     <Compile Include="Commands\StatusActivity\Watching.cs" />
+    <Compile Include="Commands\Utils\BypassLink.cs" />
     <Compile Include="Commands\Utils\DeleteWebhook.cs" />
     <Compile Include="Commands\Utils\DiscordCrasher.cs" />
     <Compile Include="Commands\Utils\Forms\GUI.cs">
@@ -396,6 +397,7 @@
     <Compile Include="Commands\Utils\Forms\GUI.Designer.cs">
       <DependentUpon>GUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="Commands\Utils\Hastebin.cs" />
     <Compile Include="Commands\Utils\MyIP.cs" />
     <Compile Include="Commands\Utils\OpenGui.cs" />
     <Compile Include="Commands\Utils\OwnerServers.cs" />

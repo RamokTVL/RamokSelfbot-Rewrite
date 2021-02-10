@@ -50,11 +50,9 @@ namespace RamokSelfbot.Commands.Utils
                     embed.AddField("IPV6", "Disabled", true);
                 }
 
-                string hostName = Dns.GetHostName(); // Retrive the Name of HOST  
-                if(Program.Debug)
-                    Console.WriteLine(hostName);
 
-                string myIP = Dns.GetHostEntry(hostName).AddressList[0].ToString();
+
+                string myIP = Dns.GetHostEntry(Dns.GetHostName()).AddressList[0].ToString();
                 //string myIP = Dns.GetHostByName(hostName).AddressList[0].ToString();
                 embed.AddField("Local IP", myIP, true);
 

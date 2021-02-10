@@ -17,10 +17,17 @@ namespace RamokSelfbot
 {
     class Program
     {
-        public static DiscordSocketClient client = new DiscordSocketClient();
+        public static DiscordSocketClient client = new DiscordSocketClient(new DiscordSocketConfig
+        {
+            ApiVersion = 6,
+            RetryOnRateLimit = true
+        });
+
         public static ulong id = 1;
         static void Main(string[] args)
         {
+
+
             if (args.Length > 1 || args.Length == 1)
             {
                 Program.formattedargs = args[0];
@@ -33,10 +40,11 @@ namespace RamokSelfbot
 
             if(formattedargs.Contains("/?"))
             {
-                Colorful.Console.Write("Project created by RamokTV\nNitro sniper credits : https://github.com/Stanley-GF/StanSniper by Stanley-GF\n\n\n", Color.MediumPurple);
+                Colorful.Console.Write("Project created by RamokTV\nNitro sniper credits : https://github.com/Stanley-GF/StanSniper by Stanley-GF\nBypass service credits : bypass-shorteners.herokuapp.com by IDRALOU#6966\n\n\n", Color.MediumPurple);
                 Colorful.Console.Write("Avaliable arguments start function : \n\n", Color.BlueViolet);
                 Colorful.Console.Write("/? - show this menu\n", Color.Gold);
                 Colorful.Console.Write("/config - config the selfbot\n", Color.Gold);
+                Colorful.Console.Write("/checkfiles - check the files of the selfbot, update, install ffmpeg etc\n", Color.Gold);
                 Colorful.Console.Write("-showtoken - Show ur token when the selfbot is connected to discord", Color.Gold);
 
                 System.Threading.Thread.Sleep(-1);
@@ -280,11 +288,13 @@ namespace RamokSelfbot
             // BIG CONSOLE : Console.SetWindowSize(129, 30);
             bool verifiedtoken = false;
 
+            client.OnLoggedIn += Client_OnLoggedIn;
+            client.OnMessageReceived += Client_OnMessageReceived;
+            client.CreateCommandHandler(JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).prefix);
 
 
 
-            
-              do
+            do
                {
                 Console.Clear();
 
@@ -320,9 +330,8 @@ namespace RamokSelfbot
                 }
                 catch { }
 
-                client.OnLoggedIn += Client_OnLoggedIn;
-                client.OnMessageReceived += Client_OnMessageReceived;
-                client.CreateCommandHandler(JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).prefix);
+          
+
                 try
                 {
                     Login();
@@ -347,10 +356,31 @@ namespace RamokSelfbot
                         {
                             Colorful.Console.WriteLine("Press any key to connect the selfbot to Discord !\n(Copy the content in token.txt in the token login)");
                             Console.ReadKey();
-                        Console.Clear();
+                        if(Program.Debug == true)
+                        {
+                            Console.WriteLine("1");
+                        }
+
+                        if (Program.Debug != true)
+                        {
+                            Console.Clear();
+                        }
+                        
                             Program.token = File.ReadAllText("token.txt");
-                            client.Login(token);
-                        }catch(Exception ex)
+                        if (Program.Debug == true)
+                        {
+                            Console.WriteLine("2");
+                        }
+
+                        
+                        client.Login(token);
+
+                        if (Program.Debug == true)
+                        {
+                            Console.WriteLine("3");
+                        }
+                    }
+                    catch(Exception ex)
                         {
                             Console.WriteLine("\nEXCEPTION HANDLER : ERROR\n\nError message : " + ex.Message);
                         Console.WriteLine("Press any key to retry");
@@ -469,7 +499,16 @@ namespace RamokSelfbot
                 {
                     args.Message.Acknowledge();
                 }
-            } 
+            }
+
+            if(config.dnd)
+            {          
+               args.Message.AcknowledgeAsync();
+                if(Program.Debug)
+                {
+                    Colorful.Console.WriteLine("Readed a message ! (dnd)", Color.Gold);
+                }
+            }
 
          
 
@@ -532,7 +571,7 @@ namespace RamokSelfbot
 
         private static void ModificationDetected(int detection)
         {
-            MessageBox.Show("We've detected " + detection.ToString() + " errors in ressources files of the selfbot !\nPlease redownload the selfbot or you can get bugs", "ERROR²", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("We've detected " + detection.ToString() + " errors in ressources files of the selfbot !\nPlease redownload the selfbot or you can get bugs", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             Process.Start("https://github.com/RamokTVL/RamokSelfbot-Rewritten");
             Environment.Exit(444);
         }
@@ -593,10 +632,23 @@ namespace RamokSelfbot
         {
             Program.Debug = JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).debug;
 
-        // FIXME   new Thread(new ThreadStart(CheckInternet)).Start();
+            // FIXME   new Thread(new ThreadStart(CheckInternet)).Start();
+            if (Program.Debug == true)
+            {
+                Console.WriteLine("4");
+            }
             new Thread(new ThreadStart(VerifyMD5)).Start();
+            if (Program.Debug == true)
+            {
+                Console.WriteLine("5");
+            }
             new Thread(new ThreadStart(time.Start)).Start();
-            Console.Clear();
+
+            if (Program.Debug != true)
+            {
+                Console.Clear();
+            }
+            
             Colorful.Console.WriteLine("╔══════════════════════════════════════════════════════════════════════════════", Color.MediumSlateBlue);
             Colorful.Console.WriteLine($"╠--> Username : {args.User.Username}#{args.User.Discriminator} ({args.User.Id})", Color.MediumSlateBlue);
             Colorful.Console.WriteLine("╠══════════════════════════════════════════════════════════════════════════════", Color.MediumSlateBlue);
@@ -724,6 +776,7 @@ namespace RamokSelfbot
 
         public static bool Debug = true;
         public static bool DynamicName = true;
+        public static bool DynamicStatus = true;
 
         public static Stopwatch time = new Stopwatch();
     }
@@ -737,6 +790,7 @@ namespace RamokSelfbot
         public bool antieveryone { get; set; }
         public bool nsfw { get; set; }
         public bool debug { get; set; }
+        public bool dnd { get; set; }
         public string twitchlink { get; set; }
         public string youtubeapikey { get; set; }
         public int embedcolorr { get; set; }

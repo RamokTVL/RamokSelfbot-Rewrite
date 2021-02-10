@@ -44,7 +44,7 @@ namespace RamokSelfbot
             return footer;
         }
 
-        public bool IsClient(DiscordMessage msg)
+        public static bool IsClient(DiscordMessage msg)
         {
             if(msg.Author.User.Id == Program.id)
             {

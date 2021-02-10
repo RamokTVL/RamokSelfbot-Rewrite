@@ -123,5 +123,13 @@ namespace RamokSelfbot.Commands.Utils.Forms
         }
 
         public int start = 1;
+
+        private void materialCheckBox6_CheckedChanged(object sender, EventArgs e)
+        {
+            JSON config = JsonConvert.DeserializeObject<JSON>(System.IO.File.ReadAllText("config.json"));
+            config.dnd = materialCheckBox6.Checked;
+            var configoutput = JsonConvert.SerializeObject(config, Formatting.Indented);
+            System.IO.File.WriteAllText("config.json", configoutput);
+        }
     }
 }

@@ -17,9 +17,7 @@ namespace RamokSelfbot.Commands.Fun
         [Parameter("name", false)]
         public string Name { get; private set; }
 
-        [Parameter("id", true)]
 
-        public string ID { get; private set; }
         public override void Execute()
         {
             if (Message.Author.User.Id == Program.id)
