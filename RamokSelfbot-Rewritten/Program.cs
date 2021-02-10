@@ -17,7 +17,11 @@ namespace RamokSelfbot
 {
     class Program
     {
-        public static DiscordSocketClient client = new DiscordSocketClient();
+        public static DiscordSocketClient client = new DiscordSocketClient(new DiscordSocketConfig
+        {
+            ApiVersion = 6,
+            RetryOnRateLimit = true
+        });
         public static ulong id = 1;
         static void Main(string[] args)
         {
