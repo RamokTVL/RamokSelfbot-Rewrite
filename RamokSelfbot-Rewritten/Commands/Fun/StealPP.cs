@@ -9,13 +9,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.IO;
+using System.Net;
+using System.Drawing.Imaging;
 
 namespace RamokSelfbot.Commands.Fun
 {
     [Command("stealpp", "Give you the profile picture of a another member. - FUN")]
     class StealPP : CommandBase
     {
-        [Parameter("id")]
+        [Parameter("id or link of a image")]
         public string id { get; set; }
         public override void Execute()
         {
@@ -72,12 +75,31 @@ namespace RamokSelfbot.Commands.Fun
                     }
                     else
                     {
-                        RamokSelfbot.Utils.ValidUser(2, Message);
-                        return;
+
+                        if(id.Contains("http"))
+                        {
+                            WebClient client = new WebClient();
+                            Stream stream = client.OpenRead(id);
+
+                            Client.User.ChangeProfile(new UserProfileUpdate()
+                            {
+                                Avatar = System.Drawing.Bitmap.FromStream(stream)
+                            });
+
+                            Client.User.Update();
+
+                            stream.Flush();
+                            stream.Close();
+                            client.Dispose();
+                        } else
+                        {
+                            RamokSelfbot.Utils.ValidUser(2, Message);
+                            return;
+                        }
+
+
                     }
                 }
-
-                
 
                 Client.User.ChangeProfile(new UserProfileUpdate()
                 {
