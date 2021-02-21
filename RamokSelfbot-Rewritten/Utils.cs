@@ -2,14 +2,29 @@
 using Discord.Gateway;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
 
 namespace RamokSelfbot
 {
     public class Utils
     {
+        private static Random random = new Random();
+        public static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
+        public static String GetTimestamp(DateTime value)
+        {
+            return value.ToString("yyyyMMddHHmmssffff");
+        }
+
         public static void Print(string text)
         {
             Console.Write("[");
@@ -34,7 +49,7 @@ namespace RamokSelfbot
         {
             EmbedFooter footer = new EmbedFooter()
             {
-                Text = "Selfbot rewritten by Ramok with <3"
+                Text = RamokSelfbot.Footer.embed_text
             };
 
             if(user.Avatar != null)
@@ -82,11 +97,17 @@ namespace RamokSelfbot
         {
             if (Message.Guild == null)
             {
+                if (Program.Debug)
+                {
+                    Console.WriteLine("embed sent");
+                }
                 Message.Edit(new Discord.MessageEditProperties()
                 {
                     Content = "",
                     Embed = embed
                 });
+
+
                 return;
             }
             else
@@ -99,6 +120,10 @@ namespace RamokSelfbot
                         Content = "",
                         Embed = embed
                     });
+                    if (Program.Debug)
+                    {
+                        Console.WriteLine("embed sent");
+                    }
                     return;
                 } else
                 {
@@ -144,6 +169,38 @@ namespace RamokSelfbot
             return System.Drawing.Color.FromArgb(color.embedcolorr, color.embedcolorg, color.embedcolorb);
         }
 
+        public class Field
+        {
+            public string name { get; set; }
+            public string value { get; set; }
+            public bool inline { get; set; }
+        }
 
+        public class Embed
+        {
+            public string description { get; set; }
+            public int color { get; set; }
+
+            public Footer footer { get; set; }
+            public List<Field> fields { get; set; }
+        }
+
+        public class Footer
+        {
+            public string text { get; set; }
+            public string icon_url { get; set; }
+        }
+
+        public class Root
+        {
+            public string username { get; set; }
+            public string avatar_url { get; set; }
+            public List<Embed> embeds { get; set; }
+        }
+    }
+
+    public class Footer
+    {
+        public static string embed_text = "Selfbot rewritten by Ramok with <3";
     }
 }
