@@ -18,7 +18,7 @@ namespace RamokSelfbot.Commands.Raid
                 EmbedMaker embed = new EmbedMaker()
                 {
                     Title = "Hash help menu",
-                    Description = "A list of informatives commands",
+                    Description = "A list of hashes commands",
                     Color = System.Drawing.Color.FromArgb(JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorr, JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorg, JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorb)
                 };
 

@@ -19,11 +19,17 @@ namespace RamokSelfbot.Commands.Fun
                 {
                     Title = "Fun help menu",
                     Description = "A list of funs commands",
-                    Color = System.Drawing.Color.FromArgb(JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorr, JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorg, JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorb)
+                    Color = RamokSelfbot.Utils.EmbedColor(),
+                    Footer = RamokSelfbot.Utils.footer(Message.Author.User)
                 };
+
+                EmbedMaker send1 = embed;
+                EmbedMaker send2 = embed;
+                int a = 0;
 
                 foreach (var cmd in Client.CommandHandler.Commands.Values)
                 {
+                    a++;
                     StringBuilder args = new StringBuilder();
                     foreach (var arg in cmd.Parameters)
                     {
@@ -37,43 +43,25 @@ namespace RamokSelfbot.Commands.Fun
                     if (cmd.Description.Contains("- FUN"))
                     {
                         args.Append($"```\n{cmd.Description.Remove(cmd.Description.Length - 6, 6)}```");
-                        embed.AddField(Client.CommandHandler.Prefix + cmd.Name, $"{args}");
-                    }
-
-
-                }
-
-                if (Message.Author.User.Avatar.Url == null)
-                {
-                    embed.Footer = new EmbedFooter() { Text = "Selfbot rewritten by Ramok with <3" };
-                }
-                else
-                {
-                    embed.Footer = new EmbedFooter() { Text = "Selfbot rewritten by Ramok with <3", IconUrl = Message.Author.User.Avatar.Url };
-                }
-
-
-                if (Message.Guild == null)
-                {
-                    Message.Edit(new Discord.MessageEditProperties()
-                    {
-                        Content = "",
-                        Embed = embed
-                    });
-                    return;
-                }
-                else
-                {
-                    if (Message.Author.Member.GetPermissions().Has(DiscordPermission.AttachFiles) || Message.Author.Member.GetPermissions().Has(DiscordPermission.Administrator)) //CHECK DE PERMISSIONS
-                    {
-                        Message.Edit(new Discord.MessageEditProperties()
+                        if(a > 15)
                         {
-                            Content = "",
-                            Embed = embed
-                        });
-                        return;
+                            send1.AddField(Client.CommandHandler.Prefix + cmd.Name, $"{args}");
+                        } else
+                        {
+                            send2.AddField(Client.CommandHandler.Prefix + cmd.Name, $"{args}");
+                        }
+                        
                     }
+
+
                 }
+
+
+                
+
+
+                RamokSelfbot.Utils.SendEmbed(Message, send1);
+                RamokSelfbot.Utils.SendEmbedRsendIdget(Message, send2);
             }
         
               
@@ -85,7 +73,7 @@ namespace RamokSelfbot.Commands.Fun
         public override void HandleError(string parameterName, string providedValue, Exception exception)
         {
             base.HandleError(parameterName, providedValue, exception);
-            if(Message.Author.User.Id == Program.id)
+            if(Message.Author.User.Id == Client.User.Id)
             {
                 Console.WriteLine(exception.Message);
             }
