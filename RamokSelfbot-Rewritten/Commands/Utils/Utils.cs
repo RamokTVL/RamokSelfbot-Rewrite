@@ -8,7 +8,7 @@ using System.Text;
 
 namespace RamokSelfbot.Commands.Utils
 {
-    [Command("utils", "Show informations about the utils commands - UTILS")]
+    [Command("utils", "Show info commands. - HELPMENU")]
     class Utils : CommandBase
     {
         public override void Execute()
@@ -19,7 +19,7 @@ namespace RamokSelfbot.Commands.Utils
                 {
                     Title = "Utils help menu",
                     Description = "A list of informatives commands",
-                    Color = System.Drawing.Color.FromArgb(JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorr, JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorg, JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorb)
+                    Color = RamokSelfbot.Utils.EmbedColor()
                 };
 
                 foreach (var cmd in Client.CommandHandler.Commands.Values)

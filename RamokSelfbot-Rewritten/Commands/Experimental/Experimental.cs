@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace RamokSelfbot.Commands.Experimental
 {
-    [Command("experimental", "This command help you to use experimentals commands - EXPERIMENTAL")]
+    [Command("experimental", "This command help you to use experimentals commands - HELPMENU")]
     class Experimental : CommandBase
     {
         public override void Execute()

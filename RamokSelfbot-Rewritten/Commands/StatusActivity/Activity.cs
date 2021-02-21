@@ -8,7 +8,7 @@ using System.Text;
 
 namespace RamokSelfbot.Commands.Raid
 {
-    [Command("activity", "Show informations about activities commands - ACTIVITY")]
+    [Command("activity", "Show activities commands - HELPMENU")]
     class Activity : CommandBase
     {
         public override void Execute()

@@ -8,7 +8,7 @@ using System.Text;
 
 namespace RamokSelfbot.Commands.Others
 {
-    [Command("others", "Show informations about the commands that are not listed on the 3 others menu - OTHERS")]
+    [Command("others", "Show commands that I didn't know which category to put in - HELPMENU")]
     class Others : CommandBase
     {
         public override void Execute()

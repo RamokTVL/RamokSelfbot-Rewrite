@@ -10,7 +10,7 @@ using System.Text;
 
 namespace RamokSelfbot.Commands.Moderation
 {
-    [Command("moderation", "This command can ban you maybe :). - MODERATION")]
+    [Command("moderation", "Show moderations commands. - MODERATION")]
     class Moderation : CommandBase
     {
         public override void Execute()

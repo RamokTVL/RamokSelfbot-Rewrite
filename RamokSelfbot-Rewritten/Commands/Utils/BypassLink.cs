@@ -34,7 +34,7 @@ namespace RamokSelfbot.Commands.Utils
                     default:
                         embed.AddField("Method", method, true);
                         embed.AddField("Original Link", link, true);
-                        embed.AddField("Bypassed Link", new WebClient().DownloadString("https://bypass-shorteners.herokuapp.com/" + method + "?url=" + link), true);
+                        embed.AddField("Bypassed Link", new WebClient().DownloadString("https://bypass-shorteners.herokuapp.com/api/" + method + "?url=" + link), true);
                         break;
                 }
                 RamokSelfbot.Utils.SendEmbed(Message, embed);

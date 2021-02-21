@@ -8,7 +8,7 @@ using System.Text;
 
 namespace RamokSelfbot.Commands.Info
 {
-    [Command("info", "Show informations about the informatives commands - INFO")]
+    [Command("info", "Show info commands.- HELPMENU")]
     class Info : CommandBase
     {
         public override void Execute()

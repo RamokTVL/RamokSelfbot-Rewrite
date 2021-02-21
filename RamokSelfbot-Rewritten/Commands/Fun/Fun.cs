@@ -8,14 +8,16 @@ using Discord.Gateway;
 
 namespace RamokSelfbot.Commands.Fun
 {
-    [Command("fun", "This command is fun. - FUN")]
+    [Command("fun", "Show fun commands. - HELPMENU")]
     class Fun : CommandBase
     {
         public override void Execute()
         {
-            if (Message.Author.User.Id == Program.id)
+            if (RamokSelfbot.Utils.IsClient(Message))
             {
-                EmbedMaker embed = new EmbedMaker()
+
+
+                EmbedMaker send1 = new EmbedMaker()
                 {
                     Title = "Fun help menu",
                     Description = "A list of funs commands",
@@ -23,8 +25,14 @@ namespace RamokSelfbot.Commands.Fun
                     Footer = RamokSelfbot.Utils.footer(Message.Author.User)
                 };
 
-                EmbedMaker send1 = embed;
-                EmbedMaker send2 = embed;
+                EmbedMaker send2 = new EmbedMaker()
+                {
+                    Title = "Fun help menu",
+                    Description = "A list of funs commands",
+                    Color = RamokSelfbot.Utils.EmbedColor(),
+                    Footer = RamokSelfbot.Utils.footer(Message.Author.User)
+                };
+
                 int a = 0;
 
                 foreach (var cmd in Client.CommandHandler.Commands.Values)
@@ -43,32 +51,38 @@ namespace RamokSelfbot.Commands.Fun
                     if (cmd.Description.Contains("- FUN"))
                     {
                         args.Append($"```\n{cmd.Description.Remove(cmd.Description.Length - 6, 6)}```");
-                        if(a > 15)
+                        if(a < 25)
                         {
                             send1.AddField(Client.CommandHandler.Prefix + cmd.Name, $"{args}");
                         } else
                         {
                             send2.AddField(Client.CommandHandler.Prefix + cmd.Name, $"{args}");
                         }
-                        
+                        args.Clear();
+
+
                     }
 
 
                 }
 
 
-                
+
 
 
                 RamokSelfbot.Utils.SendEmbed(Message, send1);
-                RamokSelfbot.Utils.SendEmbedRsendIdget(Message, send2);
+
+                /*if(send2 != null) {
+                  RamokSelfbot.Utils.SendEmbedRsendIdget(Message, send2);
+                }*/
+
             }
-        
-              
+
+
 
 
             }
-        
+
 
         public override void HandleError(string parameterName, string providedValue, Exception exception)
         {
