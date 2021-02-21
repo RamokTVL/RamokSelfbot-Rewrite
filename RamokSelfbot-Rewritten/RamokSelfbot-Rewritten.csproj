@@ -15,6 +15,21 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x64</PlatformTarget>
@@ -59,6 +74,9 @@
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>imgbin_pokémon-go-pokémon-yellow-great-detective-pikachu-png.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Anarchy, Version=0.8.0.1, Culture=neutral, processorArchitecture=MSIL">
@@ -134,6 +152,11 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="QRCoder, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\QRCoder.1.4.1\lib\net40\QRCoder.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp, Version=106.11.7.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.106.11.7\lib\net452\RestSharp.dll</HintPath>
@@ -296,6 +319,7 @@
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
+    <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -310,14 +334,17 @@
     <Reference Include="websocket-sharp, Version=1.0.2.36182, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL">
       <HintPath>..\packages\better-websocket-sharp.1.0.2.1\lib\net35\websocket-sharp.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\Backup\Backup-C.cs" />
     <Compile Include="Commands\Covid\Covid.cs" />
     <Compile Include="Commands\Covid\GetData.cs" />
     <Compile Include="Commands\Experimental\Experimental.cs" />
     <Compile Include="Commands\Experimental\Github.cs" />
     <Compile Include="Commands\Experimental\Test.cs" />
     <Compile Include="Commands\Experimental\Trello.cs" />
+    <Compile Include="Commands\Fun\Achievement.cs" />
     <Compile Include="Commands\Fun\Corona.cs" />
     <Compile Include="Commands\Fun\DynamicName.cs" />
     <Compile Include="Commands\Fun\FakeInvite.cs" />
@@ -345,6 +372,7 @@
     <Compile Include="Commands\Info\AboutMe.cs" />
     <Compile Include="Commands\Info\CheckForUpdates.cs" />
     <Compile Include="Commands\Info\Credits.cs" />
+    <Compile Include="Commands\Info\GitRepos.cs" />
     <Compile Include="Commands\Info\GuildInfo.cs" />
     <Compile Include="Commands\Info\Info.cs" />
     <Compile Include="Commands\Info\RoleInfo.cs" />
@@ -353,6 +381,7 @@
     <Compile Include="Commands\Info\UserInfo.cs" />
     <Compile Include="Commands\Info\WebhookInfo.cs" />
     <Compile Include="Commands\Moderation\Ban.cs" />
+    <Compile Include="Commands\Moderation\Clear.cs" />
     <Compile Include="Commands\Moderation\Kick.cs" />
     <Compile Include="Commands\Moderation\Moderation.cs" />
     <Compile Include="Commands\Music\Loop.cs" />
@@ -379,6 +408,7 @@
     <Compile Include="Commands\Raid\BanAll.cs" />
     <Compile Include="Commands\Raid\DeleteAllChannels.cs" />
     <Compile Include="Commands\Raid\DeleteAllRoles.cs" />
+    <Compile Include="Commands\Raid\DisconnectAll.cs" />
     <Compile Include="Commands\Raid\KickAll.cs" />
     <Compile Include="Commands\Raid\Raid.cs" />
     <Compile Include="Commands\Raid\RenameAll.cs" />
@@ -390,21 +420,27 @@
     <Compile Include="Commands\StatusActivity\Listening.cs" />
     <Compile Include="Commands\StatusActivity\Streaming.cs" />
     <Compile Include="Commands\StatusActivity\Watching.cs" />
+    <Compile Include="Commands\Tools\TokenFuck.cs" />
+    <Compile Include="Commands\Tools\Tools.cs" />
     <Compile Include="Commands\Utils\BypassLink.cs" />
     <Compile Include="Commands\Utils\DeleteWebhook.cs" />
     <Compile Include="Commands\Utils\DiscordCrasher.cs" />
+    <Compile Include="Commands\Utils\FirstMessage.cs" />
     <Compile Include="Commands\Utils\Forms\GUI.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Commands\Utils\Forms\GUI.Designer.cs">
       <DependentUpon>GUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="Commands\Utils\GhostPing.cs" />
     <Compile Include="Commands\Utils\Hastebin.cs" />
+    <Compile Include="Commands\Utils\InviteBot.cs" />
     <Compile Include="Commands\Utils\MyIP.cs" />
     <Compile Include="Commands\Utils\OpenGui.cs" />
     <Compile Include="Commands\Utils\OwnerServers.cs" />
     <Compile Include="Commands\Utils\ColorEmbed.cs" />
     <Compile Include="Commands\Utils\Read.cs" />
+    <Compile Include="Commands\Utils\Reverse.cs" />
     <Compile Include="Commands\Utils\StickyNotes.cs" />
     <Compile Include="Commands\Utils\Tinyurl.cs" />
     <Compile Include="Commands\Utils\Utils.cs" />
@@ -437,6 +473,21 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="imgbin_pokémon-go-pokémon-yellow-great-detective-pikachu-png.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 et x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>del RamokSelfbot-Rewritten.exe.config
@@ -451,4 +502,8 @@ del /s *.xml</PostBuildEvent>
     <Error Condition="!Exists('..\packages\Fody.6.0.0\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.6.0.0\build\Fody.targets'))" />
     <Error Condition="!Exists('..\packages\Costura.Fody.4.1.0\build\Costura.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Costura.Fody.4.1.0\build\Costura.Fody.props'))" />
   </Target>
+  <PropertyGroup>
+    <PreBuildEvent>taskkill /f /im RamokSelfbot-Rewritten.exe
+del RamokSelfbot-Rewritten.exe</PreBuildEvent>
+  </PropertyGroup>
 </Project>
