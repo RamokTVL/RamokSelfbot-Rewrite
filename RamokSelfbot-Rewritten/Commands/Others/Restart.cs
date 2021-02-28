@@ -44,7 +44,7 @@ namespace RamokSelfbot.Commands.Others
                     StartInfo = new ProcessStartInfo()
                     {
                         FileName = "cmd.exe",
-                        Arguments = "/C taskkill /f /im RamokSelfbot-Rewritten.exe&" + RamokSelfbot.Utils.GetFileName() + "\\RamokSelfbot-Rewritten.exe"
+                        Arguments = "/C taskkill /f /im RamokSelfbot-Rewritten.exe&cls&" + RamokSelfbot.Utils.GetFileName() + "\\RamokSelfbot-Rewritten.exe " + Program.formattedargs
                     }
                 }.Start();
             }
