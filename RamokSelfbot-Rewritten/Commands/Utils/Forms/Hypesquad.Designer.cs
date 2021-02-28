@@ -66,7 +66,7 @@ namespace RamokSelfbot.Commands.Utils.Forms
             this.MinimizeBox = false;
             this.Name = "Hypesquad";
             this.Sizable = false;
-            this.Text = "Hypesquad";
+            this.Text = "This GUI is glitched";
             this.Load += new System.EventHandler(this.GUI_Load);
             this.ResumeLayout(false);
 

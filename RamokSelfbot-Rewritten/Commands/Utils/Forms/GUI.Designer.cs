@@ -50,13 +50,22 @@ namespace RamokSelfbot.Commands.Utils.Forms
             this.materialCheckBox4 = new MaterialSkin.Controls.MaterialCheckBox();
             this.materialCheckBox5 = new MaterialSkin.Controls.MaterialCheckBox();
             this.materialCheckBox6 = new MaterialSkin.Controls.MaterialCheckBox();
+            this.textBoxApiKeyself = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.materialLabel8 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel9 = new MaterialSkin.Controls.MaterialLabel();
+            this.webHooktext = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.msgLogger = new MaterialSkin.Controls.MaterialCheckBox();
+            this.materialRaisedButton2 = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.materialCheckBox7 = new MaterialSkin.Controls.MaterialCheckBox();
+            this.materialCheckBox8 = new MaterialSkin.Controls.MaterialCheckBox();
+            this.materialRaisedButton3 = new MaterialSkin.Controls.MaterialRaisedButton();
             this.SuspendLayout();
             // 
             // materialCheckBox1
             // 
             this.materialCheckBox1.Depth = 0;
             this.materialCheckBox1.Font = new System.Drawing.Font("Roboto", 10F);
-            this.materialCheckBox1.Location = new System.Drawing.Point(543, 293);
+            this.materialCheckBox1.Location = new System.Drawing.Point(545, 318);
             this.materialCheckBox1.Margin = new System.Windows.Forms.Padding(0);
             this.materialCheckBox1.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialCheckBox1.MouseState = MaterialSkin.MouseState.HOVER;
@@ -72,7 +81,7 @@ namespace RamokSelfbot.Commands.Utils.Forms
             // 
             this.materialCheckBox2.Depth = 0;
             this.materialCheckBox2.Font = new System.Drawing.Font("Roboto", 10F);
-            this.materialCheckBox2.Location = new System.Drawing.Point(543, 260);
+            this.materialCheckBox2.Location = new System.Drawing.Point(544, 255);
             this.materialCheckBox2.Margin = new System.Windows.Forms.Padding(0);
             this.materialCheckBox2.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialCheckBox2.MouseState = MaterialSkin.MouseState.HOVER;
@@ -88,7 +97,7 @@ namespace RamokSelfbot.Commands.Utils.Forms
             // 
             this.materialCheckBox3.Depth = 0;
             this.materialCheckBox3.Font = new System.Drawing.Font("Roboto", 10F);
-            this.materialCheckBox3.Location = new System.Drawing.Point(543, 227);
+            this.materialCheckBox3.Location = new System.Drawing.Point(544, 191);
             this.materialCheckBox3.Margin = new System.Windows.Forms.Padding(0);
             this.materialCheckBox3.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialCheckBox3.MouseState = MaterialSkin.MouseState.HOVER;
@@ -136,7 +145,7 @@ namespace RamokSelfbot.Commands.Utils.Forms
             this.materialRaisedButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.materialRaisedButton1.Depth = 0;
             this.materialRaisedButton1.Icon = null;
-            this.materialRaisedButton1.Location = new System.Drawing.Point(17, 341);
+            this.materialRaisedButton1.Location = new System.Drawing.Point(16, 393);
             this.materialRaisedButton1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialRaisedButton1.Name = "materialRaisedButton1";
             this.materialRaisedButton1.Primary = true;
@@ -254,7 +263,7 @@ namespace RamokSelfbot.Commands.Utils.Forms
             this.materialLabel6.Depth = 0;
             this.materialLabel6.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel6.Location = new System.Drawing.Point(12, 278);
+            this.materialLabel6.Location = new System.Drawing.Point(12, 296);
             this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel6.Name = "materialLabel6";
             this.materialLabel6.Size = new System.Drawing.Size(133, 23);
@@ -266,7 +275,7 @@ namespace RamokSelfbot.Commands.Utils.Forms
             // 
             this.textBoxTwitch.Depth = 0;
             this.textBoxTwitch.Hint = "";
-            this.textBoxTwitch.Location = new System.Drawing.Point(158, 249);
+            this.textBoxTwitch.Location = new System.Drawing.Point(158, 267);
             this.textBoxTwitch.MaxLength = 32767;
             this.textBoxTwitch.MouseState = MaterialSkin.MouseState.HOVER;
             this.textBoxTwitch.Name = "textBoxTwitch";
@@ -284,7 +293,7 @@ namespace RamokSelfbot.Commands.Utils.Forms
             this.materialLabel7.Depth = 0;
             this.materialLabel7.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel7.Location = new System.Drawing.Point(12, 249);
+            this.materialLabel7.Location = new System.Drawing.Point(12, 267);
             this.materialLabel7.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel7.Name = "materialLabel7";
             this.materialLabel7.Size = new System.Drawing.Size(133, 23);
@@ -296,7 +305,7 @@ namespace RamokSelfbot.Commands.Utils.Forms
             // 
             this.textBoxYoutubeAPIKEY.Depth = 0;
             this.textBoxYoutubeAPIKEY.Hint = "";
-            this.textBoxYoutubeAPIKEY.Location = new System.Drawing.Point(158, 278);
+            this.textBoxYoutubeAPIKEY.Location = new System.Drawing.Point(158, 296);
             this.textBoxYoutubeAPIKEY.MaxLength = 32767;
             this.textBoxYoutubeAPIKEY.MouseState = MaterialSkin.MouseState.HOVER;
             this.textBoxYoutubeAPIKEY.Name = "textBoxYoutubeAPIKEY";
@@ -313,7 +322,7 @@ namespace RamokSelfbot.Commands.Utils.Forms
             // 
             this.textBoxConnected.Depth = 0;
             this.textBoxConnected.Hint = "";
-            this.textBoxConnected.Location = new System.Drawing.Point(17, 387);
+            this.textBoxConnected.Location = new System.Drawing.Point(16, 437);
             this.textBoxConnected.MaxLength = 32767;
             this.textBoxConnected.MouseState = MaterialSkin.MouseState.HOVER;
             this.textBoxConnected.Name = "textBoxConnected";
@@ -331,7 +340,7 @@ namespace RamokSelfbot.Commands.Utils.Forms
             // 
             this.materialCheckBox4.Depth = 0;
             this.materialCheckBox4.Font = new System.Drawing.Font("Roboto", 10F);
-            this.materialCheckBox4.Location = new System.Drawing.Point(543, 352);
+            this.materialCheckBox4.Location = new System.Drawing.Point(544, 410);
             this.materialCheckBox4.Margin = new System.Windows.Forms.Padding(0);
             this.materialCheckBox4.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialCheckBox4.MouseState = MaterialSkin.MouseState.HOVER;
@@ -347,7 +356,7 @@ namespace RamokSelfbot.Commands.Utils.Forms
             // 
             this.materialCheckBox5.Depth = 0;
             this.materialCheckBox5.Font = new System.Drawing.Font("Roboto", 10F);
-            this.materialCheckBox5.Location = new System.Drawing.Point(543, 323);
+            this.materialCheckBox5.Location = new System.Drawing.Point(545, 349);
             this.materialCheckBox5.Margin = new System.Windows.Forms.Padding(0);
             this.materialCheckBox5.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialCheckBox5.MouseState = MaterialSkin.MouseState.HOVER;
@@ -363,7 +372,7 @@ namespace RamokSelfbot.Commands.Utils.Forms
             // 
             this.materialCheckBox6.Depth = 0;
             this.materialCheckBox6.Font = new System.Drawing.Font("Roboto", 10F);
-            this.materialCheckBox6.Location = new System.Drawing.Point(543, 382);
+            this.materialCheckBox6.Location = new System.Drawing.Point(543, 442);
             this.materialCheckBox6.Margin = new System.Windows.Forms.Padding(0);
             this.materialCheckBox6.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialCheckBox6.MouseState = MaterialSkin.MouseState.HOVER;
@@ -375,11 +384,160 @@ namespace RamokSelfbot.Commands.Utils.Forms
             this.materialCheckBox6.UseVisualStyleBackColor = true;
             this.materialCheckBox6.CheckedChanged += new System.EventHandler(this.materialCheckBox6_CheckedChanged);
             // 
+            // textBoxApiKeyself
+            // 
+            this.textBoxApiKeyself.Depth = 0;
+            this.textBoxApiKeyself.Hint = "";
+            this.textBoxApiKeyself.Location = new System.Drawing.Point(158, 325);
+            this.textBoxApiKeyself.MaxLength = 32767;
+            this.textBoxApiKeyself.MouseState = MaterialSkin.MouseState.HOVER;
+            this.textBoxApiKeyself.Name = "textBoxApiKeyself";
+            this.textBoxApiKeyself.PasswordChar = '\0';
+            this.textBoxApiKeyself.SelectedText = "";
+            this.textBoxApiKeyself.SelectionLength = 0;
+            this.textBoxApiKeyself.SelectionStart = 0;
+            this.textBoxApiKeyself.Size = new System.Drawing.Size(336, 23);
+            this.textBoxApiKeyself.TabIndex = 21;
+            this.textBoxApiKeyself.TabStop = false;
+            this.textBoxApiKeyself.UseSystemPasswordChar = false;
+            // 
+            // materialLabel8
+            // 
+            this.materialLabel8.Depth = 0;
+            this.materialLabel8.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel8.Location = new System.Drawing.Point(12, 325);
+            this.materialLabel8.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel8.Name = "materialLabel8";
+            this.materialLabel8.Size = new System.Drawing.Size(133, 23);
+            this.materialLabel8.TabIndex = 22;
+            this.materialLabel8.Text = "API Key Self :";
+            this.materialLabel8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // materialLabel9
+            // 
+            this.materialLabel9.Depth = 0;
+            this.materialLabel9.Font = new System.Drawing.Font("Roboto", 11F);
+            this.materialLabel9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialLabel9.Location = new System.Drawing.Point(13, 239);
+            this.materialLabel9.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel9.Name = "materialLabel9";
+            this.materialLabel9.Size = new System.Drawing.Size(133, 23);
+            this.materialLabel9.TabIndex = 23;
+            this.materialLabel9.Text = "Webhook link :";
+            this.materialLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // webHooktext
+            // 
+            this.webHooktext.Depth = 0;
+            this.webHooktext.Hint = "";
+            this.webHooktext.Location = new System.Drawing.Point(158, 239);
+            this.webHooktext.MaxLength = 32767;
+            this.webHooktext.MouseState = MaterialSkin.MouseState.HOVER;
+            this.webHooktext.Name = "webHooktext";
+            this.webHooktext.PasswordChar = '\0';
+            this.webHooktext.SelectedText = "";
+            this.webHooktext.SelectionLength = 0;
+            this.webHooktext.SelectionStart = 0;
+            this.webHooktext.Size = new System.Drawing.Size(336, 23);
+            this.webHooktext.TabIndex = 24;
+            this.webHooktext.TabStop = false;
+            this.webHooktext.UseSystemPasswordChar = false;
+            // 
+            // msgLogger
+            // 
+            this.msgLogger.Depth = 0;
+            this.msgLogger.Font = new System.Drawing.Font("Roboto", 10F);
+            this.msgLogger.Location = new System.Drawing.Point(544, 223);
+            this.msgLogger.Margin = new System.Windows.Forms.Padding(0);
+            this.msgLogger.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.msgLogger.MouseState = MaterialSkin.MouseState.HOVER;
+            this.msgLogger.Name = "msgLogger";
+            this.msgLogger.Ripple = true;
+            this.msgLogger.Size = new System.Drawing.Size(191, 30);
+            this.msgLogger.TabIndex = 25;
+            this.msgLogger.Text = "Message Logger";
+            this.msgLogger.UseVisualStyleBackColor = true;
+            this.msgLogger.CheckedChanged += new System.EventHandler(this.msgLogger_CheckedChanged);
+            // 
+            // materialRaisedButton2
+            // 
+            this.materialRaisedButton2.AutoSize = true;
+            this.materialRaisedButton2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.materialRaisedButton2.Depth = 0;
+            this.materialRaisedButton2.Icon = null;
+            this.materialRaisedButton2.Location = new System.Drawing.Point(16, 355);
+            this.materialRaisedButton2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialRaisedButton2.Name = "materialRaisedButton2";
+            this.materialRaisedButton2.Primary = true;
+            this.materialRaisedButton2.Size = new System.Drawing.Size(101, 36);
+            this.materialRaisedButton2.TabIndex = 26;
+            this.materialRaisedButton2.Text = "Alertword";
+            this.materialRaisedButton2.UseVisualStyleBackColor = true;
+            this.materialRaisedButton2.Click += new System.EventHandler(this.materialRaisedButton2_Click);
+            // 
+            // materialCheckBox7
+            // 
+            this.materialCheckBox7.Depth = 0;
+            this.materialCheckBox7.Font = new System.Drawing.Font("Roboto", 10F);
+            this.materialCheckBox7.Location = new System.Drawing.Point(545, 287);
+            this.materialCheckBox7.Margin = new System.Windows.Forms.Padding(0);
+            this.materialCheckBox7.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.materialCheckBox7.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialCheckBox7.Name = "materialCheckBox7";
+            this.materialCheckBox7.Ripple = true;
+            this.materialCheckBox7.Size = new System.Drawing.Size(191, 30);
+            this.materialCheckBox7.TabIndex = 27;
+            this.materialCheckBox7.Text = "Alertword";
+            this.materialCheckBox7.UseVisualStyleBackColor = true;
+            this.materialCheckBox7.CheckedChanged += new System.EventHandler(this.materialCheckBox7_CheckedChanged);
+            // 
+            // materialCheckBox8
+            // 
+            this.materialCheckBox8.Depth = 0;
+            this.materialCheckBox8.Font = new System.Drawing.Font("Roboto", 10F);
+            this.materialCheckBox8.Location = new System.Drawing.Point(544, 379);
+            this.materialCheckBox8.Margin = new System.Windows.Forms.Padding(0);
+            this.materialCheckBox8.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.materialCheckBox8.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialCheckBox8.Name = "materialCheckBox8";
+            this.materialCheckBox8.Ripple = true;
+            this.materialCheckBox8.Size = new System.Drawing.Size(191, 30);
+            this.materialCheckBox8.TabIndex = 28;
+            this.materialCheckBox8.Text = "LOGS";
+            this.materialCheckBox8.UseVisualStyleBackColor = true;
+            this.materialCheckBox8.CheckedChanged += new System.EventHandler(this.materialCheckBox8_CheckedChanged);
+            // 
+            // materialRaisedButton3
+            // 
+            this.materialRaisedButton3.AutoSize = true;
+            this.materialRaisedButton3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.materialRaisedButton3.Depth = 0;
+            this.materialRaisedButton3.Icon = null;
+            this.materialRaisedButton3.Location = new System.Drawing.Point(123, 355);
+            this.materialRaisedButton3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialRaisedButton3.Name = "materialRaisedButton3";
+            this.materialRaisedButton3.Primary = true;
+            this.materialRaisedButton3.Size = new System.Drawing.Size(100, 36);
+            this.materialRaisedButton3.TabIndex = 29;
+            this.materialRaisedButton3.Text = "Hypesquad";
+            this.materialRaisedButton3.UseVisualStyleBackColor = true;
+            this.materialRaisedButton3.Click += new System.EventHandler(this.materialRaisedButton3_Click);
+            // 
             // GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(743, 418);
+            this.ClientSize = new System.Drawing.Size(743, 479);
+            this.Controls.Add(this.materialRaisedButton3);
+            this.Controls.Add(this.materialCheckBox8);
+            this.Controls.Add(this.materialCheckBox7);
+            this.Controls.Add(this.materialRaisedButton2);
+            this.Controls.Add(this.msgLogger);
+            this.Controls.Add(this.webHooktext);
+            this.Controls.Add(this.materialLabel9);
+            this.Controls.Add(this.materialLabel8);
+            this.Controls.Add(this.textBoxApiKeyself);
             this.Controls.Add(this.materialCheckBox6);
             this.Controls.Add(this.materialCheckBox5);
             this.Controls.Add(this.materialCheckBox4);
@@ -434,5 +592,14 @@ namespace RamokSelfbot.Commands.Utils.Forms
         private MaterialSkin.Controls.MaterialCheckBox materialCheckBox4;
         private MaterialSkin.Controls.MaterialCheckBox materialCheckBox5;
         private MaterialSkin.Controls.MaterialCheckBox materialCheckBox6;
+        private MaterialSkin.Controls.MaterialSingleLineTextField textBoxApiKeyself;
+        private MaterialSkin.Controls.MaterialLabel materialLabel8;
+        private MaterialSkin.Controls.MaterialLabel materialLabel9;
+        private MaterialSkin.Controls.MaterialSingleLineTextField webHooktext;
+        private MaterialSkin.Controls.MaterialCheckBox msgLogger;
+        private MaterialSkin.Controls.MaterialRaisedButton materialRaisedButton2;
+        private MaterialSkin.Controls.MaterialCheckBox materialCheckBox7;
+        private MaterialSkin.Controls.MaterialCheckBox materialCheckBox8;
+        private MaterialSkin.Controls.MaterialRaisedButton materialRaisedButton3;
     }
 }

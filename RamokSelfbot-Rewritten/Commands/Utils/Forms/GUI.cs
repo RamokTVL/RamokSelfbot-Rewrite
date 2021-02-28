@@ -26,6 +26,7 @@ namespace RamokSelfbot.Commands.Utils.Forms
         private void GUI_Load(object sender, EventArgs e)
         {
             start = 1;
+            
             textBoxConnected.Text = "Connected as : " + Program.client.User.Username + "#" + Program.client.User.Discriminator + " (" + Program.client.User.Id + ")";
             JSON config = JsonConvert.DeserializeObject<JSON>(System.IO.File.ReadAllText("config.json"));
             textBoxPrefix.Text = config.prefix;
@@ -34,6 +35,7 @@ namespace RamokSelfbot.Commands.Utils.Forms
             textBoxB.Text = config.embedcolorb.ToString();
             textBoxTwitch.Text = config.twitchlink;
             textBoxYoutubeAPIKEY.Text = config.youtubeapikey;
+            materialCheckBox7.Checked = config.alertword;
 
                 materialCheckBox2.Checked = config.nitrosniper;
                 materialCheckBox1.Checked = config.antieveryone;
@@ -41,6 +43,7 @@ namespace RamokSelfbot.Commands.Utils.Forms
                 materialCheckBox4.Checked = config.nsfw;
                 materialCheckBox5.Checked = config.debug;
                 materialCheckBox6.Checked = config.dnd;
+            materialRaisedButton2.Visible = materialCheckBox7.Checked;
             start = 0;
         }
 
@@ -91,6 +94,8 @@ namespace RamokSelfbot.Commands.Utils.Forms
             config.embedcolorb = int.Parse(textBoxB.Text);
             config.twitchlink = textBoxTwitch.Text;
             config.youtubeapikey = textBoxYoutubeAPIKEY.Text;
+            config.apikeyself = textBoxApiKeyself.Text;
+            config.messageloggerwebhook = webHooktext.Text;
 
             var configoutput = JsonConvert.SerializeObject(config, Formatting.Indented);
             System.IO.File.WriteAllText("config.json", configoutput);
@@ -131,6 +136,41 @@ namespace RamokSelfbot.Commands.Utils.Forms
             config.dnd = materialCheckBox6.Checked;
             var configoutput = JsonConvert.SerializeObject(config, Formatting.Indented);
             System.IO.File.WriteAllText("config.json", configoutput);
+        }
+
+        private void msgLogger_CheckedChanged(object sender, EventArgs e)
+        {
+            JSON config = JsonConvert.DeserializeObject<JSON>(System.IO.File.ReadAllText("config.json"));
+            config.messagelogger = msgLogger.Checked;
+            var configoutput = JsonConvert.SerializeObject(config, Formatting.Indented);
+            System.IO.File.WriteAllText("config.json", configoutput);
+        }
+
+        private void materialCheckBox7_CheckedChanged(object sender, EventArgs e)
+        {
+            materialRaisedButton2.Visible = materialCheckBox7.Checked;
+            JSON config = JsonConvert.DeserializeObject<JSON>(System.IO.File.ReadAllText("config.json"));
+            config.alertword = materialCheckBox7.Checked;
+            var configoutput = JsonConvert.SerializeObject(config, Formatting.Indented);
+            System.IO.File.WriteAllText("config.json", configoutput);
+        }
+
+        private void materialRaisedButton2_Click(object sender, EventArgs e)
+        {
+            new Alertword().ShowDialog();
+        }
+
+        private void materialCheckBox8_CheckedChanged(object sender, EventArgs e)
+        {
+            JSON config = JsonConvert.DeserializeObject<JSON>(System.IO.File.ReadAllText("config.json"));
+            config.logs = materialCheckBox8.Checked;
+            var configoutput = JsonConvert.SerializeObject(config, Formatting.Indented);
+            System.IO.File.WriteAllText("config.json", configoutput);
+        }
+
+        private void materialRaisedButton3_Click(object sender, EventArgs e)
+        {
+            new Hypesquad().ShowDialog();
         }
     }
 }
