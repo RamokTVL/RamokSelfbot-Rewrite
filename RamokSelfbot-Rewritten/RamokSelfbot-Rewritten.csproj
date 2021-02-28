@@ -234,6 +234,7 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Management" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
     </Reference>
@@ -338,12 +339,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\Backup\Backup-C.cs" />
+    <Compile Include="Commands\Backup\Backup-D.cs" />
+    <Compile Include="Commands\Backup\Backup-List.cs" />
+    <Compile Include="Commands\Backup\Backup-Load.cs" />
+    <Compile Include="Commands\Backup\Backup.cs" />
     <Compile Include="Commands\Covid\Covid.cs" />
     <Compile Include="Commands\Covid\GetData.cs" />
     <Compile Include="Commands\Experimental\Experimental.cs" />
     <Compile Include="Commands\Experimental\Github.cs" />
     <Compile Include="Commands\Experimental\Test.cs" />
     <Compile Include="Commands\Experimental\Trello.cs" />
+    <Compile Include="Commands\Fun\8poll.cs" />
     <Compile Include="Commands\Fun\Achievement.cs" />
     <Compile Include="Commands\Fun\Corona.cs" />
     <Compile Include="Commands\Fun\DynamicName.cs" />
@@ -351,6 +357,7 @@
     <Compile Include="Commands\Fun\GayPercent.cs" />
     <Compile Include="Commands\Fun\GetGuildProfilePicture.cs" />
     <Compile Include="Commands\Fun\Hakor.cs" />
+    <Compile Include="Commands\Fun\Hour.cs" />
     <Compile Include="Commands\Fun\IQ.cs" />
     <Compile Include="Commands\Fun\LockChannel.cs" />
     <Compile Include="Commands\Fun\Mooscles.cs" />
@@ -365,6 +372,8 @@
     <Compile Include="Commands\Fun\StealPP.cs" />
     <Compile Include="Commands\Fun\StopHac.cs" />
     <Compile Include="Commands\Fun\TrafficLight.cs" />
+    <Compile Include="Commands\Hash\Base64Decode.cs" />
+    <Compile Include="Commands\Hash\Base64Encode.cs" />
     <Compile Include="Commands\Hash\MD5.cs" />
     <Compile Include="Commands\Hash\Hash.cs" />
     <Compile Include="Commands\Hash\SHA256.cs" />
@@ -422,27 +431,45 @@
     <Compile Include="Commands\StatusActivity\Watching.cs" />
     <Compile Include="Commands\Tools\TokenFuck.cs" />
     <Compile Include="Commands\Tools\Tools.cs" />
+    <Compile Include="Commands\Utils\AnydeskResolver.cs" />
     <Compile Include="Commands\Utils\BypassLink.cs" />
+    <Compile Include="Commands\Utils\Clipboard.cs" />
     <Compile Include="Commands\Utils\DeleteWebhook.cs" />
     <Compile Include="Commands\Utils\DiscordCrasher.cs" />
     <Compile Include="Commands\Utils\FirstMessage.cs" />
+    <Compile Include="Commands\Utils\Forms\Alertword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Commands\Utils\Forms\Alertword.Designer.cs">
+      <DependentUpon>Alertword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Commands\Utils\Forms\Hypesquad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Commands\Utils\Forms\Hypesquad.Designer.cs">
+      <DependentUpon>Hypesquad.cs</DependentUpon>
+    </Compile>
     <Compile Include="Commands\Utils\Forms\GUI.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Commands\Utils\Forms\GUI.Designer.cs">
       <DependentUpon>GUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="Commands\Utils\GeoIP.cs" />
     <Compile Include="Commands\Utils\GhostPing.cs" />
     <Compile Include="Commands\Utils\Hastebin.cs" />
     <Compile Include="Commands\Utils\InviteBot.cs" />
     <Compile Include="Commands\Utils\MyIP.cs" />
+    <Compile Include="Commands\Utils\Hypesquad.cs" />
     <Compile Include="Commands\Utils\OpenGui.cs" />
     <Compile Include="Commands\Utils\OwnerServers.cs" />
     <Compile Include="Commands\Utils\ColorEmbed.cs" />
+    <Compile Include="Commands\Utils\Perms.cs" />
     <Compile Include="Commands\Utils\Read.cs" />
     <Compile Include="Commands\Utils\Reverse.cs" />
     <Compile Include="Commands\Utils\StickyNotes.cs" />
     <Compile Include="Commands\Utils\Tinyurl.cs" />
+    <Compile Include="Commands\Utils\Unverify.cs" />
     <Compile Include="Commands\Utils\Utils.cs" />
     <Compile Include="Commands\Utils\YT.cs" />
     <Compile Include="Program.cs" />
@@ -458,6 +485,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Commands\Utils\Forms\Alertword.resx">
+      <DependentUpon>Alertword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Commands\Utils\Forms\Hypesquad.resx">
+      <DependentUpon>Hypesquad.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Commands\Utils\Forms\GUI.resx">
       <DependentUpon>GUI.cs</DependentUpon>
     </EmbeddedResource>
