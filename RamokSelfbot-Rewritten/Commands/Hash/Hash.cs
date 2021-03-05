@@ -8,7 +8,7 @@ using System.Text;
 
 namespace RamokSelfbot.Commands.Raid
 {
-    [Command("hash", "Show informations about the hashes commands - HASH")]
+    [Command("hash", "Show hashes commands. - HELPMENU")]
     class Hash : CommandBase
     {
         public override void Execute()

@@ -3,9 +3,11 @@ using Discord.Commands;
 using Discord.Gateway;
 using Discord.Media;
 using Discord.WebSockets;
+using Leaf.xNet;
 using Newtonsoft.Json;
 using System;
 using System.IO;
+using System.Net;
 
 namespace RamokSelfbot.Commands.Info
 {
@@ -14,11 +16,11 @@ namespace RamokSelfbot.Commands.Info
     {
         [Parameter("id", true)]
         public string id { get; set; }
-        public override void Execute()
+        public override async void Execute()
         {
-            if(Message.Author.User.Id == Program.id)
+            if(RamokSelfbot.Utils.IsClient(Message))
             {
-                DiscordUser user = Client.GetUser(Program.id);
+                DiscordUser user = await Client.GetUserAsync(Program.id);
                 if(id == null)
                 {
                     RamokSelfbot.Utils.ValidUser(1, Message);
@@ -29,7 +31,7 @@ namespace RamokSelfbot.Commands.Info
                     {
                         try
                         {
-                            user = Client.GetUser(ulong.Parse(id));
+                            user = await Client.GetUserAsync(ulong.Parse(id));
                         }
                         catch (Exception ex)
                         {
@@ -47,7 +49,7 @@ namespace RamokSelfbot.Commands.Info
                     {
                         try
                         {
-                            user = Client.GetUser(Message.Mentions[0].Id);
+                            user = await Client.GetUserAsync(Message.Mentions[0].Id);
                         }
                         catch (Exception ex)
                         {
@@ -71,53 +73,83 @@ namespace RamokSelfbot.Commands.Info
 
                 EmbedMaker embed = new EmbedMaker()
                 {
-                    Color = System.Drawing.Color.FromArgb(JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorr, JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorg, JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorb),
-                    Description = "These informations are publics.\nThey cant injure <@" + user.Id + ">."
-                };
+                    Color = RamokSelfbot.Utils.EmbedColor(),
+                    Description = "These informations are publics.\nThey cant injure <@" + user.Id + ">.",
+                    Footer = RamokSelfbot.Utils.footer(Message.Author.User)
+            };
 
-                string avatarurl;
-                embed.Footer = RamokSelfbot.Utils.footer(Message.Author.User);
-
-
+                
 
                 embed.AddField("Username", $"```{user.Username}#{user.Discriminator}```", true);
                 embed.AddField("ID", "```" + user.Id.ToString() + "```", true);
 
-
-                try
+                //AVATAR GOES HERE
+                
+                if(user.Avatar == null)
                 {
-                    if (user.Avatar == null)
-                    {
-                        embed.AddField("Avatar URL", "```No Avatar```", true);
-                    }
-                    else
-                    {
-                        embed.ThumbnailUrl = user.Avatar.Url;
-                        avatarurl = new System.Net.WebClient().DownloadString("https://tinyurl.com/api-create.php?url=" + user.Avatar.Url);
-                        embed.AddField("Avatar URL", "```" + avatarurl + "```", true);
-                    }
-                } catch
+                    embed.AddField("Avatar URL", "```\nNo Avatar```", true);
+                } else
                 {
-                    embed.AddField("Avatar URL", "```No Avatar```", true);
+                    try
+                    {
+                        HttpRequest request = new HttpRequest();
+                        string content = request.Get(user.Avatar.Url + ".gif").StatusCode.ToString();
+                        embed.AddField("Avatar URL", new WebClient().DownloadString("https://tinyurl.com/api-create.php?url=" + user.Avatar.Url + ".gif"), true);
+                        if (content.Contains("415"))
+                        {
+                            embed.ThumbnailUrl = user.Avatar.Url;
+                            if (Program.Debug)
+                            {
+                                Console.WriteLine("415");
+                                Console.WriteLine("415");
+                                Console.WriteLine("415");
+                                Console.WriteLine("415");
+                                Console.WriteLine("415");
+                                Console.WriteLine("415");
+                            }
+                            embed.AddField("Avatar URL", new WebClient().DownloadString("https://tinyurl.com/api-create.php?url=" + user.Avatar.Url), true);
+                        }
+                        else
+                        {
+                            embed.ThumbnailUrl = user.Avatar.Url + ".gif";
+                        }
+                        /*    if()
+                            {
+                                */
+                    }
+                    catch (Exception ex)
+                    {
+                        if (Program.Debug)
+                        {
+                            if (ex.Message.Contains("415"))
+                            {
+                                embed.ThumbnailUrl = user.Avatar.Url;
+                                if (Program.Debug)
+                                {
+                                    Console.WriteLine("415");
+                                    Console.WriteLine("415");
+                                    Console.WriteLine("415");
+                                    Console.WriteLine("415");
+                                    Console.WriteLine("415");
+                                    Console.WriteLine("415");
+                                }
+                                embed.AddField("Avatar URL", new WebClient().DownloadString("https://tinyurl.com/api-create.php?url=" + user.Avatar.Url), true);
+                            }
+                        }
+                    }
                 }
+                GuildMember member = Message.Guild.GetMember(user.Id);
 
-                if (Message.Author.User.Avatar != null)
+                
+                if (Message.Guild != null)
                 {
-                    if(embed.ThumbnailUrl == null)
-                    {
-                        embed.ThumbnailUrl = Message.Author.User.Avatar.Url;
-                    }
-                }
-
-                if(Message.Guild != null)
-                {
-
-                    if(Message.Guild.GetMember(user.Id).Nickname == null)
+                    
+                    if (member.Nickname == null)
                     {
                         embed.AddField("Nickname", "```No Nickname```", true);
                     } else
                     {
-                        embed.AddField("Nickname", "```" + Message.Guild.GetMember(user.Id).Nickname + "```", true);
+                        embed.AddField("Nickname", "```" + member.Nickname + "```", true);
                     }
                     
                 }
@@ -132,12 +164,13 @@ namespace RamokSelfbot.Commands.Info
                     embed.AddField("Is a bot", "```No```", true);
                 }
 
-                if(user.GetProfile().NitroSince.ToString() == "")
+                DiscordProfile profile = user.GetProfile();
+                if (profile.NitroSince.ToString() == "")
                 {
                     embed.AddField("Nitro", "```No```", true);
                 }else
                 {
-                    embed.AddField("Nitro", "```Yes (since " + user.GetProfile().NitroSince.ToString() + ")```", true);
+                    embed.AddField("Nitro", "```Yes (since " + profile.NitroSince.ToString() + ")```", true);
                 }
 
                 
@@ -154,12 +187,13 @@ namespace RamokSelfbot.Commands.Info
                     string roles = "```\n";
                     int rolesn = 0;
                     //embed.AddField("Nickname", "```" + )
-                    if (Message.Guild.GetMember(user.Id).Roles.Count < 15)
+                    int rolescount = member.Roles.Count;
+                    if (rolescount < 15)
                     {
-                        for (int i = 0; i < Message.Guild.GetMember(user.Id).Roles.Count; i++)
+                        for (int i = 0; i < rolescount; i++)
                         {
                             rolesn++;
-                            var roleidd = Message.Guild.GetMember(user.Id).Roles[i];
+                            var roleidd = member.Roles[i];
                             DiscordRole role = Client.GetGuildRole(roleidd);
                             if (Program.Debug)
                             {
@@ -177,7 +211,7 @@ namespace RamokSelfbot.Commands.Info
                         for (int i = 0; i < 15; i++)
                         {
                             rolesn++;
-                            var roleidd = Message.Guild.GetMember(user.Id).Roles[i];
+                            var roleidd = member.Roles[i];
                             DiscordRole role = Client.GetGuildRole(roleidd);
                             roles = roles + role.Name + "\n";
                         }
@@ -195,16 +229,17 @@ namespace RamokSelfbot.Commands.Info
 
                     string perms = "```\n";
 
-                    perms += HasPermission(DiscordPermission.CreateInstantInvite, user, "Create Invite");
-                    perms += HasPermission(DiscordPermission.SendMessages, user, "Send Message");
-                    perms += HasPermission(DiscordPermission.ReadMessageHistory, user, "Read Message History");
-                    perms += HasPermission(DiscordPermission.UseExternalEmojis, user, "Use External Emojis");
-                    perms += HasPermission(DiscordPermission.ConnectToVC, user, "Connect");
-                    perms += HasPermission(DiscordPermission.SpeakInVC, user, "Speak");
-                    perms += HasPermission(DiscordPermission.MuteMembers, user, "Mute members");
-                    perms += HasPermission(DiscordPermission.DeafenVCMembers, user, "Deafen members");
-                    perms += HasPermission(DiscordPermission.MoveVCMembers, user, "Move members");
-                    perms += HasPermission(DiscordPermission.PrioritySpeaker, user, "Priority Speaker");
+                    DiscordPermission memberperms = await member.GetPermissionsAsync();
+                    perms += HasPermission(DiscordPermission.CreateInstantInvite, memberperms, "Create Invite");
+                    perms += HasPermission(DiscordPermission.SendMessages, memberperms, "Send Message");
+                    perms += HasPermission(DiscordPermission.ReadMessageHistory, memberperms, "Read Message History");
+                    perms += HasPermission(DiscordPermission.UseExternalEmojis, memberperms, "Use External Emojis");
+                    perms += HasPermission(DiscordPermission.ConnectToVC, memberperms, "Connect");
+                    perms += HasPermission(DiscordPermission.SpeakInVC, memberperms, "Speak");
+                    perms += HasPermission(DiscordPermission.MuteMembers, memberperms, "Mute members");
+                    perms += HasPermission(DiscordPermission.DeafenVCMembers, memberperms, "Deafen members");
+                    perms += HasPermission(DiscordPermission.MoveVCMembers, memberperms, "Move members");
+                    perms += HasPermission(DiscordPermission.PrioritySpeaker, memberperms, "Priority Speaker");
                     perms += "```";
 
                     embed.AddField("Global Permissions", perms, false);
@@ -212,12 +247,13 @@ namespace RamokSelfbot.Commands.Info
 
                     int serversn = 0;
                     string servers = "```\n";
-                    if (user.GetProfile().MutualGuilds.Count < 15)
+                int mutualguildcount = profile.MutualGuilds.Count;
+                    if (mutualguildcount < 15)
                     {
-                        for (int i = 0; i < user.GetProfile().MutualGuilds.Count; i++)
+                        for (int i = 0; i < mutualguildcount; i++)
                         {
                             serversn++;
-                            var serveridd = user.GetProfile().MutualGuilds[i].Id;
+                            var serveridd = profile.MutualGuilds[i].Id;
                             SocketGuild guild = Client.GetCachedGuild(serveridd);
                             if (Program.Debug)
                             {
@@ -236,7 +272,7 @@ namespace RamokSelfbot.Commands.Info
                         for (int i = 0; i < 15; i++)
                         {
                             serversn++;
-                            var serveridd = user.GetProfile().MutualGuilds[i].Id;
+                            var serveridd = profile.MutualGuilds[i].Id;
                             SocketGuild guild = Client.GetCachedGuild(serveridd);
                             servers = servers + guild.Name + "\n";
                         }
@@ -248,7 +284,7 @@ namespace RamokSelfbot.Commands.Info
                 embed.AddField("Created at", "```\n" + user.CreatedAt.Day.ToString() + "/" + user.CreatedAt.Month + "/" + user.CreatedAt.Year + " " + user.CreatedAt.Hour + "hours " + user.CreatedAt.Minute + "min " + user.CreatedAt.Second + "seconds\n```", false);
                 if(Message.Guild != null)
                 {
-                    embed.AddField("Joined the server at", "```\n" + Client.GetCachedGuild(Message.Guild.Id).GetMember(user.Id).JoinedAt.ToString() + "```", false);
+                    embed.AddField("Joined the server at", "```\n" + member.JoinedAt.ToString() + "```", false);
                 }
 
 
@@ -258,9 +294,9 @@ namespace RamokSelfbot.Commands.Info
             }
         }
 
-        private string HasPermission(DiscordPermission permission, DiscordUser user, string NamePerm)
+        private string HasPermission(DiscordPermission permission, DiscordPermission member, string NamePerm)
         {
-            if(Message.Guild.GetMember(user.Id).GetPermissions().Has(permission))
+            if(member.Has(permission))
             {
                 return "✅ " + NamePerm + "\n";
             } else
@@ -280,6 +316,8 @@ namespace RamokSelfbot.Commands.Info
                     Console.WriteLine("error occured : " + exception.Message);
                 }
         }
+
+
 
     }
 }

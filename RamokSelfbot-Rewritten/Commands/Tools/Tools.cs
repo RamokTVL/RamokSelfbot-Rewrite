@@ -43,12 +43,6 @@ namespace RamokSelfbot.Commands.Tools
                             break;
                     }
 
-                            if (cmd.Description.Contains("- HASH"))
-                    {
-                        args.Append($"```\n{cmd.Description.Remove(cmd.Description.Length - 7, 7)}```");
-                        embed.AddField(Client.CommandHandler.Prefix + cmd.Name, $"{args}");
-                    }
-
 
                 }
 

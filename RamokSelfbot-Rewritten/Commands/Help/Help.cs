@@ -3,10 +3,11 @@ using Discord;
 using System;
 using Newtonsoft.Json;
 using System.IO;
+using System.Text;
 
 namespace RamokSelfbot.Commands.Help
 {
-    [Command("help", "Help you to use the selfbot - UTILS")]
+    [Command("help", "Help you to use the selfbot - HELPMENU")]
     class Help : CommandBase
     {
         [Parameter("cmd", true)]
@@ -23,7 +24,7 @@ namespace RamokSelfbot.Commands.Help
                     int paramcount = 0;
                     bool exsist = false;
 
-                    try                      
+                    try
                     {
                         var command = Client.CommandHandler.Commands[cmd];
                                                     exsist = true;
@@ -44,7 +45,7 @@ namespace RamokSelfbot.Commands.Help
                             paramcount = 0;
                         }
                     } catch {
-                   
+
                         exsist = false;
                     }
 
@@ -63,84 +64,43 @@ namespace RamokSelfbot.Commands.Help
 
                     RamokSelfbot.Utils.SendEmbed(Message, embed);
 
-                    
+
                 } else
                 {
-                    int fun = 0;
-                    int hash = 0;
-                    int raid = 0;
-                    int utils = 0;
-                    int moderation = 0;
-                    int activity = 0;
-                    int others = 0;
-                    int covid = 0;
-                    int info = 0;
-                    int nsfw = 0;
-                    int experimental = 0;
-
-
-                    foreach (var cmds in Client.CommandHandler.Commands.Values)
-                    {
-                        switch (cmds.Description)
-                        {
-                            case string a when a.Contains("- FUN"):
-                                fun++;
-                                break;
-                            case string b when b.Contains("- HASH"):
-                                hash++;
-                                break;                     
-                             case string c when c.Contains("- RAID"):
-                                raid++;
-                                break;               
-                            case string d when d.Contains("- UTILS"):
-                                utils++;
-                                break;                     
-                            case string e when e.Contains("- MODERATION"):
-                                moderation++;
-                                break;              
-                            case string f when f.Contains("- ACTIVITY"):
-                                activity++;
-                                break;             
-                            case string g when g.Contains("- OTHERS"):
-                                others++;
-                                break;              
-                            case string h when h.Contains("- INFO"):
-                                info++;
-                                break;            
-                            case string i when i.Contains("- EXPERIMENTAL"):
-                                experimental++;
-                                break;                
-                            case string j when j.Contains("- COVID"):
-                                covid++;
-                                break;                
-                            case string k when k.Contains("- NSFW"):
-                                nsfw++;
-                                break;
-                        };
-
-
-                    }
                     EmbedMaker embed = new EmbedMaker()
                     {
                         Color = System.Drawing.Color.FromArgb(JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorr, JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorg, JsonConvert.DeserializeObject<JSON>(File.ReadAllText("config.json")).embedcolorb),
                         Title = "Help menu",
                         Footer = RamokSelfbot.Utils.footer(Message.Author.User),
-                        Description = "This menu is made for help you. \nIf you dont understand it, you are a retard." +
-                        "\n\n" +
-                        "**" + Client.CommandHandler.Prefix + "fun [" + fun.ToString() + "]" + "**\n```\nShow informations about the funs commands```" +
-                        "\n**" + Client.CommandHandler.Prefix + "info [" + info.ToString() + "]" + "**\n```\nShow informations about the informatives commands```" +
-                        "\n**" + Client.CommandHandler.Prefix + "hash [" + hash.ToString() + "]" + "**\n```\nShow informations about the hashes commands```" +
-                        "\n**" + Client.CommandHandler.Prefix + "nsfw [" + nsfw.ToString() + "]" + "**\n```\nThis command display NSFWs commands```" +
-                        "\n**" + Client.CommandHandler.Prefix + "raid [" + raid.ToString() + "]" + "**\n```\nShow informations about the raids commands```" +
-                        "\n**" + Client.CommandHandler.Prefix + "utils [" + utils.ToString() + "]" + "**\n```\nShow informations about the utils commands```" +
-                        "\n**" + Client.CommandHandler.Prefix + "covid [" + covid.ToString() + "]" + "**\n```\nGet the commands for covid stats (france only)```" +
-                        "\n**" + Client.CommandHandler.Prefix + "moderation [" + moderation.ToString() + "]" + "**\n```\nShow informations about the moderation commands```" +
-                        "\n**" + Client.CommandHandler.Prefix + "experimental [" + experimental.ToString() + "]" + "**\n```\nThis command help you to use experimentals commands```" +
-                        "\n**" + Client.CommandHandler.Prefix + "activity [" + activity.ToString() + "]" + "**\n```\nShow informations about the activities commands```" +
-                        "\n**" + Client.CommandHandler.Prefix + "others [" + others.ToString() + "]" + "**\n```\nShow informations about the commands that are not listed on the 4 others menus```",
-                        //
+                        Description = "This menu is made for help you. \nIf you dont understand it, you're a retard."
                     };
 
+                    foreach (var cmd in Client.CommandHandler.Commands.Values)
+                    {
+                        StringBuilder args = new StringBuilder();
+                        if (cmd.Description.Contains("- HELPMENU"))
+                        {
+                            args.Append($"```\n{cmd.Description.Remove(cmd.Description.Length - 11, 11)}```");
+                            embed.AddField($"{Client.CommandHandler.Prefix}**{cmd.Name}**", $"**{args}**");
+                        }
+                    }
+
+              /*    embed.AddField($"ʜᴇʟᴘ ꜰᴜɴ **[{fun}]**", @"𝓢𝓱𝓸𝔀 𝓯𝓾𝓷 𝓬𝓸𝓶𝓶𝓪𝓷𝓭𝓼", true);
+                    embed.AddField($"ʜᴇʟᴘ ɪɴꜰᴏ **[{info}]**", @"𝓢𝓱𝓸𝔀 𝓲𝓷𝓯𝓸 𝓬𝓸𝓶𝓶𝓪𝓷𝓭𝓼", true);
+                    embed.AddField($"ʜᴇʟᴘ ʜᴀꜱʜ **[{hash}]**", @"𝓢𝓱𝓸𝔀 𝓱𝓪𝓼𝓱 𝓬𝓸𝓶𝓶𝓪𝓷𝓭𝓼", true);
+                    embed.AddField("\u200b", "\u200b", false);
+                    embed.AddField($"ʜᴇʟᴘ ɴꜱꜰᴡ **[{nsfw}]**", @"𝓢𝓱𝓸𝔀 𝓷𝓼𝓯𝔀 𝓬𝓸𝓶𝓶𝓪𝓷𝓭𝓼", true);
+                    embed.AddField($"ʜᴇʟᴘ ᴄᴏᴠɪᴅ **[{covid}]**", @"𝓢𝓱𝓸𝔀 𝓬𝓸𝓿𝓲𝓭 𝓬𝓸𝓶𝓶𝓪𝓷𝓭𝓼", true);
+                    embed.AddField($"ʜᴇʟᴘ ᴛᴏᴏʟꜱ **[{tools}]**", @"𝓢𝓱𝓸𝔀 𝓽𝓸𝓸𝓵𝓼 𝓬𝓸𝓶𝓶𝓪𝓷𝓭𝓼", true);
+                    embed.AddField("\u200b", "\u200b", false);
+                    embed.AddField($"ʜᴇʟᴘ ʀᴀɪᴅ **[{raid}]**", @"𝓢𝓱𝓸𝔀 𝓷𝓼𝓯𝔀 𝓬𝓸𝓶𝓶𝓪𝓷𝓭𝓼", true);
+                    embed.AddField($"ʜᴇʟᴘ ᴜᴛɪʟꜱ **[{utils}]**", @"𝓢𝓱𝓸𝔀 𝓾𝓽𝓲𝓵𝓼 𝓬𝓸𝓶𝓶𝓪𝓷𝓭𝓼", true);
+                    embed.AddField($"ʜᴇʟᴘ ᴍᴏᴅᴇʀᴀᴛɪᴏɴ **[{moderation}]**", @"𝓢𝓱𝓸𝔀 𝓶𝓸𝓭𝓮𝓻𝓪𝓽𝓲𝓸𝓷 𝓬𝓸𝓶𝓶𝓪𝓷𝓭𝓼", true);
+                    embed.AddField("\u200b", "\u200b", false);
+                    embed.AddField($"ʜᴇʟᴘ ᴇxᴘᴇʀɪᴍᴇɴᴛᴀʟ **[{experimental}]**", @"𝓢𝓱𝓸𝔀 𝓮𝔁𝓹𝓮𝓻𝓲𝓶𝓮𝓷𝓽𝓪𝓵𝓼 𝓬𝓸𝓶𝓶𝓪𝓷𝓭𝓼", true);
+                    embed.AddField($"ʜᴇʟᴘ ᴀᴄᴛɪᴠɪᴛʏ **[{activity}]**", @"𝓢𝓱𝓸𝔀 𝓪𝓬𝓽𝓲𝓿𝓲𝓽𝔂 𝓬𝓸𝓶𝓶𝓪𝓷𝓭𝓼", true);
+                    embed.AddField($"ʜᴇʟᴘ ᴏᴛʜᴇʀꜱ **[{others}]**", @"𝓢𝓱𝓸𝔀 𝓸𝓽𝓱𝓮𝓻𝓼 𝓬𝓸𝓶𝓶𝓪𝓷𝓭𝓼", true);*/
+                    embed.ThumbnailUrl = "https://media1.tenor.com/images/1e158cadbc4e98e60d95fdff49b1ad25/tenor.gif";
 
                     RamokSelfbot.Utils.SendEmbed(Message, embed);
                 }

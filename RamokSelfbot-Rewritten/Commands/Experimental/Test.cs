@@ -1,9 +1,13 @@
 ﻿using Discord.Commands;
 using Discord.Gateway;
-using System;
+using Leaf.xNet;
+using System.Drawing;
+using Colorful;
 using RestSharp;
-using Newtonsoft.Json;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using System.IO;
+using Discord;
 
 namespace RamokSelfbot.Commands.Experimental
 {
@@ -15,15 +19,15 @@ namespace RamokSelfbot.Commands.Experimental
         {
             if(Message.Author.User.Id == Program.id)
             {
-       
 
-
-                
             }
         }
 
  
     }
+
+
+
 
 
 

@@ -1,9 +1,10 @@
-﻿using Discord.Commands;
+﻿using System.Net;
+using System.IO;
+using Discord.Commands;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;

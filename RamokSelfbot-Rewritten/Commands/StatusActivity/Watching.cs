@@ -23,7 +23,7 @@ namespace RamokSelfbot.Commands.StatusActivity
                     Client.SetActivity(new ActivityProperties()
                     {
                         Name = name,
-                        Type = ActivityType.Streaming
+                        Type = ActivityType.Watching
                     });
 
                   

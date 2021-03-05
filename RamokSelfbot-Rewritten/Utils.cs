@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Management;
 
 namespace RamokSelfbot
 {
@@ -22,7 +23,54 @@ namespace RamokSelfbot
 
         public static String GetTimestamp(DateTime value)
         {
-            return value.ToString("yyyyMMddHHmmssffff");
+            return value.ToString("yyyy/MM/dd HH:mm");
+        }
+
+        public static string Base64Encode(string plainText)
+        {
+            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+            return System.Convert.ToBase64String(plainTextBytes);
+        }
+
+        public static string Base64Decode(string base64EncodedData)
+        {
+            var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
+            return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+        }
+
+        public static JSON DumpConfig()
+        {
+            if(File.Exists(GetFileName() + "\\config.json"))
+            {
+                JSON config = JsonConvert.DeserializeObject<JSON>(File.ReadAllText(GetFileName() + "\\config.json"));
+                return config;
+            } else
+            {
+                return null;
+            }
+        }
+
+        public static string GetGuid()
+        {
+            ManagementObjectCollection mbsList = null;
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("Select ProcessorID From Win32_processor");
+            mbsList = mos.Get();
+            string processorId = string.Empty;
+            foreach (ManagementBaseObject mo in mbsList)
+            {
+                processorId = mo["ProcessorID"] as string;
+            }
+
+            mos = new ManagementObjectSearcher("SELECT UUID FROM Win32_ComputerSystemProduct");
+            mbsList = mos.Get();
+            string systemId = string.Empty;
+            foreach (ManagementBaseObject mo in mbsList)
+            {
+                systemId = mo["UUID"] as string;
+            }
+
+            var compIdStr = $"{processorId}{systemId}";
+            return compIdStr;
         }
 
         public static void Print(string text)

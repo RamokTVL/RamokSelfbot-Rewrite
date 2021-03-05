@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace RamokSelfbot.Commands.NSFW
 {
-    [Command("nsfw", "This command display NSFWs commands. - NSFW")]
+    [Command("nsfw", "Show NSFWs commands. - HELPMENU")]
     class NSFW : CommandBase
     {
         public override void Execute()

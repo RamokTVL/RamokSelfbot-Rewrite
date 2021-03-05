@@ -83,7 +83,7 @@ namespace RamokSelfbot.Commands.Fun
                 {
                     Color = RamokSelfbot.Utils.EmbedColor(),
                     Footer = RamokSelfbot.Utils.footer(Message.Author.User),
-                    Description = "<@" + user.Id + "> has " + new Random().Next(0, 999) + " " + moosclestype[new Random().Next(0, 4)] + " of mooscles"
+                    Description = "<@" + user.Id + "> has " + new Random().Next(0, 999) + " " + moosclestype[new Random().Next(moosclestype.Length - moosclestype.Length, moosclestype.Length)] + " of mooscles"
                 };
 
                 if(File.ReadAllText("ressources\\listhetero.selfbot").Contains(user.Id.ToString()))
@@ -91,10 +91,7 @@ namespace RamokSelfbot.Commands.Fun
                     embed.Description = "<@" + user.Id + "> has ∞ peta-tons of mooscles";
                 }
 
-                if(embed.Footer != null)
-                {
-                    embed.ThumbnailUrl = embed.Footer.IconUrl;
-                }
+
 
 
                 RamokSelfbot.Utils.SendEmbed(Message, embed);

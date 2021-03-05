@@ -37,7 +37,7 @@ namespace RamokSelfbot.Commands.Fun
 
                 foreach (var cmd in Client.CommandHandler.Commands.Values)
                 {
-                    a++;
+                    
                     StringBuilder args = new StringBuilder();
                     foreach (var arg in cmd.Parameters)
                     {
@@ -50,27 +50,26 @@ namespace RamokSelfbot.Commands.Fun
 
                     if (cmd.Description.Contains("- FUN"))
                     {
+                        a++;
                         args.Append($"```\n{cmd.Description.Remove(cmd.Description.Length - 6, 6)}```");
-                        if(a < 25)
+                        if (a < 20)
                         {
                             send1.AddField(Client.CommandHandler.Prefix + cmd.Name, $"{args}");
-                        } else
+                        }
+                        else
                         {
                             send2.AddField(Client.CommandHandler.Prefix + cmd.Name, $"{args}");
                         }
                         args.Clear();
-
-
                     }
+
+
 
 
                 }
 
-
-
-
-
                 RamokSelfbot.Utils.SendEmbed(Message, send1);
+                RamokSelfbot.Utils.SendEmbedRsendIdget(Message, send2);
 
                 /*if(send2 != null) {
                   RamokSelfbot.Utils.SendEmbedRsendIdget(Message, send2);

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RamokSelfbot.Commands.Moderation
 {
-    [Command("clear", "Delete the number of messages specified - MOD")]
+    [Command("clear", "Delete the number of messages specified - MODERATION")]
     class Clear : CommandBase
     {
         [Parameter("number of messages to delete", true)]

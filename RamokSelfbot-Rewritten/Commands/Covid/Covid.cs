@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RamokSelfbot.Commands.Covid
 {
-    [Command("covid", "Get the commands for covid stats - COVID")]
+    [Command("covid", "Show covid stats commands. - HELPMENU")]
     class Covid : CommandBase
     {
         public override void Execute()

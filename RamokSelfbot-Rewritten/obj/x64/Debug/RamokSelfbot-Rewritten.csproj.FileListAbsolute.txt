@@ -31,7 +31,6 @@ C:\Users\RR\Documents\GitHub\RamokSelfbot-Rewrite\RamokSelfbot-Rewritten\bin\x64
 C:\Users\RR\Documents\RamokSelfbot-1.8\RamokSelfbot-Rewritten.exe.config
 C:\Users\RR\Documents\RamokSelfbot-1.8\RamokSelfbot-Rewritten.exe
 C:\Users\RR\Documents\RamokSelfbot-1.8\RamokSelfbot-Rewritten.pdb
-C:\Users\RR\Documents\GitHub\RamokSelfbot-Rewrite\RamokSelfbot-Rewritten\obj\x64\Debug\RamokSelfbot-Rewritten.csprojAssemblyReference.cache
 C:\Users\RR\Documents\GitHub\RamokSelfbot-Rewrite\RamokSelfbot-Rewritten\obj\x64\Debug\Interop.WMPLib.dll
 C:\Users\RR\Documents\GitHub\RamokSelfbot-Rewrite\RamokSelfbot-Rewritten\obj\x64\Debug\RamokSelfbot-Rewritten.csproj.ResolveComReference.cache
 C:\Users\RR\Documents\GitHub\RamokSelfbot-Rewrite\RamokSelfbot-Rewritten\obj\x64\Debug\RamokSelfbot.Commands.Utils.Forms.GUI.resources
@@ -41,3 +40,6 @@ C:\Users\RR\Documents\GitHub\RamokSelfbot-Rewrite\RamokSelfbot-Rewritten\obj\x64
 C:\Users\RR\Documents\GitHub\RamokSelfbot-Rewrite\RamokSelfbot-Rewritten\obj\x64\Debug\RamokSelfbot-Rewritten.exe
 C:\Users\RR\Documents\GitHub\RamokSelfbot-Rewrite\RamokSelfbot-Rewritten\obj\x64\Debug\RamokSelfbot-Rewritten.pdb
 C:\Users\RR\Documents\GitHub\RamokSelfbot-Rewrite\RamokSelfbot-Rewritten\obj\x64\Debug\RamokSelfbot-Rewritten.csproj.Fody.CopyLocal.cache
+C:\Users\RR\Documents\GitHub\RamokSelfbot-Rewrite\RamokSelfbot-Rewritten\obj\x64\Debug\RamokSelfbot.Commands.Utils.Forms.Hypesquad.resources
+C:\Users\RR\Documents\GitHub\RamokSelfbot-Rewrite\RamokSelfbot-Rewritten\obj\x64\Debug\RamokSelfbot.Commands.Utils.Forms.Alertword.resources
+C:\Users\RR\Documents\GitHub\RamokSelfbot-Rewrite\RamokSelfbot-Rewritten\obj\x64\Debug\RamokSelfbot-Rewritten.csprojAssemblyReference.cache
