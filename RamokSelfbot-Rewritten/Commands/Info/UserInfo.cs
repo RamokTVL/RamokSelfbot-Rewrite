@@ -138,21 +138,36 @@ namespace RamokSelfbot.Commands.Info
                         }
                     }
                 }
-                GuildMember member = Message.Guild.GetMember(user.Id);
 
-                
-                if (Message.Guild != null)
+                bool intheserver = false;
+                try
                 {
-                    
+                    if(Message.Guild != null)
+                    {
+                        GuildMember member = Message.Guild.GetMember(user.Id);
+                        intheserver = true;
+                    } else
+                    {
+                        intheserver = false;
+                    }
+                } catch(Exception)
+                {
+                    intheserver = false;
+                }
+
+                if(intheserver)
+                {
+                    GuildMember member = Message.Guild.GetMember(user.Id);
                     if (member.Nickname == null)
                     {
                         embed.AddField("Nickname", "```No Nickname```", true);
-                    } else
+                    }
+                    else
                     {
                         embed.AddField("Nickname", "```" + member.Nickname + "```", true);
                     }
-                    
                 }
+
 
                 embed.AddField("Hypesquad", "```\n" + user.Hypesquad.ToString() + "```", true);
                 if (user.Type == DiscordUserType.Bot)
@@ -181,9 +196,9 @@ namespace RamokSelfbot.Commands.Info
                     embed.AddField("Badges", "```\n" + user.Badges.ToString() + "```", false);
                 }
 
-
-                if(Message.Guild != null)
+                if(intheserver)
                 {
+                    GuildMember member = Message.Guild.GetMember(user.Id);
                     string roles = "```\n";
                     int rolesn = 0;
                     //embed.AddField("Nickname", "```" + )
@@ -250,32 +265,21 @@ namespace RamokSelfbot.Commands.Info
                 int mutualguildcount = profile.MutualGuilds.Count;
                     if (mutualguildcount < 15)
                     {
+                    
                         for (int i = 0; i < mutualguildcount; i++)
                         {
-                            serversn++;
-                            var serveridd = profile.MutualGuilds[i].Id;
-                            SocketGuild guild = Client.GetCachedGuild(serveridd);
-                            if (Program.Debug)
-                            {
-                                Console.WriteLine(servers);
-                                Console.WriteLine(i.ToString());
-                                Console.WriteLine(serveridd.ToString());
-                                Console.WriteLine(guild.Name);
-                                Console.WriteLine(servers);
-                            }
-
-                            servers = servers + guild.Name + "\n";
+                            SocketGuild guild = Client.GetCachedGuild(profile.MutualGuilds[i].Id);
+                            servers += guild.Name + "\n";
                         }
                     }
                     else
                     {
-                        for (int i = 0; i < 15; i++)
-                        {
-                            serversn++;
-                            var serveridd = profile.MutualGuilds[i].Id;
-                            SocketGuild guild = Client.GetCachedGuild(serveridd);
-                            servers = servers + guild.Name + "\n";
-                        }
+                    serversn = mutualguildcount;
+                    for (int i = 0; i < 15; i++)
+                        {                  
+                            SocketGuild guild = Client.GetCachedGuild(profile.MutualGuilds[i].Id);
+                        servers += guild.Name + "\n";
+                    }
                     }
 
                 servers += "```";
@@ -284,7 +288,11 @@ namespace RamokSelfbot.Commands.Info
                 embed.AddField("Created at", "```\n" + user.CreatedAt.Day.ToString() + "/" + user.CreatedAt.Month + "/" + user.CreatedAt.Year + " " + user.CreatedAt.Hour + "hours " + user.CreatedAt.Minute + "min " + user.CreatedAt.Second + "seconds\n```", false);
                 if(Message.Guild != null)
                 {
-                    embed.AddField("Joined the server at", "```\n" + member.JoinedAt.ToString() + "```", false);
+                    if(intheserver)
+                    {
+                        GuildMember member = Message.Guild.GetMember(user.Id);
+                        embed.AddField("Joined the server at", "```\n" + member.JoinedAt.ToString() + "```", false);
+                    }
                 }
 
 
