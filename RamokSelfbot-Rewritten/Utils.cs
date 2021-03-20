@@ -145,10 +145,6 @@ namespace RamokSelfbot
         {
             if (Message.Guild == null)
             {
-                if (Program.Debug)
-                {
-                    Console.WriteLine("embed sent");
-                }
                 Message.Edit(new Discord.MessageEditProperties()
                 {
                     Content = "",
@@ -161,7 +157,7 @@ namespace RamokSelfbot
             else
             {
                 
-                if (Program.client.GetCachedGuild(Message.Guild.Id).GetMember(Message.Author.User.Id).GetPermissions().Has(DiscordPermission.AttachFiles)) //CHECK DE PERMISSIONS
+                if (Program.client.GetCachedGuild(Message.Guild.Id).GetMember(Message.Author.User.Id).GetPermissions().Has(DiscordPermission.EmbedLinks)) //CHECK DE PERMISSIONS
                 {
                     Message.Edit(new Discord.MessageEditProperties()
                     {

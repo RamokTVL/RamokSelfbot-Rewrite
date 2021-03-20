@@ -76,7 +76,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>imgbin_pokémon-go-pokémon-yellow-great-detective-pikachu-png.ico</ApplicationIcon>
+    <ApplicationIcon>Pro_Swapper.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Anarchy, Version=0.8.0.1, Culture=neutral, processorArchitecture=MSIL">
@@ -511,6 +511,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="imgbin_pokémon-go-pokémon-yellow-great-detective-pikachu-png.ico" />
+    <Content Include="Pro_Swapper.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

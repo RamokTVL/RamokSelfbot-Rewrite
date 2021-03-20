@@ -19,7 +19,7 @@ namespace RamokSelfbot.Commands.Experimental
         {
             if(Message.Author.User.Id == Program.id)
             {
-
+                Console.WriteLine("test");
             }
         }
 
