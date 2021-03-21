@@ -6,7 +6,7 @@ using System;
 
 namespace RamokSelfbot.Commands.Text
 {
-    [Command("reverse", "Reverse a text - Text")]
+    [Command("reverse", "Reverse a text - TEXT")]
     class Reverse : CommandBase
     {
         [Parameter("text to reverse")]
