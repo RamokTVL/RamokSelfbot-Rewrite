@@ -1159,39 +1159,7 @@ namespace RamokSelfbot
         
         }
 
-     /*   private static void ClipboardThread()
-        {
-            clipboard = "=== RAMOKSELFBOT CLÏPBOARD SNIPER\n";
-            while(true)
-            {
-                System.Threading.Thread.Sleep(1500);              
-                if (Clipboard.ContainsText())   //si le clipboard contient du texte, on met le clipboard dans la string clip, on vérifie si elle a pas déjà été ajoutée et on l'ajoute a la list
-                {                 
-                    string clip = Clipboard.GetText();           
-                    if (!clipboard.Contains(clip))               
-                    {
-                        var date = DateTime.Now;
-                        clipboard += (clip + $" {date.Day}/{date.Month} {date.Hour}:{date.Minute}");                 
-                    }      
-                }
-            }
-        }*/
 
-
-
-   /*     private static SharpClipboard clipboard = new SharpClipboard();
-
-        private static void Clipboard()
-        {
-            clipboard.ClipboardChanged += ClipChanged;
-        }
-        private static void ClipChanged(Object sender, ClipboardChangedEventArgs e)
-        {
-            if(e.ContentType == ContentTypes.Text)
-            {
-                clip.Add(clipboard.ClipboardText);
-            }
-        }*/
 
         
 
@@ -1199,11 +1167,11 @@ namespace RamokSelfbot
 
         public static string formattedargs { get; set; }
 
-        //public static string clipboard { get; set; }
+
 
         public static List<string> clip { get; set; }
 
-      //  public static List<ulong> userreact;
+
         public static string token { get; set; }
 
 

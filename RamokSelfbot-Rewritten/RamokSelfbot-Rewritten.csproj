@@ -386,6 +386,7 @@
     <Compile Include="Commands\Info\GitRepos.cs" />
     <Compile Include="Commands\Info\GuildInfo.cs" />
     <Compile Include="Commands\Info\Info.cs" />
+    <Compile Include="Commands\Info\OtherOwnerProjects.cs" />
     <Compile Include="Commands\Info\RoleInfo.cs" />
     <Compile Include="Commands\Info\SelfUserinfo.cs" />
     <Compile Include="Commands\Info\Uptime.cs" />

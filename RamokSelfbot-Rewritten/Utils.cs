@@ -187,7 +187,7 @@ namespace RamokSelfbot
             else
             {
 
-                if (Program.client.GetCachedGuild(Message.Guild.Id).GetMember(Message.Author.User.Id).GetPermissions().Has(DiscordPermission.AttachFiles)) //CHECK DE PERMISSIONS
+                if (Program.client.GetCachedGuild(Message.Guild.Id).GetMember(Message.Author.User.Id).GetPermissions().Has(DiscordPermission.EmbedLinks)) //CHECK DE PERMISSIONS
                 {
                     var msg = Message.Channel.SendMessage("", false, embed);
                     return msg.Id;

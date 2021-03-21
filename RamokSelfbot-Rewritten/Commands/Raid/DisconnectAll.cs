@@ -9,7 +9,7 @@ namespace RamokSelfbot.Commands.Raid
     {
         [Parameter("id of the vc")]
         public ulong id { get; set; }
-        public override async void Execute()
+        public override void Execute()
         {
             if(RamokSelfbot.Utils.IsClient(Message))
             {

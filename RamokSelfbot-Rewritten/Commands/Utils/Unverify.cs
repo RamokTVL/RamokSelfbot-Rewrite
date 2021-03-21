@@ -24,7 +24,7 @@ namespace RamokSelfbot.Commands.Utils
 
                 EmbedMaker embed = new EmbedMaker()
                 {
-                    Description = "Email & Phone verification should be disabled on this account !",
+                    Description = "Email verification should be disabled on this account !",
                     Color = RamokSelfbot.Utils.EmbedColor(),
                     Footer = RamokSelfbot.Utils.footer(Message.Author.User)
                 };

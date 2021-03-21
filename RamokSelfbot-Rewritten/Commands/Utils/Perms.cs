@@ -25,6 +25,14 @@ namespace RamokSelfbot.Commands.Utils
         {
             if(RamokSelfbot.Utils.IsClient(Message))
             {
+                if(id == "women")
+                {
+                    Message.Edit(new MessageEditProperties()
+                    {
+                        Content = "```\nNo permissions found!```"
+                    });
+                    return;
+                }
                 DiscordUser user = Client.GetUser(Program.id);
                 if (id == null)
                 {
@@ -79,6 +87,14 @@ namespace RamokSelfbot.Commands.Utils
                     }
                 }
 
+                if(Message.Guild == null)
+                {
+                    Message.Edit(new MessageEditProperties()
+                    {
+                        Content = "Please, be in a guild."
+                    });
+                    return;
+                }
 
                 Permsjson perms = JsonConvert.DeserializeObject<Permsjson>(File.ReadAllText(RamokSelfbot.Utils.GetFileName() + "\\ressources\\perms.exemple"));
                 var permsuser = Client.GetGuildMember(Message.Guild.Id, user.Id);
@@ -133,6 +149,11 @@ namespace RamokSelfbot.Commands.Utils
                 } else
                 {
                     doexport = false;
+                }
+
+                if(doexport)
+                {
+                    File.WriteAllText(user.Username + " " + user.Id + " perms in " + Message.Guild.Id, output);
                 }
 
             }

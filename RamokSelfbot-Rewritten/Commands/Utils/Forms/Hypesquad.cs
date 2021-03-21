@@ -60,7 +60,9 @@ namespace RamokSelfbot.Commands.Utils.Forms
                     richTextBox1.AppendText("Hypesquad set to Brilliance!");
                     return;
                     //MessageBox.Show("Hypesquad set to Brilliance!", "Hypesquad success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+#pragma warning disable CS0162 // Code inaccessible détecté
                     break;
+#pragma warning restore CS0162 // Code inaccessible détecté
                 case "2":
                     Program.client.User.SetHypesquad(Discord.Hypesquad.Bravery);
                     Program.client.User.Update();

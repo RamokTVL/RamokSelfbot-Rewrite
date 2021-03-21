@@ -23,7 +23,7 @@ namespace RamokSelfbot.Commands.Utils
             {
                 HttpRequest request = new HttpRequest();
 
-                var body = "{\n \"text\": " + bodyg + "\n}";
+                var body = "{\"text\": " + bodyg + "}";
 
                 request.AddHeader("apikey", JsonConvert.DeserializeObject<JSON>(File.ReadAllText(RamokSelfbot.Utils.GetFileName() + "\\config.json")).apikeyself);
 
