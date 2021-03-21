@@ -420,7 +420,6 @@
     <Compile Include="Commands\Raid\BanAll.cs" />
     <Compile Include="Commands\Raid\DeleteAllChannels.cs" />
     <Compile Include="Commands\Raid\DeleteAllRoles.cs" />
-    <Compile Include="Commands\Raid\DisconnectAll.cs" />
     <Compile Include="Commands\Raid\KickAll.cs" />
     <Compile Include="Commands\Raid\Raid.cs" />
     <Compile Include="Commands\Raid\RenameAll.cs" />
@@ -432,7 +431,16 @@
     <Compile Include="Commands\StatusActivity\Listening.cs" />
     <Compile Include="Commands\StatusActivity\Streaming.cs" />
     <Compile Include="Commands\StatusActivity\Watching.cs" />
+    <Compile Include="Commands\Text\Bold.cs" />
+    <Compile Include="Commands\Text\BoldCrossed.cs" />
+    <Compile Include="Commands\Text\Crossed.cs" />
+    <Compile Include="Commands\Text\Italic.cs" />
+    <Compile Include="Commands\Text\ItalicBold.cs" />
+    <Compile Include="Commands\Text\ItalicBoldUnderlined.cs" />
+    <Compile Include="Commands\Text\ItalicUnderlined.cs" />
     <Compile Include="Commands\Text\Morse.cs" />
+    <Compile Include="Commands\Text\Text.cs" />
+    <Compile Include="Commands\Text\Underline.cs" />
     <Compile Include="Commands\Tools\TokenFuck.cs" />
     <Compile Include="Commands\Tools\Tools.cs" />
     <Compile Include="Commands\Utils\AnydeskResolver.cs" />
@@ -476,6 +484,7 @@
     <Compile Include="Commands\Utils\Unverify.cs" />
     <Compile Include="Commands\Utils\Utils.cs" />
     <Compile Include="Commands\Utils\YT.cs" />
+    <Compile Include="OtherStuff.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils.cs" />

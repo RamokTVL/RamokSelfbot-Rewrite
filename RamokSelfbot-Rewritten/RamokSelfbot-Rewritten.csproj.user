@@ -5,7 +5,7 @@
     </StartArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <StartArguments>-hidephone -skiplogin</StartArguments>
+    <StartArguments>-hidephone -skiplogin -skipprevention</StartArguments>
   </PropertyGroup>
   <PropertyGroup>
     <PublishUrlHistory>publish\</PublishUrlHistory>
