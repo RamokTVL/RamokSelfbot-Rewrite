@@ -4,7 +4,7 @@ using Leaf.xNet;
 
 namespace RamokSelfbot.Commands.Info
 {
-    [Command("OtherOwnerProjects", "Show the others projects of the owner.. - INFO")]
+    [Command("otherownersprojects", "Show the others projects of the owner.. - INFO")]
     class OtherOwnerProjects : CommandBase
     {
         public override void Execute()
