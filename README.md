@@ -1,9 +1,7 @@
 # RamokSelfbot-Rewritten
 DISCORD : https://discord.gg/GxvKJ5kgPR
 
-I made this project for learn c#, this is not the best selfbot ever (lol its a beta and the only opensource selfbot in c# that i know the existence) 
-
-The github repository is like ~250 mo, so if you want to download the sources, download the latest release and put it in DNSpy, this can be a alternative for bad connexions !
+I made this project to learn c#, this is not the best selfbot ever (lol its a beta and the only opensource selfbot in c# that i know the existence) 
 
 # Legality
 The selfbot has been made for educational purposes. I do not take responsability on the bad usage of this selfbot.
@@ -30,8 +28,6 @@ Or :
    
    - Create a Youtube API key here : https://console.developers.google.com/
    
-   
-   - And you can change the prefix in the config.json only for now but for V2 you will can change it directly from the selfbot.
 
    - (You can modify embed color in the selfbot without restarting !)
 
